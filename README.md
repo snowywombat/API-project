@@ -3,7 +3,7 @@
 ## Database Schema Design
 
 `<insert database schema design here>`
-![API DB Schema](https://user-images.githubusercontent.com/96889369/196823989-74edbf48-2d2a-4214-a1a7-e9952e58313e.png)
+![API DB Schema (1)](https://user-images.githubusercontent.com/96889369/196824869-5ef30428-790c-4663-8afa-2f081a724e64.png)
 
 ## API Documentation
 
