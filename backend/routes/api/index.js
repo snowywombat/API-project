@@ -1,9 +1,7 @@
 // backend/routes/api/index.js
 const router = require('express').Router();
-
-// router.post('/test', function(req, res) {
-//     res.json({ requestBody: req.body });
-//   });
+const sessionRouter = require('./session.js');
+const usersRouter = require('./users.js');
 
 
 // // GET /api/restore-user
@@ -13,7 +11,21 @@ const { restoreUser } = require('../../utils/auth.js');
   // If current user session is not valid, set req.user to null
 router.use(restoreUser);
 
-// router.get(
+router.use('/session', sessionRouter);
+
+router.use('/users', usersRouter);
+
+router.post('/test', (req, res) => {
+  res.json({ requestBody: req.body });
+});
+
+
+// router.post('/test', function(req, res) { //PHASE 1/2
+//     res.json({ requestBody: req.body });
+//   });
+
+
+// router.get( //PHASE 3
 //   '/restore-user',
 //   (req, res) => {
 //     return res.json(req.user);
@@ -21,7 +33,7 @@ router.use(restoreUser);
 // );
 
 
-// // GET /api/set-token-cookie
+// // GET /api/set-token-cookie //PHASE 3
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
 // router.get('/set-token-cookie', async (_req, res) => {
@@ -34,7 +46,7 @@ router.use(restoreUser);
 //   return res.json({ user });
 // });
 
-// // GET /api/require-auth
+// // GET /api/require-auth //PHASE 3
 // const { requireAuth } = require('../../utils/auth.js');
 // router.get(
 //   '/require-auth',
