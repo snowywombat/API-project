@@ -20,9 +20,9 @@ router.post('/test', (req, res) => {
 });
 
 
-// router.post('/test', function(req, res) { //PHASE 1/2
-//     res.json({ requestBody: req.body });
-//   });
+router.post('/test', function(req, res) { //PHASE 1/2
+    res.json({ requestBody: req.body });
+  });
 
 
 // router.get( //PHASE 3
