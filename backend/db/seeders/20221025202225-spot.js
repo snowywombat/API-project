@@ -23,7 +23,7 @@ module.exports = {
         name: 'River Rest 1',
         description:'Modern tiny home on the banks of the Chena River.',
         price: 119.00,
-        owner: 'Ted',
+        ownerId: 1,
       },
       {
         address:'234 B. Street Leavenworth, Washington 98826',
@@ -35,7 +35,7 @@ module.exports = {
         name: 'Mountain Dream Escape',
         description:'Na-Mu Lodge offers 4 luxurious suites each w/private baths, plus our bunk room w/plenty of space for everyone.',
         price: 1303.00,
-        owner: 'John',
+        ownerId: 2,
       },
       {
         address:'345 C. Street Fire Island Pines, New York 11782',
@@ -47,7 +47,7 @@ module.exports = {
         name: 'The Legendary Pyramid House',
         description:'Iconic architectural masterpiece (b. 1961) with spectacular views offers unparalleled peace and privacy.',
         price: 1460.00,
-        owner: 'Glenn',
+        ownerId: 3,
       },
       {
         address:'456 D. Street Baton Rouge, Louisiana 70801',
@@ -59,7 +59,7 @@ module.exports = {
         name: 'Charming Acadian Style Cottage',
         description:'This beautifully appointed 1 bedroom/1 bath Acadian Style Cottage is located on a private street',
         price: 43.00,
-        owner: 'Deirdre',
+        ownerId: 4,
       },
       {
         address:'567 E. Street Albuquerque, New Mexico 87105',
@@ -71,7 +71,7 @@ module.exports = {
         name: 'Oasis in the City',
         description:'Lovely 1 bd / 1 ba (1,100 sq ft) "casita" (guesthouse) nestled on an acre in the beautiful North Valley.',
         price: 110.00,
-        owner: 'Seth',
+        ownerId: 5,
       },
     ], {});
   },
