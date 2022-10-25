@@ -17,25 +17,39 @@ module.exports = {
     */
      return queryInterface.bulkInsert('Users', [
       {
-        email: 'demo@user.io',
-        firstName: 'Demo',
-        lastName: 'Lition',
-        username: 'Demo-lition',
+        email: 'tedrogers@gmail.com',
+        firstName: 'Ted',
+        lastName: 'Rogers',
+        username: 'tedrogers',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        email: 'user1@user.io',
-        firstName: 'Fake',
-        lastName: 'User',
-        username: 'FakeUser1',
+        email: 'johnsanders@gmail.com',
+        firstName: 'John',
+        lastName: 'Sanders',
+        username: 'johnsanders',
         hashedPassword: bcrypt.hashSync('password2')
       },
       {
-        email: 'user2@user.io',
-        firstName: 'Other',
-        lastName: 'Name',
-        username: 'FakeUser2',
+        email: 'glennmaisel@gmail.com',
+        firstName: 'Glenn',
+        lastName: 'Maisel',
+        username: 'glennmaisel',
         hashedPassword: bcrypt.hashSync('password3')
+      },
+      {
+        email: 'deirdremcphee@gmail.com',
+        firstName: 'Deirdre',
+        lastName: 'McPhee',
+        username: 'deirdremcphee',
+        hashedPassword: bcrypt.hashSync('password4')
+      },
+      {
+        email: 'sethbaker@gmail.com',
+        firstName: 'Seth',
+        lastName: 'Baker',
+        username: 'sethbaker',
+        hashedPassword: bcrypt.hashSync('password5')
       }
     ], {});
     },
