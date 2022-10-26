@@ -1,6 +1,7 @@
 'use strict';
 
 const { User } = require('../models');
+const bcrypt = require("bcryptjs");
 
 const users = [
   {
@@ -41,9 +42,6 @@ const users = [
 ];
 
 /** @type {import('sequelize-cli').Migration} */
-
-const bcrypt = require("bcryptjs");
-
 module.exports = {
   async up (queryInterface, Sequelize) {
     await User.bulkCreate(users, { validate: true });

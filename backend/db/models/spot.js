@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsTo(models.User, { foreignKey: 'ownerId' })
       Spot.belongsToMany(models.User, { through: models.Booking })
       Spot.belongsToMany(models.User, { through: models.Review })
-      Spot.hasMany(models.SportImage, { foreignKey: 'spotId' })
+      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId' })
     }
   }
   Spot.init({
