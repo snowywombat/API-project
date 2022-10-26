@@ -89,9 +89,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spots', {
-      where: { username: spots.map(spot => spot.owner) }
-    }, {});
+    await queryInterface.bulkDelete('Spots', {}, {});
 
   }
 };

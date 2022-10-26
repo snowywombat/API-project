@@ -48,8 +48,6 @@ module.exports = {
     },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Users', {
-      where: { username: users.map(user => user.username) }
-    }, {});
+    await queryInterface.bulkDelete('Users', {}, {});
   }
 };
