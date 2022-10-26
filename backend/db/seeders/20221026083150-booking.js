@@ -46,6 +46,7 @@ module.exports = {
       const foundUser = await User.findOne({
         where: { username: bookingInfo.user }
       });
+      console.log(foundSpot.id, foundUser.id)
       await Booking.create({
         startDate,
         endDate,
