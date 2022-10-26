@@ -11,11 +11,11 @@ module.exports = {
       },
       reviewId: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull: false
       },
       url: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
