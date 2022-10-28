@@ -6,6 +6,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { user } = require('pg/lib/defaults');
 
 const validateSignup = [
   check('email')
@@ -27,7 +28,7 @@ const validateSignup = [
   handleValidationErrors
 ];
 
-// Sign up
+// // Sign up
 router.post(
     '/',
     validateSignup,
@@ -42,5 +43,56 @@ router.post(
       });
     }
   );
+
+// Sign up
+// router.post('/', async(req, res, next) => {
+
+//   const { firstName, lastName, email, username, password } = req.body;
+
+//   const userList = await User.findAll({
+//     where: {
+//       firstName,
+//       lastName,
+//       email,
+//       username,
+//       password
+//     }
+//   });
+
+//   if(userList.length) {
+//     const err = newError('This user already exists')
+//     err.status = 403
+//     next(err)
+//   } else if (!userList) {
+//     const userErr = new Error ('This user cannot be found')
+//     err.status = 400
+//     next(userErr)
+//   } else {
+//     const users = await User.create ({
+//       firstName,
+//       lastName,
+//       email,
+//       username,
+//       password
+
+//     })
+
+//     res.json(users)
+
+//   }
+  // const user = {
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   username,
+  //   password
+  // };
+  // console.log(user)
+
+//   await setTokenCookie(res, user);
+
+
+// });
+
 
 module.exports = router;
