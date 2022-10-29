@@ -6,6 +6,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
+const { Booking } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
@@ -376,6 +377,28 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     res.json({Reviews})
 
 });
+
+//create booking on spot id
+router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
+    const { spotId } = req.params;
+    const { startDate, endDate } = req.body;
+    let userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+
+    const bookings = await Booking.create({
+        spotId: spot.id,
+        userId: userId,
+        startDate,
+        endDate
+    })
+
+    res.status(200)
+    res.json(bookings)
+
+})
+
 
 
 
