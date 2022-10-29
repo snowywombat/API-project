@@ -7,6 +7,7 @@ const { Spot } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
+const { ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { captureRejectionSymbol } = require('pg/lib/query');
@@ -306,6 +307,73 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
         })
     }
 
+
+});
+
+//create review for a spot
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
+    let userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    try {
+        const newReview = await Review.create({
+            spotId: spot.id,
+            userId: userId,
+            review,
+            stars
+
+        })
+
+        res.status(200)
+        res.json(newReview)
+    }
+
+    catch(error) {
+        res.status(404),
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+});
+
+
+
+//get reviews by spot id
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        },
+        include: [{
+            model: Review,
+            include: [
+                {
+                    model: User,
+                    as: 'User',
+                    attributes: ['id', 'firstName', 'lastName'],
+                },
+                {
+                    model: ReviewImage,
+                    as: 'ReviewImages',
+                    attributes: ['id', 'url'],
+                }
+            ]
+        }],
+        attributes: [],
+
+        group: ['spot.id']
+
+    })
+
+    const Reviews = spot.Reviews
+    res.status(200)
+    res.json({Reviews})
 
 });
 
