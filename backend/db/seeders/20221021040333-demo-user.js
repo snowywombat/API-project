@@ -6,6 +6,8 @@ if(process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA; //define your schema in options object
 }
 
+options.tableName = 'Users';
+
 const { User } = require('../models');
 
 const users = [
@@ -49,10 +51,10 @@ const users = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await User.bulkCreate(users, { validate: true });
+    await User.bulkCreate(options, { validate: true });
     },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Users', {}, {});
+    await queryInterface.bulkDelete(options, {}, {});
   }
 };

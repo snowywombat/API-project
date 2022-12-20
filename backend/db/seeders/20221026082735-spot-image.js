@@ -6,6 +6,8 @@ if(process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA; //define your schema in options object
 }
 
+options.tableName = 'SpotImages';
+
 const { SpotImage, Spot } = require('../models');
 
 const spotImages = [
@@ -55,7 +57,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('SpotImages', {}, {});
+    await queryInterface.bulkDelete(options, {}, {});
 
   }
 };
