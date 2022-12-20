@@ -1,6 +1,6 @@
 'use strict';
 
-let option = {};
+let options = {};
 if(process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA; //deine your schema in options object
 }
