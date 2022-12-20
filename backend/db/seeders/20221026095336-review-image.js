@@ -37,7 +37,7 @@ const reviewImages = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await User.ReviewImage(options, { validate: true });
+    await ReviewImage.bulkCreate(options, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {
