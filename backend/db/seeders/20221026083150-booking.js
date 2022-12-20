@@ -12,32 +12,32 @@ const { Booking, Spot, User } = require('../models')
 
 const bookings = [
   {
-    spot: 'River Rest 1',
-    user: 'tedrogers',
+    spotId: 1,
+    userId: 1,
     startDate: '2022-11-03',
     endDate: '2022-11-05'
   },
   {
-    spot: 'Mountain Dream Escape',
-    user: 'johnsanders',
+    spotId: 2,
+    userId: 2,
     startDate: '2022-11-04',
     endDate: '2022-11-08'
   },
   {
-    spot: 'The Legendary Pyramid House',
-    user: 'glennmaisel',
+    spotId: 3,
+    userId: 3,
     startDate: '2022-10-27',
     endDate: '2022-10-30'
   },
   {
-    spot: 'Charming Acadian Style Cottage',
-    user: 'deirdremcphee',
+    spotId: 4,
+    userId: 4,
     startDate: '2022-12-23',
     endDate: '2022-12-26'
   },
   {
-    spot: 'Oasis in the City',
-    user: 'sethbaker',
+    spotId: 5,
+    userId: 5,
     startDate: '2022-12-08',
     endDate: '2022-12-09'
   },
@@ -46,22 +46,7 @@ const bookings = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let bookingInfo of bookings) {
-      const { startDate, endDate } = bookingInfo;
-      const foundSpot = await Spot.findOne({
-        where: { name: bookingInfo.spot }
-      });
-      const foundUser = await User.findOne({
-        where: { username: bookingInfo.user }
-      });
-      await Booking.create({
-        startDate,
-        endDate,
-        spotId: foundSpot.id,
-        userId: foundUser.id,
-      });
-    }
-
+    await Booking.bulkCreate(options, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {

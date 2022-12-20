@@ -12,32 +12,32 @@ const { Review, Spot, User } = require('../models')
 
 const reviews = [
   {
-    spot: 'River Rest 1',
-    user: 'tedrogers',
+    spotId: 1,
+    userId: 1,
     review: 'The house was so cozy and had ever we needed. Loved the deck, fire pit and bbq!!',
     stars: 5
   },
   {
-    spot: 'Mountain Dream Escape',
-    user: 'johnsanders',
+    spotId: 2,
+    userId: 2,
     review: 'Great spot. Spacious and comfortable.',
     stars: 5
   },
   {
-    spot: 'The Legendary Pyramid House',
-    user: 'glennmaisel',
+    spotId: 3,
+    userId: 3,
     review: 'Awesome location. Host was super nice and helpful.',
     stars: 5
   },
   {
-    spot: 'Charming Acadian Style Cottage',
-    user: 'deirdremcphee',
+    spotId: 4,
+    userId: 4,
     review: 'Very cute place, great location, we very much enjoyed our stay.',
     stars: 5
   },
   {
-    spot: 'Oasis in the City',
-    user: 'sethbaker',
+    spotId: 5,
+    userId: 5,
     review: 'Stay was great. Nice and quiet area. Very green and relaxing. Will stay again.',
     stars: 5
   },
@@ -46,22 +46,7 @@ const reviews = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let reviewInfo of reviews) {
-      const { review, stars } = reviewInfo;
-      const foundSpot = await Spot.findOne({
-        where: { name: reviewInfo.spot}
-      });
-      const foundUser = await User.findOne({
-        where: { username: reviewInfo.user}
-      });
-      await Review.create({
-        review,
-        stars,
-        spotId: foundSpot.id,
-        userId: foundUser.id
-      });
-    }
-
+    await Review.bulkCreate(options, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {
