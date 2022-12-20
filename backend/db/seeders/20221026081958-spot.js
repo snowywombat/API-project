@@ -93,7 +93,7 @@ module.exports = {
         price,
         ownerId: foundUser.id
       });
-    }, options
+    } options
   },
 
   async down (queryInterface, Sequelize) {
