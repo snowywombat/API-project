@@ -92,7 +92,7 @@ module.exports = {
         description,
         price,
         ownerId: foundUser.id
-      });
+      }, options);
     }
   },
 
