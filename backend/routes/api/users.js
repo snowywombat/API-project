@@ -34,65 +34,94 @@ router.post(
     validateSignup,
     async (req, res) => {
       const { firstName, lastName, email, password, username } = req.body;
+      const findUsers = await User.findAll()
+
+    for(let i = 0; i < findUsers.length; i++) {
+      let user = findUsers[i]
+      if(user.email === email) {
+        res.status(403),
+        res.json({
+          message: 'User already exists',
+          statusCode: 403,
+          errors: {
+            email: 'User with that email already exists'
+          }
+        })
+      }
+
+      else if(user.username === username) {
+        res.status(403),
+        res.json({
+          message: 'User already exists',
+          statusCode: 403,
+          errors: {
+            email: 'User with that username already exists'
+          }
+        })
+      }
+    }
+
+    if(!email) {
+        res.status(400),
+        res.json({
+          message: "Validation error",
+          statusCode: 400,
+          errors: {
+            email: "Invalid email",
+          }
+      })
+    }
+
+    else if(username.length < 4) {
+      res.status(400),
+        res.json({
+          message: "Validation error",
+          statusCode: 400,
+          errors: {
+            username: "Username is required",
+          }
+      })
+
+    }
+
+    else if(firstName.length === 0) {
+        res.status(400),
+        res.json({
+          message: "Validation error",
+          statusCode: 400,
+          errors: {
+            firstName: "First Name is required",
+          }
+      })
+
+    }
+
+
+    else if(lastName.length === 0) {
+      res.status(400),
+        res.json({
+          message: "Validation error",
+          statusCode: 400,
+          errors: {
+            lastName: "Last Name is required"
+          }
+      })
+
+    }
+
+    else {
       const user = await User.signup({ firstName, lastName, email, username, password });
 
-      await setTokenCookie(res, user);
+        await setTokenCookie(res, user);
 
-      return res.json({
-        user
-      });
-    }
-  );
+        res.status(200)
+        return res.json({
+          user
+       });
 
-// Sign up
-// router.post('/', async(req, res, next) => {
+      }
 
-//   const { firstName, lastName, email, username, password } = req.body;
-
-//   const userList = await User.findAll({
-//     where: {
-//       firstName,
-//       lastName,
-//       email,
-//       username,
-//       password
-//     }
-//   });
-
-//   if(userList.length) {
-//     const err = newError('This user already exists')
-//     err.status = 403
-//     next(err)
-//   } else if (!userList) {
-//     const userErr = new Error ('This user cannot be found')
-//     err.status = 400
-//     next(userErr)
-//   } else {
-//     const users = await User.create ({
-//       firstName,
-//       lastName,
-//       email,
-//       username,
-//       password
-
-//     })
-
-//     res.json(users)
-
-//   }
-  // const user = {
-  //   firstName,
-  //   lastName,
-  //   email,
-  //   username,
-  //   password
-  // };
-  // console.log(user)
-
-//   await setTokenCookie(res, user);
-
-
-// });
+    })
 
 
 module.exports = router;

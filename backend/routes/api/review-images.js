@@ -4,22 +4,23 @@ const sequelize = require('sequelize')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { ReviewImage } = require('../../db/models');
+const { Review } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { captureRejectionSymbol } = require('pg/lib/query');
 
-//delete spot image
+//delete review image
 router.delete('/:imageId', requireAuth, async(req, res, next) => {
     const { imageId } = req.params;
-    const userId = req.user.id
+    // const userId = req.user.id
 
-    const currentImage = await ReviewImage.findByPk(imageId
-        , {
-        where: {
-            userId: userId
-        }
-    }
-    );
+    const currentImage = await ReviewImage.findByPk(imageId);
+
+    const findReviews = await Review.findByPk(id)
+
+    console.log(findReviews)
+
+    if(currentImage.reviewId)
 
     if (currentImage) {
         await currentImage.destroy();

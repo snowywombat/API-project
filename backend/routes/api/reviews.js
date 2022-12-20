@@ -11,6 +11,7 @@ const { ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { captureRejectionSymbol } = require('pg/lib/query');
+const e = require('express');
 
 //get all reviews of current user
 router.get('/current', requireAuth, async (req, res, next) => {
@@ -44,7 +45,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-        group: ['Review.id']
+        group: ['Review.id', 'ReviewImages.id']
 
     })
 
@@ -73,36 +74,68 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     const { reviewId } = req.params
     const { url } = req.body;
+    const userId = req.user.id;
 
-    const reviews = await Review.findByPk(reviewId)
+    const review = await Review.findByPk(reviewId, {
+        where: {
+            userId: userId
+        }
+    })
 
-    try {
-        await ReviewImage.create({
-            reviewId: reviews.id,
-            url,
-        })
+    if (userId === review.userId) {
 
-        const findImg = await ReviewImage.findAll({
+        const findImages = await ReviewImage.findAll({
             where: {
                 reviewId: reviewId
+            }
+        })
 
-            },
-            attributes: {
-                exclude: ['reviewId', 'updatedAt', 'createdAt']
+        if(findImages.length >= 10) {
+                res.status(403),
+                res.json ({
+                    message: 'Maximum number of images for this resource was reached',
+                    statusCode: 403
+                })
+
+        }
+
+        else if (review) {
+                await ReviewImage.create({
+                    reviewId: review.id,
+                    url,
+                })
+
+                const findImg = await ReviewImage.findAll({
+                    where: {
+                        reviewId: reviewId
+
+                    },
+                    attributes: {
+                        exclude: ['reviewId', 'updatedAt', 'createdAt']
+                    }
+
+                })
+
+                res.status(200)
+                res.json(findImg)
             }
 
-        })
-
-        res.status(200)
-        res.json(findImg)
+        else {
+            res.status(404),
+            res.json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
     }
 
-    catch(error) {
+    else {
         res.status(404),
         res.json({
-            message: "Spot couldn't be found",
+            message: 'Not authorized add image to review',
             statusCode: 404
         })
+
     }
 
 })
@@ -111,10 +144,33 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
 router.put('/:reviewId', requireAuth, async(req, res, next) => {
     const { reviewId } = req.params
     const { review, stars } = req.body;
+    const userId = req.user.id;
 
     const findReview = await Review.findByPk(reviewId);
 
-        if(findReview) {
+    if (userId === review.userId) {
+
+       if(!findReview) {
+            res.status(404)
+            res.json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        else if (review.length === 0 || (stars < 1 || stars > 5) ) {
+            res.status(400),
+            res.json({
+                message: 'Validation error',
+                statusCode: 400,
+                errors : {
+                    review: "Review text is required",
+                    stars: "Stars must be an integer from 1 to 5"
+                  }
+            })
+        }
+
+        else  {
             if(review) {
                 findReview.review = review;
             }
@@ -126,13 +182,13 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
 
             res.status(200)
             res.json(findReview)
-
         }
+    }
 
-    else if(!findReview) {
-        res.status(404)
+    else {
+        res.status(404),
         res.json({
-            message: "Review couldn't be found",
+            message: 'Not authorized add image to review',
             statusCode: 404
         })
 

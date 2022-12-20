@@ -2,7 +2,8 @@
 const express = require('express')
 const router = express.Router();
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -23,25 +24,83 @@ router.post(
     '/',
     validateLogin,
     async (req, res, next) => {
+
+
+    try{
       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password });
+      let user = null;
 
-      if (!user) {
-        const err = new Error('Login failed');
-        err.status = 401;
-        err.title = 'Login failed';
-        err.errors = ['The provided credentials were invalid.'];
-        return next(err);
+      const findUsers = await User.findAll()
+      for(let i = 0; i < findUsers.length; i++) {
+        // console.log(findUsers[i].email + 'and' + credential)
+        if(findUsers[i].email === credential) {
+          user = findUsers[i]
+        }
       }
 
-      await setTokenCookie(res, user);
+      if(credential.length === 0) {
+        res.status(400),
+        res.json({
+          message: 'Validation error',
+          statusCode: 400,
+          error: {
+            credential: 'Email or username is required'
+          }
+        })
 
-      return res.json({
-        user
-      });
+      }
+      else if(!password) {
+        res.status(400),
+        res.json({
+          message: 'Validation error',
+          statusCode: 400,
+          error: {
+            credential: 'Password is required'
+          }
+        })
+      }
+
+
+    else if (user !== null) {
+        const userLogin = await User.login({ credential, password });
+          await setTokenCookie(res, userLogin);
+          return res.json({
+            userLogin
+          });
+      }
+
+
+      else {
+        res.status(401),
+        res.json({
+          message: 'Invalid credentials',
+          statusCode: 401
+        })
+      }
+
     }
-  );
+
+    catch(error) {
+      res.status(400),
+      res.json({
+        message: 'Validation error',
+          statusCode: 400,
+          error: error
+      })
+
+    }
+
+
+    //   if(!user) {
+    //     const err = new Error('Login failed');
+    //     err.status = 401;
+    //     err.title = 'Login failed';
+    //     err.errors = ['The provided credentials were invalid.'];
+    //     return next(err);
+    // }
+
+    });
 
 // Log out
 router.delete(
@@ -54,7 +113,7 @@ router.delete(
 
 // Restore session user
 router.get(
-    '/',
+    '/', requireAuth,
     restoreUser,
     (req, res) => {
       const { user } = req;
