@@ -1,5 +1,10 @@
 'use strict';
 
+let option = {};
+if(process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA; //deine your schema in options object
+}
+
 const { SpotImage, Spot } = require('../models');
 
 const spotImages = [
