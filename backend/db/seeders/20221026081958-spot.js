@@ -81,7 +81,7 @@ module.exports = {
       const foundUser = await User.findOne({
         where: { username: spotInfo.owner }
       });
-      await Spot.create(options,{
+      await Spot.create({
         address,
         city,
         state,
@@ -93,7 +93,7 @@ module.exports = {
         price,
         ownerId: foundUser.id
       });
-    }
+    }, options
   },
 
   async down (queryInterface, Sequelize) {
