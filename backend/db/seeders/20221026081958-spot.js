@@ -81,7 +81,7 @@ module.exports = {
       const foundUser = await User.findOne({
         where: { username: spotInfo.owner }
       });
-      await Spot.create({
+      await Spot.create(options,{
         address,
         city,
         state,
@@ -92,7 +92,7 @@ module.exports = {
         description,
         price,
         ownerId: foundUser.id
-      }, options);
+      });
     }
   },
 
