@@ -39,60 +39,9 @@ router.post(
       await setTokenCookie(res, user);
 
       return res.json({
-        user
+        user: user
       });
     }
   );
-
-// Sign up
-// router.post('/', async(req, res, next) => {
-
-//   const { firstName, lastName, email, username, password } = req.body;
-
-//   const userList = await User.findAll({
-//     where: {
-//       firstName,
-//       lastName,
-//       email,
-//       username,
-//       password
-//     }
-//   });
-
-//   if(userList.length) {
-//     const err = newError('This user already exists')
-//     err.status = 403
-//     next(err)
-//   } else if (!userList) {
-//     const userErr = new Error ('This user cannot be found')
-//     err.status = 400
-//     next(userErr)
-//   } else {
-//     const users = await User.create ({
-//       firstName,
-//       lastName,
-//       email,
-//       username,
-//       password
-
-//     })
-
-//     res.json(users)
-
-//   }
-  // const user = {
-  //   firstName,
-  //   lastName,
-  //   email,
-  //   username,
-  //   password
-  // };
-  // console.log(user)
-
-//   await setTokenCookie(res, user);
-
-
-// });
-
 
 module.exports = router;
