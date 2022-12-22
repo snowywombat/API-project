@@ -8,8 +8,17 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { user } = require('pg/lib/defaults');
 
 const validateLogin = [
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1 })
+    .withMessage('Please provide a firstName.'),
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1 })
+    .withMessage('Please provide a lastName.'),
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -21,97 +30,73 @@ const validateLogin = [
 ];
 
 // Log in
-router.post(
-    '/',
-    validateLogin,
-    async (req, res, next) => {
+router.post('/', validateLogin, async (req, res, next) => {
+  const { credential, password, firstName, lastName } = req.body;
 
-    const { credential, password } = req.body;
+  const findUsers = await User.findAll()
 
-    const user = await User.login({ credential, password });
+  for(let i = 0; i < findUsers.length; i++) {
+    let user = findUsers[i]
 
-    if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
-      return next(err);
+    if (!user.email) {
+      res.status(401),
+      res.json({
+        message: 'Authentication required',
+        statusCode: 401,
+        errors: {
+          email: 'The provided credentials are invalid.'
+        }
+      })
     }
 
-    await setTokenCookie(res, user);
+    else if (!user.username) {
+      res.status(401),
+      res.json({
+        message: 'Authentication required',
+        statusCode: 401,
+        errors: {
+          username: 'The provided credentials are invalid.'
+        }
+      })
+    }
 
-    return res.json({
-      user: user
-    });
+    else if (!user.password) {
+      res.status(401),
+      res.json({
+        message: 'Authentication required',
+        statusCode: 401,
+        errors: {
+          password: 'The provided password is incorrect.'
+        }
+      })
+    }
+  }
 
-
-    // try{
-    //   const { credential, password } = req.body;
-
-    //   let user = null;
-
-    //   const findUsers = await User.findAll()
-    //   for(let i = 0; i < findUsers.length; i++) {
-    //     // console.log(findUsers[i].email + 'and' + credential)
-    //     if(findUsers[i].email === credential) {
-    //       user = findUsers[i]
-    //     }
-    //   }
-
-    //   if(credential.length === 0) {
-    //     res.status(400),
-    //     res.json({
-    //       message: 'Validation error',
-    //       statusCode: 400,
-    //       error: {
-    //         credential: 'Email or username is required'
-    //       }
-    //     })
-
-    //   }
-    //   else if(!password) {
-    //     res.status(400),
-    //     res.json({
-    //       message: 'Validation error',
-    //       statusCode: 400,
-    //       error: {
-    //         credential: 'Password is required'
-    //       }
-    //     })
-    //   }
+  // if(credential.length === 0 && (!credential.includes('@') || !credential.includes('.com') )) {
+  //   res.status(400),
+  //   res.json({
+  //     message: "Validation error",
+  //     statusCode: 400,
+  //     errors: {
+  //       email: "Invalid email",
+  //     }
+  //   })
+  // }
 
 
-    // else if (user !== null) {
-    //     const userLogin = await User.login({ credential, password });
-    //       await setTokenCookie(res, userLogin);
-    //       return res.json({
-    //         userLogin
-    //       });
-    //   }
+  const user = await User.login({ credential, password, firstName, lastName });
+  console.log(user)
 
+  await setTokenCookie(res, user);
 
-    //   else {
-    //     res.status(401),
-    //     res.json({
-    //       message: 'Invalid credentials',
-    //       statusCode: 401
-    //     })
-    //   }
+  return res.json({
+    firstName,
+    lastName,
+    credential,
+    password
+  });
 
-    // }
-
-    // catch(error) {
-    //   res.status(400),
-    //   res.json({
-    //     message: 'Validation error',
-    //       statusCode: 400,
-    //       error: error
-    //   })
-
-    // }
-    //
-
-    });
+});
 
 // Log out
 router.delete(

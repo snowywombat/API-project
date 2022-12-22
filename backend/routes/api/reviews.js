@@ -130,12 +130,15 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Not authorized add image to review',
-            statusCode: 404
-        })
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                userId: 'Not authorized to add image to review'
 
+            }
+        })
     }
 
 })
@@ -186,12 +189,15 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Not authorized add image to review',
-            statusCode: 404
-        })
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                userId: 'Not authorized add image to review'
 
+            }
+        })
     }
 
 });
@@ -199,21 +205,36 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
 //delete a review
 router.delete('/:reviewId', requireAuth, async(req, res, next) => {
     const { reviewId } = req.params;
+    const userId = req.user.id;
 
     const deletedReview = await Review.findByPk(reviewId);
 
-    if(deletedReview) {
-        await deletedReview.destroy();
-        res.status(200)
+    if(userId === deletedReview.userId) {
+        if(deletedReview) {
+            await deletedReview.destroy();
+            res.status(200)
+            res.json({
+                message: 'Successfully deleted',
+                statusCode: 200
+            })
+        } else {
+            res.status(400)
+            res.json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
+    }
+
+    else {
+        res.status(403),
         res.json({
-            message: 'Successfully deleted',
-            statusCode: 200
-        })
-    } else {
-        res.status(400)
-        res.json({
-            message: "Review couldn't be found",
-            statusCode: 404
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                ownerId: 'Not authorized to delete review'
+
+            }
         })
     }
 

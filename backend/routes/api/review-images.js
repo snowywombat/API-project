@@ -12,32 +12,41 @@ const { captureRejectionSymbol } = require('pg/lib/query');
 //delete review image
 router.delete('/:imageId', requireAuth, async(req, res, next) => {
     const { imageId } = req.params;
-    // const userId = req.user.id
+    const userId = req.user.id;
 
     const currentImage = await ReviewImage.findByPk(imageId);
 
-    const findReviews = await Review.findByPk(id)
+    if(userId === currentImage.userId) {
+        if (currentImage) {
+            await currentImage.destroy();
+            res.status(200)
+            res.json({
+                message: 'Successfully deleted',
+                statusCode: 200
+            })
+        }
 
-    console.log(findReviews)
-
-    if(currentImage.reviewId)
-
-    if (currentImage) {
-        await currentImage.destroy();
-        res.status(200)
-        res.json({
-            message: 'Successfully deleted',
-            statusCode: 200
-        })
+        else {
+            res.status(400)
+            res.json({
+                message: "Review Image couldn't be found",
+                statusCode: 404
+            })
+        }
     }
 
     else {
-        res.status(400)
+        res.status(403),
         res.json({
-            message: "Review Image couldn't be found",
-            statusCode: 404
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                ownerId: 'Not authorized to delete review image'
+
+            }
         })
     }
+
 });
 
 module.exports = router;

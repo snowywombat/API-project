@@ -177,12 +177,15 @@ router.put('/:bookingId', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Not authorized to modify booking',
-            statusCode: 404
-        })
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+               userId: 'Not authorized to modify booking'
 
+            }
+        })
     }
 
 });
@@ -223,14 +226,18 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
                 statusCode: 404
             })
         }
-    else {
-        res.status(404),
-        res.json({
-            message: 'Not authorized to delete booking',
-            statusCode: 404
-        })
 
-    }
+        else {
+            res.status(403),
+            res.json({
+                message: 'Forbidden',
+                statusCode: 403,
+                errors: {
+                   userId: 'Not authorized to delete booking'
+
+                }
+            })
+        }
 });
 
 

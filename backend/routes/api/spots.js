@@ -23,19 +23,22 @@ const e = require('express');
 router.get('/', async (req, res, next) => {
 
     let {page, size} = req.query;
-    if(!page) page = 1;
-    if(!size) size = 20;
-
-
-    let pagination = []
-    if(parseInt(page) >= 1 && parseInt(size) >= 1) {
-        pagination.limit = size;
-        pagination.offset = size * (page - 1);
-
-    }
 
     page = parseInt(page);
     size = parseInt(size);
+
+
+    if (Number.isNaN(page) || (page < 0 || page < 10)) page = 1;
+    if (Number.isNaN(size) || (size < 0 || size < 20)) size = 20;
+
+
+    // let pagination = []
+    // if(parseInt(page) >= 1 && parseInt(size) >= 1) {
+    //     pagination.limit = size;
+    //     pagination.offset = size * (page - 1);
+
+    // }
+
 
     // const pagination = {};
 
@@ -53,8 +56,8 @@ router.get('/', async (req, res, next) => {
     //     })
     // }
 
-    console.log('hiiiiiii')
-    console.log(pagination)
+    // console.log('hiiiiiii')
+    // console.log(pagination)
 
     const spots = await Spot.findAll({
         include: [{
@@ -80,20 +83,18 @@ router.get('/', async (req, res, next) => {
             ]
         },
 
-        // ...pagination,
-
         group: ['Spot.id', 'Reviews.stars', 'SpotImages.url'],
-
-
-        limit: 3,
-        offset: 0,
-        subQuery: false
-
+        // limit: size,
+        // offset: size * (page - 1),
 
     })
 
-    res.json({ spots })
-})
+    return res.json({
+        spots,
+        page,
+        size
+    });
+});
 
 //create a spot
 router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
@@ -144,17 +145,16 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
 router.post('/:spotId/images', requireAuth, async(req, res, next) => {
     const { spotId } = req.params
     const { url, preview } = req.body;
-    const userId = req.user.id;
     const ownerId = req.user.id;
 
     const spot = await Spot.findByPk(spotId, {
-        where: {
-            ownerId: userId
-        }
+        // where: {
+        //     ownerId: req.user.id
+        // }
     })
 
     //if user has spot
-    if(userId === spot.ownerId) {
+    if(ownerId === spot.ownerId) {
 
        if(!spot) {
             res.status(404),
@@ -188,10 +188,14 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Not authorized to add image',
-            statusCode: 404
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                ownerId: 'Not authorized to add image'
+
+            }
         })
     }
 
@@ -367,12 +371,15 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Not authorized to edit spot',
-            statusCode: 404
-        })
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                userId: 'Not authorized to edit spot'
 
+            }
+        })
     }
 
 
@@ -381,24 +388,38 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
 //delete a spot
 router.delete('/:spotId', requireAuth, async(req, res, next) => {
     const { spotId } = req.params;
+    const ownerId = req.user.id;
 
     const deletedSpot = await Spot.findByPk(spotId);
 
-    if(deletedSpot) {
-        await deletedSpot.destroy();
-        res.status(200)
-        res.json({
-            message: 'Successfully deleted',
-            statusCode: 200
-        })
-    } else {
-        res.status(400)
-        res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
+    if(ownerId === deletedSpot.ownerId) {
+        if(deletedSpot) {
+            await deletedSpot.destroy();
+            res.status(200)
+            res.json({
+                message: 'Successfully deleted',
+                statusCode: 200
+            })
+        } else {
+            res.status(400)
+            res.json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+            })
+        }
     }
 
+    else {
+        res.status(403),
+        res.json({
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                ownerId: 'Not authorized to delete spot'
+
+            }
+        })
+    }
 
 });
 
@@ -629,12 +650,15 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
     }
 
     else {
-        res.status(404),
+        res.status(403),
         res.json({
-            message: 'Cannot make a booking',
-            statusCode: 404
-        })
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+                userId: 'Not authorized to make a booking'
 
+            }
+        })
     }
 
 
