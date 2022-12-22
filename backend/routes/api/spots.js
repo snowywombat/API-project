@@ -61,7 +61,6 @@ router.get('/', async (req, res, next) => {
     }
 
 
-
     const spots = await Spot.findAll({
         include: [{
             model: Review,

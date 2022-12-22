@@ -25,35 +25,6 @@ const validateLogin = [
 router.post('/', validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 
-  const findUsers = await User.findAll()
-
-  for(let i = 0; i < findUsers.length; i++) {
-    let user = findUsers[i]
-
-    if (!user.email) {
-      res.status(401),
-      res.json({
-        message: 'Authentication required',
-        statusCode: 401,
-        errors: {
-          email: 'The provided credentials are invalid.'
-        }
-      })
-    }
-
-    if (!user.username) {
-      res.status(401),
-      res.json({
-        message: 'Authentication required',
-        statusCode: 401,
-        errors: {
-          username: 'The provided credentials are invalid.'
-        }
-      })
-    }
-  }
-
-
   // if(credential.length === 0 && (!credential.includes('@') || !credential.includes('.com') )) {
   //   res.status(400),
   //   res.json({
@@ -66,7 +37,18 @@ router.post('/', validateLogin, async (req, res, next) => {
   // }
 
   const user = await User.login({ credential, password });
-  console.log(user)
+
+  if(!user) {
+      res.status(401),
+      res.json({
+      message: 'Authentication required',
+      statusCode: 401,
+      errors: {
+        credentials: 'The provided credentials are invalid.'
+      }
+    })
+
+  }
 
   await setTokenCookie(res, user);
 
