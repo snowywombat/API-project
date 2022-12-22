@@ -11,14 +11,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { user } = require('pg/lib/defaults');
 
 const validateLogin = [
-  check('firstName')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 1 })
-    .withMessage('Please provide a firstName.'),
-  check('lastName')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 1 })
-    .withMessage('Please provide a lastName.'),
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -31,7 +23,7 @@ const validateLogin = [
 
 // Log in
 router.post('/', validateLogin, async (req, res, next) => {
-  const { credential, password, firstName, lastName } = req.body;
+  const { credential, password } = req.body;
 
   const findUsers = await User.findAll()
 
@@ -49,7 +41,7 @@ router.post('/', validateLogin, async (req, res, next) => {
       })
     }
 
-    else if (!user.username) {
+    if (!user.username) {
       res.status(401),
       res.json({
         message: 'Authentication required',
@@ -59,18 +51,8 @@ router.post('/', validateLogin, async (req, res, next) => {
         }
       })
     }
-
-    else if (!user.password) {
-      res.status(401),
-      res.json({
-        message: 'Authentication required',
-        statusCode: 401,
-        errors: {
-          password: 'The provided password is incorrect.'
-        }
-      })
-    }
   }
+
 
   // if(credential.length === 0 && (!credential.includes('@') || !credential.includes('.com') )) {
   //   res.status(400),
@@ -83,17 +65,19 @@ router.post('/', validateLogin, async (req, res, next) => {
   //   })
   // }
 
-
-  const user = await User.login({ credential, password, firstName, lastName });
+  const user = await User.login({ credential, password });
   console.log(user)
 
   await setTokenCookie(res, user);
 
   return res.json({
-    firstName,
-    lastName,
-    credential,
-    password
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    username: user.username,
+    token: ''
+
   });
 
 });

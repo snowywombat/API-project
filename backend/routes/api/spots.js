@@ -22,42 +22,45 @@ const e = require('express');
 //get all spots
 router.get('/', async (req, res, next) => {
 
-    let {page, size} = req.query;
+    let { page, size } = req.query;
+
+    //minLat, maxLat, minLng, maxLng, minPrice, maxPrice
 
     page = parseInt(page);
     size = parseInt(size);
 
+    if(!page) page = 1;
+    if(!size) size = 20;
 
-    if (Number.isNaN(page) || (page < 0 || page < 10)) page = 1;
-    if (Number.isNaN(size) || (size < 0 || size < 20)) size = 20;
+    let pagination = []
+    if ((page > 0 || page < 10) && (size > 0 || size < 20)) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1)
+    }
+
+    if(page < 1) {
+        res.status(400),
+        res.json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+            username: "Page must be greater than or equal to 1",
+            }
+        })
+    }
+
+    else if(size < 1) {
+        res.status(400),
+        res.json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+            username: "Size must be greater than or equal to 1",
+            }
+        })
+    }
 
 
-    // let pagination = []
-    // if(parseInt(page) >= 1 && parseInt(size) >= 1) {
-    //     pagination.limit = size;
-    //     pagination.offset = size * (page - 1);
-
-    // }
-
-
-    // const pagination = {};
-
-    // if (
-    //     Number.isInteger(page) && Number.isInteger(size) &&
-    //     page > 0 && page <= 10 && size > 0 && size <= 20
-    // ) {
-    //     pagination.limit = size;
-    //     pagination.offset = size * (page - 1);
-    // } else if (!(page === 0 && size === 0)) {
-    //     res.status(400),
-    //     res.json({
-    //         message: 'Requires valid page and size params'
-
-    //     })
-    // }
-
-    // console.log('hiiiiiii')
-    // console.log(pagination)
 
     const spots = await Spot.findAll({
         include: [{
@@ -69,23 +72,27 @@ router.get('/', async (req, res, next) => {
             model: SpotImage,
             as: 'SpotImages',
             attributes: [],
-        }
+        }],
+
+        attributes: [
+            "id",
+            "ownerId",
+            "address",
+            "city",
+            "state",
+            "country",
+            "lat",
+            "lng",
+            "name",
+            "description",
+            "price",
+            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
+            [sequelize.fn('MAX', sequelize.col('SpotImages.url')), 'previewImage'],
         ],
-        attributes: {
-            include:
-            [
-                [
-                    sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'
-                ],
-                [
-                    sequelize.fn('MAX', sequelize.col('SpotImages.url')), 'previewImage'
-                ],
-            ]
-        },
 
         group: ['Spot.id', 'Reviews.stars', 'SpotImages.url'],
-        // limit: size,
-        // offset: size * (page - 1),
+
+        ...pagination
 
     })
 
