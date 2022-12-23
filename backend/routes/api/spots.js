@@ -28,14 +28,6 @@ router.get('/', async (req, res, next) => {
     page = parseInt(page);
     size = parseInt(size);
 
-    if(!page) page = 1;
-    if(!size) size = 20;
-
-    let pagination = []
-    if ((page > 0 || page < 10) && (size > 0 || size < 20)) {
-        pagination.limit = size;
-        pagination.offset = size * (page - 1)
-    }
 
     if(page < 1) {
         res.status(400),
@@ -43,7 +35,7 @@ router.get('/', async (req, res, next) => {
             message: "Validation error",
             statusCode: 400,
             errors: {
-            username: "Page must be greater than or equal to 1",
+                page: "Page must be greater than or equal to 1",
             }
         })
     }
@@ -54,10 +46,98 @@ router.get('/', async (req, res, next) => {
             message: "Validation error",
             statusCode: 400,
             errors: {
-            username: "Size must be greater than or equal to 1",
+                size: "Size must be greater than or equal to 1",
             }
         })
     }
+
+    else if(minLat) {
+        if(minLat % 1 === 0 || minLat.toString().length < 4)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLat: "Minimum latitude is invalid",
+                }
+            })
+        }
+    }
+
+    else if(maxLat) {
+        if(maxLat % 1 === 0 || maxLat.toString().length < 4)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLat: "Maximum latitude is invalid",
+                }
+            })
+        }
+    }
+
+    else if(minLng) {
+        if(minLng % 1 === 0 || minLng.toString().length < 4)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLng: "Minimum longitude is invalid",
+                }
+            })
+        }
+    }
+
+    else if(maxLng) {
+        if(minLat % 1 === 0 || maxLng.toString().length < 4)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLng: "Maximum longitude is invalid",
+                }
+            })
+        }
+    }
+
+    else if(minPrice) {
+        if(minPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minPrice: "Minimum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
+    else if(maxPrice) {
+        if(maxPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxPrice: "Maximum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
+    if(!page) page = 1;
+    if(!size) size = 20;
+
+    let pagination = []
+    if ((page > 0 || page < 10) && (size > 0 || size < 20)) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1)
+    }
+
 
     const spots = await Spot.findAll({
         include: [
@@ -79,29 +159,36 @@ router.get('/', async (req, res, next) => {
         spotsList.push(spot.toJSON())
     })
 
-    for (const spot of spotsList){
+    for (let spot of spotsList){
 
-        const reviews = Review.findAll({
+        const reviews = await Review.findAll({
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-                ]
-            }
+            attributes: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']]
         })
 
-        console.log(reviews)
+        if(reviews[0].dataValues.avgRating) {
+            spot.avgRating = reviews[0].dataValues.avgRating
+        }
+        else {
+            spot.avgRating = 'No reviews exist for this spot.'
+        }
 
-        spot.Reviews.forEach(review => {
-            spot.avgRating = review.avgRating
+        const images = await SpotImage.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: [[sequelize.fn('MIN', sequelize.col('url')), 'previewImage']]
         })
 
-        spot.SpotImages.forEach(image => {
-            spot.previewImage = ""
+        if(images[0].dataValues.previewImage) {
+            spot.previewImage = images[0].dataValues.previewImage
+        }
+        else {
+            spot.previewImage = 'No images exist for this spot.'
+        }
 
-        })
 
         delete spot.Reviews,
         delete spot.SpotImages
