@@ -258,27 +258,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-    try {
-    const ownerId = req.user.id
-    const newSpot = await Spot.create({
-        ownerId,
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price
-    });
-
-    res.status(201)
-    res.json(newSpot)
-
-    }
-
-    catch(error) {
+    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price){
         res.status(400)
         res.json({
             message: 'Validation Error',
@@ -295,8 +275,27 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
                 price: 'Price per day is required'
             }
         });
-
     }
+
+    else {
+        const ownerId = req.user.id
+        const newSpot = await Spot.create({
+            ownerId,
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        });
+
+        res.status(201)
+        res.json(newSpot)
+    }
+
 })
 
 //create an image for a spot
@@ -462,6 +461,26 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         })
     }
 
+    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price){
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                address: 'Street address is required',
+                city: 'City is required',
+                state: 'State is required',
+                country: 'Country is required',
+                lat: 'Latitude is not valid',
+                lng: 'Longitude is not valid',
+                name: 'Name must be less than 50 characters',
+                description: 'Description is required',
+                price: 'Price per day is required'
+            }
+        });
+    }
+
+
     else if(ownerId !== findSpot.ownerId) {
         res.status(403),
         res.json({
@@ -540,7 +559,15 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
 
     const deletedSpot = await Spot.findByPk(spotId);
 
-    if(ownerId === deletedSpot.ownerId) {
+    if(!deletedSpot) {
+        res.status(400)
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    else if(ownerId === deletedSpot.ownerId) {
         if(deletedSpot) {
             await deletedSpot.destroy();
             res.status(200)
@@ -548,16 +575,10 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
                 message: 'Successfully deleted',
                 statusCode: 200
             })
-        } else {
-            res.status(400)
-            res.json({
-                message: "Spot couldn't be found",
-                statusCode: 404
-            })
         }
     }
 
-    else {
+    else if(ownerId !== deletedSpot.ownerId) {
         res.status(403),
         res.json({
             message: 'Forbidden',
@@ -568,6 +589,7 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
             }
         })
     }
+
 
 });
 
@@ -589,8 +611,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         }
     })
 
-    console.log(findSpot)
-
 
     if(findSpot === null) {
         res.status(404),
@@ -598,15 +618,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             message: "Spot couldn't be found",
             statusCode: 404
         })
-    }
-
-    else if(findReviews.length > 0) {
-        res.status(403),
-        res.json({
-            message: 'User already has a review for this spot',
-            statusCode: 403
-        })
-
     }
 
     else if (review.length === 0 || (stars < 1 || stars > 5)) {
@@ -619,6 +630,15 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
                 stars: 'Stars must be an integer from 1 to 5'
             }
         })
+    }
+
+    else if(findReviews.length > 0) {
+        res.status(403),
+        res.json({
+            message: 'User already has a review for this spot',
+            statusCode: 403
+        })
+
     }
 
 
@@ -841,7 +861,7 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
                     spotId: spotId
                 },
 
-                attributes: ["id", 'spotId', 'startDate', 'endDate'],
+                attributes: ['spotId', 'startDate', 'endDate'],
 
                 group: ['booking.id']
 

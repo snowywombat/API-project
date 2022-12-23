@@ -60,6 +60,17 @@ router.post('/', validateSignup, async (req, res) => {
         }
       })
     }
+
+    else if(user.username === username) {
+      res.status(403),
+      res.json({
+        message: 'Forbidden',
+        statusCode: 403,
+        errors: {
+          email: 'User with that username already exists'
+        }
+      })
+    }
   }
 
   // if(username.length < 4) {

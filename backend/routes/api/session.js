@@ -22,7 +22,7 @@ const validateLogin = [
 ];
 
 // Log in
-router.post('/', validateLogin, async (req, res, next) => {
+router.post('/', validateLogin, requireAuth, async (req, res, next) => {
   const { credential, password } = req.body;
 
   // if(credential.length === 0 && (!credential.includes('@') || !credential.includes('.com') )) {
@@ -39,15 +39,14 @@ router.post('/', validateLogin, async (req, res, next) => {
   const user = await User.login({ credential, password });
 
   if(!user) {
-      res.status(401),
-      res.json({
-      message: 'Authentication required',
-      statusCode: 401,
-      errors: {
-        credentials: 'The provided credentials are invalid.'
+    res.status(401),
+    res.json({
+    message: 'Authentication required',
+    statusCode: 401,
+    errors: {
+      credentials: 'The provided credentials are invalid.'
       }
     })
-
   }
 
   await setTokenCookie(res, user);
