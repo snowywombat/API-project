@@ -74,15 +74,27 @@ router.put('/:bookingId', requireAuth, async(req, res, next) => {
 
     const findBooking = await Booking.findByPk(bookingId);
 
-    if(findBooking.userId === userId) {
+    if(findBooking === null) {
+        res.status(404),
+        res.json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }
 
-        if(!findBooking) {
-            res.status(404),
-            res.json({
-                message: "Booking couldn't be found",
-                statusCode: 404
-            })
-        }
+    else if (findBooking.userId !== userId) {
+        res.status(403),
+        res.json({
+            message: 'Forbidden',
+            statusCode: 403,
+            errors: {
+               userId: 'Not authorized to modify booking'
+
+            }
+        })
+    }
+
+    else if(findBooking.userId === userId) {
 
         const bookStartDate = new Date(findBooking.startDate);
         const bookingStartTime = bookStartDate.getTime();
@@ -174,18 +186,6 @@ router.put('/:bookingId', requireAuth, async(req, res, next) => {
             res.json(findBooking)
 
         }
-    }
-
-    else {
-        res.status(403),
-        res.json({
-            message: 'Forbidden',
-            statusCode: 403,
-            errors: {
-               userId: 'Not authorized to modify booking'
-
-            }
-        })
     }
 
 });

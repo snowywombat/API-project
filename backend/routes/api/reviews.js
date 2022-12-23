@@ -76,57 +76,56 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     const { url } = req.body;
     const userId = req.user.id;
 
-    const review = await Review.findByPk(reviewId, {
+    const findReview = await Review.findByPk(reviewId, {
         where: {
             userId: userId
         }
     })
 
-    if (userId === review.userId) {
+    const findImages = await ReviewImage.findAll({
+        where: {
+            reviewId: reviewId
+        }
+    })
 
-        const findImages = await ReviewImage.findAll({
-            where: {
-                reviewId: reviewId
-            }
+    if (findReview === null) {
+        res.status(404),
+        res.json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+
+
+    else if(findImages.length >= 10) {
+        res.status(403),
+        res.json ({
+            message: 'Maximum number of images for this resource was reached',
+            statusCode: 403
         })
 
-        if(findImages.length >= 10) {
-                res.status(403),
-                res.json ({
-                    message: 'Maximum number of images for this resource was reached',
-                    statusCode: 403
-                })
+    }
 
-        }
+    else if (userId === findReview.userId) {
+        await ReviewImage.create({
+            reviewId: findReview.id,
+            url,
+        })
 
-        else if (review) {
-                await ReviewImage.create({
-                    reviewId: review.id,
-                    url,
-                })
+        const findImg = await ReviewImage.findAll({
+            where: {
+                reviewId: reviewId
 
-                const findImg = await ReviewImage.findAll({
-                    where: {
-                        reviewId: reviewId
-
-                    },
-                    attributes: {
-                        exclude: ['reviewId', 'updatedAt', 'createdAt']
-                    }
-
-                })
-
-                res.status(200)
-                res.json(findImg)
+            },
+            attributes: {
+                exclude: ['reviewId', 'updatedAt', 'createdAt']
             }
 
-        else {
-            res.status(404),
-            res.json({
-                message: "Review couldn't be found",
-                statusCode: 404
-            })
-        }
+        })
+
+        res.status(200)
+        res.json(findImg)
+
     }
 
     else {
@@ -151,44 +150,15 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
 
     const findReview = await Review.findByPk(reviewId);
 
-    if (userId === review.userId) {
-
-       if(!findReview) {
-            res.status(404)
-            res.json({
-                message: "Review couldn't be found",
-                statusCode: 404
-            })
-        }
-
-        else if (review.length === 0 || (stars < 1 || stars > 5) ) {
-            res.status(400),
-            res.json({
-                message: 'Validation error',
-                statusCode: 400,
-                errors : {
-                    review: "Review text is required",
-                    stars: "Stars must be an integer from 1 to 5"
-                  }
-            })
-        }
-
-        else  {
-            if(review) {
-                findReview.review = review;
-            }
-            if(stars) {
-                findReview.stars = stars;
-            }
-
-            findReview.save();
-
-            res.status(200)
-            res.json(findReview)
-        }
+    if(findReview === null) {
+        res.status(404),
+        res.json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
     }
 
-    else {
+    else if (userId !== findReview.userId) {
         res.status(403),
         res.json({
             message: 'Forbidden',
@@ -198,6 +168,33 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
 
             }
         })
+    }
+
+    else if (review.length === 0 || (stars < 1 || stars > 5) ) {
+        res.status(400),
+        res.json({
+            message: 'Validation error',
+            statusCode: 400,
+            errors : {
+                review: "Review text is required",
+                stars: "Stars must be an integer from 1 to 5"
+              }
+        })
+    }
+
+    else if (userId === findReview.userId) {
+
+        if(review) {
+            findReview.review = review;
+        }
+        if(stars) {
+            findReview.stars = stars;
+        }
+
+        findReview.save();
+
+        res.status(200)
+        res.json(findReview)
     }
 
 });
