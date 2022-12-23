@@ -1,4 +1,12 @@
 'use strict';
+const bcrypt = require("bcryptjs");
+
+let options = {};
+if(process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA; //define your schema in options object
+}
+
+options.tableName = 'Spots';
 
 const { Spot, User } = require('../models');
 
@@ -13,7 +21,7 @@ const spots = [
     name: 'River Rest 1',
     description:'Modern tiny home on the banks of the Chena River.',
     price: 119.00,
-    owner: 'tedrogers',
+    ownerId: 1,
   },
   {
     address:'234 B. Street Leavenworth, Washington 98826',
@@ -25,7 +33,7 @@ const spots = [
     name: 'Mountain Dream Escape',
     description:'Na-Mu Lodge offers 4 luxurious suites each w/private baths, plus our bunk room w/plenty of space for everyone.',
     price: 1303.00,
-    owner: 'johnsanders',
+    ownerId: 2,
   },
   {
     address:'345 C. Street Fire Island Pines, New York 11782',
@@ -37,7 +45,7 @@ const spots = [
     name: 'The Legendary Pyramid House',
     description:'Iconic architectural masterpiece (b. 1961) with spectacular views offers unparalleled peace and privacy.',
     price: 1460.00,
-    owner: 'glennmaisel',
+    ownerId: 3,
   },
   {
     address:'456 D. Street Baton Rouge, Louisiana 70801',
@@ -49,7 +57,7 @@ const spots = [
     name: 'Charming Acadian Style Cottage',
     description:'This beautifully appointed 1 bedroom/1 bath Acadian Style Cottage is located on a private street',
     price: 43.00,
-    owner: 'deirdremcphee',
+    ownerId: 4,
   },
   {
     address:'567 E. Street Albuquerque, New Mexico 87105',
@@ -61,35 +69,18 @@ const spots = [
     name: 'Oasis in the City',
     description:'Lovely 1 bd / 1 ba (1,100 sq ft) "casita" (guesthouse) nestled on an acre in the beautiful North Valley.',
     price: 110.00,
-    owner: 'sethbaker',
+    ownerId: 5,
   },
 ];
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let spotInfo of spots) {
-      const { address, city, state, country, lat, lng, name, description, price } = spotInfo;
-      const foundUser = await User.findOne({
-        where: { username: spotInfo.owner }
-      });
-      await Spot.create({
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price,
-        ownerId: foundUser.id
-      });
-    }
+    await Spot.bulkCreate(options, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spots', {}, {});
+    await queryInterface.bulkDelete(options, {}, {});
 
   }
 };
