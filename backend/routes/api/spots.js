@@ -443,7 +443,7 @@ router.get('/:spotId', async(req, res, next) => {
         },
 
 
-    group: ['SpotImages.id']
+    group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'User.id']
 
 
     });
@@ -685,9 +685,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 router.get('/:spotId/reviews', async (req, res, next) => {
     const { spotId } = req.params;
 
-    const findSpot = await Spot.findByPk(spotId, {
-        group: ['id']
-    })
+    const findSpot = await Spot.findByPk(spotId)
 
     if(findSpot){
         const Reviews = await Review.findAll({
@@ -707,7 +705,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }],
             attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-            group: ['Review.id', 'ReviewImages.id']
+            group: ['Review.id', 'User.id' 'ReviewImages.id']
         })
 
         res.status(200)
