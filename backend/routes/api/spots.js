@@ -689,9 +689,9 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
     if(findSpot){
         const Reviews = await Review.findAll({
-            where: {
-                spotId: spotId
-            },
+            // where: {
+            //     spotId: spotId
+            // },
             include: [{
                 model: User,
                 as: 'User',
@@ -705,7 +705,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }],
             attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-            group: ['Review.id', 'ReviewImages.id']
+            group: ['Spot.id','Review.id', 'ReviewImages.id']
         })
 
         res.status(200)
@@ -916,8 +916,6 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
     }
 
 })
-
-
 
 
 module.exports = router;
