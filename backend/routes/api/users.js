@@ -39,8 +39,6 @@ const validateSignup = [
   handleValidationErrors
 ];
 
-
-
 // // Sign up
 router.post('/', validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
@@ -59,6 +57,7 @@ router.post('/', validateSignup, async (req, res) => {
           email: 'User with that email already exists'
         }
       })
+
     }
 
     else if(user.username === username) {
