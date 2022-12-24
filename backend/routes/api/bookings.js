@@ -197,16 +197,24 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
 
     const currentBooking = await Booking.findByPk(bookingId);
 
-    if(currentBooking.userId === userId || userId === ownerId)
+   if(!currentBooking) {
+        res.status(400)
+        res.json({
+            message: "Booking couldn't be founxd",
+            statusCode: 404
+        })
+    }
+
+    else if(currentBooking.userId === userId || userId === ownerId)
         if(currentBooking) {
             const bookStartDate = new Date(currentBooking.startDate);
             const bookingStartTime = bookStartDate.getTime();
 
             if(bookingStartTime < Date.now()) {
-                res.status(403),
+                res.status(400),
                 res.json({
                     message: "Bookings that have been started can't be deleted",
-                    statusCode: 403
+                    statusCode: 400
                 })
             }
             else  {
@@ -219,15 +227,7 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
             }
         }
 
-        else {
-            res.status(400)
-            res.json({
-                message: "Booking couldn't be founxd",
-                statusCode: 404
-            })
-        }
-
-        else {
+        else if(currentBooking.userId !== userId || userId !== ownerId) {
             res.status(403),
             res.json({
                 message: 'Forbidden',
