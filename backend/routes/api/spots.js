@@ -705,7 +705,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }],
             attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-            group: ['Review.id', 'User.id' 'ReviewImages.id']
+            group: ['Review.id', 'User.id', 'ReviewImages.id']
         })
 
         res.status(200)
