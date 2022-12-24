@@ -685,7 +685,9 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 router.get('/:spotId/reviews', async (req, res, next) => {
     const { spotId } = req.params;
 
-    const findSpot = await Spot.findByPk(spotId)
+    const findSpot = await Spot.findByPk(spotId {
+        group: ['Spot.id']
+    })
 
     if(findSpot){
         const Reviews = await Review.findAll({
