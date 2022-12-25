@@ -39,7 +39,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
                         duplicating: false
                     },
                     group: ['SpotImages.id']
-
                 },
                 {
                     model: ReviewImage,
@@ -50,7 +49,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-        group: ['Review.id', 'User.id', 'Spot.id', 'SpotImages.id', 'ReviewImages.id'],
+        group: ['Review.id', 'User.id', 'Spot.id', 'ReviewImages.id'],
         required: true,
         duplicating: false
 
