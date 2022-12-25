@@ -444,7 +444,9 @@ router.get('/:spotId', async(req, res, next) => {
         },
 
 
-    group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'User.id']
+        group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'User.id'],
+        required: true,
+        duplicating: false
 
 
     });
