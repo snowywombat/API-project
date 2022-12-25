@@ -45,7 +45,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-        group: ['Review.id', 'ReviewImages.id']
+        group: ['Review.id', 'User.id', 'Spot,id', 'ReviewImages.id'],
+        required: true,
+        duplicating: false
 
     })
 
