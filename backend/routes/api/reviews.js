@@ -18,36 +18,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const userId = req.user.id
 
 
-    // let spots = await Spot.findAll({
-    //     where: {
-    //         id: userId
-    //     },
-    //     include: [{
-    //         model: SpotImage,
-    //         as: 'SpotImages',
-    //         where: { preview: true },
-    //     }],
-    //     group: ['Spot.id', 'SpotImages.id'],
-    // })
-
-
-    // let spotsList = [];
-    // spots.forEach(spot => {
-    //     spotsList.push(spot.toJSON())
-    // })
-
-
-    // spotsList.forEach(spot => {
-    //     spot.SpotImages.forEach(spotImage => {
-    //         if(spotImage.preview === true) {
-    //             spots.previewImage = spotImage.url
-    //         }
-    //     })
-
-    //     delete spots.SpotImages
-    // })
-
-
     const reviews = await Review.findAll({
         where: {
             userId: userId
