@@ -413,22 +413,16 @@ router.get('/:spotId', async(req, res, next) => {
             model: Review,
             as: 'Reviews',
             attributes: [],
-            // required: true,
-            // duplicating: false
         },
         {
             model: SpotImage,
             as: 'SpotImages',
             attributes: ['id', 'url', 'preview'],
-            // required: true,
-            // duplicating: false
         },
         {
             model: User,
             as: 'Owner',
             attributes: ['id', 'firstName', 'lastName'],
-            // required: true,
-            // duplicating: false
         }],
 
 
@@ -448,7 +442,6 @@ router.get('/:spotId', async(req, res, next) => {
         group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'Owner.id'],
         required: true,
         duplicating: false
-
 
     });
 
@@ -697,7 +690,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             },
             include: [{
                 model: User,
-                as: 'User',
+                as: 'Owner',
                 attributes: ['id', 'firstName', 'lastName'],
             },
             {
@@ -708,7 +701,9 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }],
             attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-            group: ['Review.id', 'User.id', 'ReviewImages.id']
+            group: ['Review.id', 'Owner.id', 'ReviewImages.id'],
+            required: true,
+            duplicating: false
         })
 
         res.status(200)
