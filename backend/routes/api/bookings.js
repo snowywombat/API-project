@@ -36,8 +36,8 @@ router.get('/current', requireAuth, async(req, res, next) => {
                 },
         ],
         attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
-
-        group: ['Booking.id']
+        required: true,
+        duplicating: false
 
     })
 
