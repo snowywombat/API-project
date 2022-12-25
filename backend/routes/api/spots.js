@@ -690,7 +690,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             },
             include: [{
                 model: User,
-                as: 'Owner',
+                as: 'User',
                 attributes: ['id', 'firstName', 'lastName'],
             },
             {
@@ -701,7 +701,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }],
             attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-            group: ['Review.id', 'Owner.id', 'ReviewImages.id'],
+            group: ['Review.id', 'User.id', 'ReviewImages.id'],
             required: true,
             duplicating: false
         })
