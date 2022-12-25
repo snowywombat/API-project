@@ -16,10 +16,12 @@ const e = require('express');
 //get all reviews of current user
 router.get('/current', requireAuth, async (req, res, next) => {
     const userId = req.user.id
-    // const ownerId = req.user.id
+
 
     // let spots = await Spot.findAll({
-
+    //     where: {
+    //         id: userId
+    //     },
     //     include: [{
     //         model: SpotImage,
     //         as: 'SpotImages',
@@ -41,14 +43,15 @@ router.get('/current', requireAuth, async (req, res, next) => {
     //             spots.previewImage = spotImage.url
     //         }
     //     })
+
     //     delete spots.SpotImages
     // })
 
 
     const reviews = await Review.findAll({
-        // where: {
-        //     userId: userId
-        // },
+        where: {
+            userId: userId
+        },
         include: [{
                     model: User,
                     as: 'User',
@@ -64,6 +67,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                         as: 'SpotImages',
                         where: { preview: true },
                         required: true,
+
                     },
                     group: ['SpotImages.id']
                 },
@@ -76,7 +80,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
 
-        group: ['Review.id', 'User.id', 'Spot.id', 'ReviewImages.id'],
+        // group: ['Review.id', 'User.id', 'Spot.id', 'ReviewImages.id'],
         required: true,
         duplicating: false
 
@@ -97,9 +101,13 @@ router.get('/current', requireAuth, async (req, res, next) => {
         delete review.Spot.SpotImages
     })
 
+
     const Reviews = reviewsList
+
     res.status(200)
-    res.json({Reviews})
+    res.json({
+        Reviews,
+    })
 
 });
 
