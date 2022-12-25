@@ -407,26 +407,27 @@ router.get('/current', requireAuth, async(req, res, next) => {
 router.get('/:spotId', async(req, res, next) => {
     const { spotId } = req.params
 
-
-
     let spots = await Spot.findByPk(spotId, {
         include: [{
             model: Review,
             as: 'Reviews',
             attributes: [],
+            required: true,
+            duplicating: false
         },
         {
             model: SpotImage,
             as: 'SpotImages',
-
-            attributes:
-                ['id', 'url', 'preview']
-
+            attributes: ['id', 'url', 'preview'],
+            required: true,
+            duplicating: false
         },
         {
             model: User,
-            as: 'Owner',
-            attributes: ['id', 'firstName', 'lastName']
+            as: 'Users',
+            attributes: ['id', 'firstName', 'lastName'],
+            required: true,
+            duplicating: false
         }],
 
 
@@ -677,7 +678,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
 
 });
-
 
 
 
