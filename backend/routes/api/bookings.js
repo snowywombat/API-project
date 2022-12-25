@@ -200,7 +200,7 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
    if(!currentBooking) {
         res.status(400)
         res.json({
-            message: "Booking couldn't be founxd",
+            message: "Booking couldn't be found",
             statusCode: 404
         })
     }
