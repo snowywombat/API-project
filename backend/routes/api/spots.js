@@ -425,6 +425,7 @@ router.get('/:spotId', async(req, res, next) => {
         {
             model: User,
             as: 'Owner',
+            where: { subQuery: false}
             attributes: ['id', 'firstName', 'lastName'],
             required: true,
             duplicating: false
