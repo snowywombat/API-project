@@ -17,6 +17,9 @@ router.delete('/:imageId', requireAuth, async(req, res, next) => {
     const findImage = await ReviewImage.findByPk(imageId);
 
     const findReview = await Review.findAll({
+        where: {
+            userId: userId
+        },
         include: [
             {
                 model: ReviewImage
