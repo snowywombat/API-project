@@ -883,7 +883,7 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
 
                 attributes: ['spotId', 'startDate', 'endDate'],
 
-                group: ['booking.id']
+                // group: ['booking.id']
 
             })
 
@@ -903,7 +903,7 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
                 }],
                 attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
 
-                group: ['booking.id']
+                // group: ['booking.id']
 
             })
 
