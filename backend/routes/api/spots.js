@@ -251,7 +251,14 @@ router.get('/', async (req, res, next) => {
     return res.json({
         spotsList,
         page,
-        size
+        size,
+        minLat,
+        maxLat,
+        minLng,
+        maxLng,
+        minPrice,
+        maxPrice
+
     });
 });
 
