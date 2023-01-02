@@ -233,20 +233,100 @@ router.get('/', async (req, res, next) => {
 router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price){
+    if(!address) {
         res.status(400)
         res.json({
             message: 'Validation Error',
             statusCode: 400,
             errors: {
-                address: 'Street address is required',
-                city: 'City is required',
-                state: 'State is required',
-                country: 'Country is required',
-                lat: 'Latitude is not valid',
-                lng: 'Longitude is not valid',
-                name: 'Name must be less than 50 characters',
-                description: 'Description is required',
+                address: 'Street address is required'
+            }
+        });
+    }
+
+    else if(!city) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                city: 'City is required'
+            }
+        });
+    }
+
+    else if(!state) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                state: 'State is required'
+            }
+        });
+    }
+
+    else if(!country) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                country: 'Country is required'
+            }
+        });
+    }
+
+    else if(!lat) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                lat: 'Latitude is not valid'
+            }
+        });
+    }
+
+    else if(!lng) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                lng: 'Longitude is not valid'
+            }
+        });
+    }
+
+    else if(name.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                name: 'Name must be less than 50 characters'
+            }
+        });
+    }
+
+    else if(!description) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                description: 'Description is required'
+            }
+        });
+    }
+
+    else if(!price) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
                 price: 'Price per day is required'
             }
         });
