@@ -25,6 +25,8 @@ router.get('/', async (req, res, next) => {
 
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
+    const where = {}
+
     page = parseInt(page);
     size = parseInt(size);
 
@@ -40,7 +42,7 @@ router.get('/', async (req, res, next) => {
         })
     }
 
-    else if(size < 1) {
+    if(size < 1) {
         res.status(400),
         res.json({
             message: "Validation error",
@@ -51,9 +53,18 @@ router.get('/', async (req, res, next) => {
         })
     }
 
-    else if(minLat) {
-        if(minLat % 1 === 0 || minLat.toString().length < 4)  {
-            res.status(400),
+    if(minLat || maxLat) {
+        if(minLat % 1 !== 0 || maxLat % 1 !== 0) {
+            where.lat = {
+                [Op.gte]: req.query.minLat,
+                [Op.lte]: req.query.maxLat
+            }
+
+        }
+
+
+        if(minLat % 1 === 0)  {
+            res.status(400)
             res.json({
                 message: "Validation error",
                 statusCode: 400,
@@ -62,10 +73,9 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
-    }
 
-    else if(maxLat) {
-        if(maxLat % 1 === 0 || maxLat.toString().length < 4)  {
+
+        if(maxLat % 1 === 0)  {
             res.status(400),
             res.json({
                 message: "Validation error",
@@ -75,11 +85,20 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
+
     }
 
-    else if(minLng) {
-        if(minLng % 1 === 0 || minLng.toString().length < 4)  {
-            res.status(400),
+    if(minLng || maxLng) {
+        if(minLng % 1 !== 0 || maxLng % 1 !== 0) {
+            where.lng = {
+                [Op.gte]: req.query.minLng,
+                [Op.lte]: req.query.maxLng
+            }
+
+        }
+
+        if(minLng % 1 === 0)  {
+            res.status(400)
             res.json({
                 message: "Validation error",
                 statusCode: 400,
@@ -88,11 +107,9 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
-    }
 
-    else if(maxLng) {
-        if(minLat % 1 === 0 || maxLng.toString().length < 4)  {
-            res.status(400),
+        if(maxLng % 1 === 0)  {
+            res.status(400)
             res.json({
                 message: "Validation error",
                 statusCode: 400,
@@ -101,9 +118,17 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
+
     }
 
-    else if(minPrice) {
+    if(minPrice || maxPrice) {
+        if(minPrice >= 0 || maxPrice >= 0) {
+            where.price = {
+                [Op.gte]: req.query.minPrice,
+                [Op.lte]: req.query.maxPrice
+            }
+        }
+
         if(minPrice < 0) {
             res.status(400),
             res.json({
@@ -114,9 +139,7 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
-    }
 
-    else if(maxPrice) {
         if(maxPrice < 0) {
             res.status(400),
             res.json({
@@ -127,6 +150,7 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
+
     }
 
     if(!page) page = 1;
@@ -149,7 +173,8 @@ router.get('/', async (req, res, next) => {
             }
         ],
 
-        ...pagination
+        where,
+        ...pagination,
 
     })
 
@@ -196,69 +221,10 @@ router.get('/', async (req, res, next) => {
     }
 
 
-
-    // async function loading() {
-    //     spotsList.forEach(spot => {
-
-    //         const reviews = Review.findByPk(spot.id, {
-    //             attributes: {
-    //                 include: [
-    //                     [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-    //                 ]
-    //             }
-    //         });
-
-    //         let res = await (reviews)
-
-    //         console.log(res)
-
-    //         spot.avgRating = reviews.avgRating
-    //         console.log(spot.avgRating)
-
-    //         // let reviewsList = [];
-    //         // reviews.forEach(review => {
-    //         //     reviewsList.push(review.toJSON())
-    //         // })
-    //         // reviewsList.forEach(review => {
-    //         // })
-
-    //         const spotImages = SpotImage.findByPk(spot.id, {
-    //             attributes: {
-    //                 include: [
-    //                     [sequelize.fn('MAX', sequelize.col('url')), 'previewImage']
-    //                 ]
-    //             }
-    //         });
-
-    //         spot.previewImage = spotImages.previewImage
-
-    //         delete spot.Reviews,
-    //         delete spot.SpotImages
-    // })
-    // }
-
-    // let imagesList = [];
-    // spotImages.forEach(image => {
-    //     imagesList.push(image.toJSON())
-    // })
-
-
-    // imagesList.forEach(image => {
-    //     spot.previewImage = image.previewImage
-    // })
-
-
     return res.json({
         spotsList,
         page,
         size,
-        minLat,
-        maxLat,
-        minLng,
-        maxLng,
-        minPrice,
-        maxPrice
-
     });
 });
 
