@@ -42,7 +42,7 @@ router.get('/', async (req, res, next) => {
         })
     }
 
-    if(size < 1) {
+    else if(size < 1) {
         res.status(400),
         res.json({
             message: "Validation error",
@@ -53,7 +53,8 @@ router.get('/', async (req, res, next) => {
         })
     }
 
-    if(minLat || maxLat) {
+    //both lat
+    else if(minLat && maxLat) {
         if(minLat % 1 !== 0 || maxLat % 1 !== 0) {
             where.lat = {
                 [Op.gte]: req.query.minLat,
@@ -61,9 +62,7 @@ router.get('/', async (req, res, next) => {
             }
 
         }
-
-
-        if(minLat % 1 === 0)  {
+        else if(minLat % 1 === 0)  {
             res.status(400)
             res.json({
                 message: "Validation error",
@@ -74,8 +73,7 @@ router.get('/', async (req, res, next) => {
             })
         }
 
-
-        if(maxLat % 1 === 0)  {
+        else if(maxLat % 1 === 0)  {
             res.status(400),
             res.json({
                 message: "Validation error",
@@ -85,19 +83,61 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
-
     }
 
-    if(minLng || maxLng) {
-        if(minLng % 1 !== 0 || maxLng % 1 !== 0) {
-            where.lng = {
-                [Op.gte]: req.query.minLng,
-                [Op.lte]: req.query.maxLng
+    //minLat
+    else if(minLat) {
+        if(minLat % 1 !== 0) {
+            where.lat = {
+                [Op.gte]: req.query.minLat,
             }
 
         }
 
-        if(minLng % 1 === 0)  {
+        else if(minLat % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLat: "Minimum latitude is invalid",
+                }
+            })
+        }
+    }
+
+
+    //maxLat
+    else if(maxLat) {
+        if( maxLat % 1 !== 0) {
+            where.lat = {
+                [Op.lte]: req.query.maxLat
+            }
+
+        }
+
+        else if(maxLat % 1 === 0)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLat: "Maximum latitude is invalid",
+                }
+            })
+        }
+    }
+
+    //both lng
+    else if(minLng && maxLng) {
+        if(minLng % 1 !== 0 && maxLng % 1 !== 0  ) {
+            where.lng = {
+                [Op.gte]: req.query.minLng,
+                [Op.lte]: req.query.maxLng
+            }
+        }
+
+        else if(minLng % 1 === 0)  {
             res.status(400)
             res.json({
                 message: "Validation error",
@@ -108,7 +148,7 @@ router.get('/', async (req, res, next) => {
             })
         }
 
-        if(maxLng % 1 === 0)  {
+        else if(maxLng % 1 === 0)  {
             res.status(400)
             res.json({
                 message: "Validation error",
@@ -121,15 +161,62 @@ router.get('/', async (req, res, next) => {
 
     }
 
-    if(minPrice || maxPrice) {
-        if(minPrice >= 0 || maxPrice >= 0) {
+
+   //minLng
+   else if(minLng) {
+        if(minLng % 1 !== 0) {
+            where.lng = {
+                [Op.gte]: req.query.minLng,
+
+            }
+
+        }
+
+        else if(minLng % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLng: "Minimum longitude is invalid",
+                }
+            })
+        }
+
+    }
+
+
+    //maxLng
+    else if(maxLng) {
+        if(maxLng % 1 !== 0) {
+            where.lng = {
+                [Op.lte]: req.query.maxLng
+            }
+
+        }
+
+       else if(maxLng % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLng: "Maximum longitude is invalid",
+                }
+            })
+        }
+    }
+
+
+    //both prices
+    else if(minPrice && maxPrice) {
+        if(minPrice >= 0 && maxPrice >= 0) {
             where.price = {
                 [Op.gte]: req.query.minPrice,
                 [Op.lte]: req.query.maxPrice
             }
         }
-
-        if(minPrice < 0) {
+        else if(minPrice < 0) {
             res.status(400),
             res.json({
                 message: "Validation error",
@@ -139,8 +226,7 @@ router.get('/', async (req, res, next) => {
                 }
             })
         }
-
-        if(maxPrice < 0) {
+        else if(maxPrice < 0) {
             res.status(400),
             res.json({
                 message: "Validation error",
@@ -152,6 +238,48 @@ router.get('/', async (req, res, next) => {
         }
 
     }
+
+
+    //minPrice
+    else if(minPrice) {
+        if(minPrice >= 0) {
+            where.price = {
+                [Op.gte]: req.query.minPrice
+            }
+        }
+
+        else if(minPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minPrice: "Minimum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
+
+    //maxPrice
+    else if(maxPrice) {
+        if(maxPrice >= 0) {
+            where.price = {
+                [Op.lte]: req.query.maxPrice
+            }
+        }
+       else if(maxPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxPrice: "Maximum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
 
     if(!page) page = 1;
     if(!size) size = 20;
