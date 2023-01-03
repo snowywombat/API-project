@@ -42,7 +42,7 @@ router.get('/', async (req, res, next) => {
         })
     }
 
-    else if(size < 1) {
+    if(size < 1) {
         res.status(400),
         res.json({
             message: "Validation error",
@@ -53,8 +53,136 @@ router.get('/', async (req, res, next) => {
         })
     }
 
+    //minLat
+    if(minLat && !maxLat) {
+        if(minLat % 1 !== 0) {
+            where.lat = {
+                [Op.gte]: req.query.minLat,
+            }
+
+        }
+
+        else if(minLat % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLat: "Minimum latitude is invalid",
+                }
+            })
+        }
+    }
+
+
+    //maxLat
+    if(maxLat && !minLat) {
+        if( maxLat % 1 !== 0) {
+            where.lat = {
+                [Op.lte]: req.query.maxLat
+            }
+
+        }
+
+        else if(maxLat % 1 === 0)  {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLat: "Maximum latitude is invalid",
+                }
+            })
+        }
+    }
+
+   //minLng
+   if(minLng && !maxLng) {
+        if(minLng % 1 !== 0) {
+            where.lng = {
+                [Op.gte]: req.query.minLng,
+
+            }
+
+        }
+
+        else if(minLng % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minLng: "Minimum longitude is invalid",
+                }
+            })
+        }
+    }
+
+
+    //maxLng
+    if(maxLng && !minLng) {
+        if(maxLng % 1 !== 0) {
+            where.lng = {
+                [Op.lte]: req.query.maxLng
+            }
+
+        }
+
+    else if(maxLng % 1 === 0)  {
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxLng: "Maximum longitude is invalid",
+                }
+            })
+        }
+    }
+
+    //minPrice
+    if(minPrice && !maxPrice) {
+        if(minPrice >= 0) {
+            where.price = {
+                [Op.gte]: req.query.minPrice
+            }
+        }
+
+        else if(minPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    minPrice: "Minimum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
+
+    //maxPrice
+    if(maxPrice && !minPrice) {
+        if(maxPrice >= 0) {
+            where.price = {
+                [Op.lte]: req.query.maxPrice
+            }
+        }
+    else if(maxPrice < 0) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    maxPrice: "Maximum price must be greater than or equal to 0",
+                }
+            })
+        }
+    }
+
+
     //both lat
-    else if(minLat && maxLat) {
+    if(minLat && maxLat) {
         if(minLat % 1 !== 0 || maxLat % 1 !== 0) {
             where.lat = {
                 [Op.gte]: req.query.minLat,
@@ -85,52 +213,9 @@ router.get('/', async (req, res, next) => {
         }
     }
 
-    //minLat
-    else if(minLat) {
-        if(minLat % 1 !== 0) {
-            where.lat = {
-                [Op.gte]: req.query.minLat,
-            }
-
-        }
-
-        else if(minLat % 1 === 0)  {
-            res.status(400)
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    minLat: "Minimum latitude is invalid",
-                }
-            })
-        }
-    }
-
-
-    //maxLat
-    else if(maxLat) {
-        if( maxLat % 1 !== 0) {
-            where.lat = {
-                [Op.lte]: req.query.maxLat
-            }
-
-        }
-
-        else if(maxLat % 1 === 0)  {
-            res.status(400),
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    maxLat: "Maximum latitude is invalid",
-                }
-            })
-        }
-    }
-
     //both lng
-    else if(minLng && maxLng) {
-        if(minLng % 1 !== 0 && maxLng % 1 !== 0  ) {
+    if(minLng && maxLng) {
+        if(minLng % 1 !== 0 && maxLng % 1 !== 0) {
             where.lng = {
                 [Op.gte]: req.query.minLng,
                 [Op.lte]: req.query.maxLng
@@ -161,55 +246,8 @@ router.get('/', async (req, res, next) => {
 
     }
 
-
-   //minLng
-   else if(minLng) {
-        if(minLng % 1 !== 0) {
-            where.lng = {
-                [Op.gte]: req.query.minLng,
-
-            }
-
-        }
-
-        else if(minLng % 1 === 0)  {
-            res.status(400)
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    minLng: "Minimum longitude is invalid",
-                }
-            })
-        }
-
-    }
-
-
-    //maxLng
-    else if(maxLng) {
-        if(maxLng % 1 !== 0) {
-            where.lng = {
-                [Op.lte]: req.query.maxLng
-            }
-
-        }
-
-       else if(maxLng % 1 === 0)  {
-            res.status(400)
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    maxLng: "Maximum longitude is invalid",
-                }
-            })
-        }
-    }
-
-
     //both prices
-    else if(minPrice && maxPrice) {
+    if(minPrice && maxPrice) {
         if(minPrice >= 0 && maxPrice >= 0) {
             where.price = {
                 [Op.gte]: req.query.minPrice,
@@ -237,47 +275,6 @@ router.get('/', async (req, res, next) => {
             })
         }
 
-    }
-
-
-    //minPrice
-    else if(minPrice) {
-        if(minPrice >= 0) {
-            where.price = {
-                [Op.gte]: req.query.minPrice
-            }
-        }
-
-        else if(minPrice < 0) {
-            res.status(400),
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    minPrice: "Minimum price must be greater than or equal to 0",
-                }
-            })
-        }
-    }
-
-
-    //maxPrice
-    else if(maxPrice) {
-        if(maxPrice >= 0) {
-            where.price = {
-                [Op.lte]: req.query.maxPrice
-            }
-        }
-       else if(maxPrice < 0) {
-            res.status(400),
-            res.json({
-                message: "Validation error",
-                statusCode: 400,
-                errors: {
-                    maxPrice: "Maximum price must be greater than or equal to 0",
-                }
-            })
-        }
     }
 
 
