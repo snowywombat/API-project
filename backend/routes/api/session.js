@@ -57,13 +57,14 @@ router.post('/', validateLogin, requireAuth, async (req, res, next) => {
   console.log(token)
 
   return res.json({
-    id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    username: user.username,
-    token: token
-
+    user: {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username,
+      // token: token
+    }
   });
 
 });
@@ -80,8 +81,8 @@ router.delete(
 
 // Restore session user
 router.get(
-    '/', requireAuth,
-    restoreUser,
+    '/',
+    restoreUser, //requireAuth
     (req, res) => {
       const { user } = req;
       if (user) {
