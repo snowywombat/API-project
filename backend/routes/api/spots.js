@@ -490,7 +490,6 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
             ownerId: ownerId
         }
     })
-    console.log(findSpot)
 
     if(findSpot === null) {
 
