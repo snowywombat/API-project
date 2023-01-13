@@ -7,13 +7,13 @@ const reviewsRouter = require('./reviews.js');
 const bookingsRouter = require('./bookings.js');
 const spotImagesRouter = require('./spot-images.js')
 const reviewImagesRouter = require('./review-images.js')
-const { restoreUser } = require('../../utils/auth.js');
+const { restoreUser, requireAuth } = require('../../utils/auth.js');
 
 router.use(restoreUser)
 
-// router.get('/test', requireAuth, (req, res) => {
-//   res.json({ message: 'success'})
-// })
+router.get('/test', requireAuth, (req, res) => {
+  res.json({ message: 'success'})
+})
 
 router.use('/session', sessionRouter);
 
@@ -30,9 +30,8 @@ router.use('/spot-images', spotImagesRouter);
 
 router.use('/review-images', reviewImagesRouter);
 
-router.post('/test', (req, res) => {
-
-  res.json({ requestBody: req.body });
-});
+// router.post('/test', (req, res) => {
+//   res.json({ requestBody: req.body });
+// });
 
 module.exports = router;

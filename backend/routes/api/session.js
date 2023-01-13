@@ -11,6 +11,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { user } = require('pg/lib/defaults');
+// const { mapValueFieldNames } = require('sequelize/types/utils');
 
 const validateLogin = [
   check('credential')
@@ -27,17 +28,6 @@ const validateLogin = [
 router.post('/', validateLogin, requireAuth, async (req, res, next) => {
   const { credential, password } = req.body;
 
-  // if(credential.length === 0 && (!credential.includes('@') || !credential.includes('.com') )) {
-  //   res.status(400),
-  //   res.json({
-  //     message: "Validation error",
-  //     statusCode: 400,
-  //     errors: {
-  //       email: "Invalid email",
-  //     }
-  //   })
-  // }
-
   const user = await User.login({ credential, password });
 
   if(!user) {
@@ -51,10 +41,7 @@ router.post('/', validateLogin, requireAuth, async (req, res, next) => {
     })
   }
 
-
   const token = await setTokenCookie(res, user);
-
-  console.log(token)
 
   return res.json({
     user: {
