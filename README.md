@@ -3,3 +3,7 @@ Staybnb is a website clone of Airbnb. Staybnb is a platform to rent out spaces h
 Live site: 
 
 # Wiki Link
+
+# Tech Stack
+
+# Landing Page
