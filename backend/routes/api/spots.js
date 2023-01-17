@@ -355,7 +355,7 @@ router.get('/', async (req, res, next) => {
 
 
 //create a spot
-router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
+router.post('/', requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     if(!address) {
@@ -363,9 +363,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                address: 'Street address is required'
-            }
+            errors: ['Street address is required']
         });
     }
 
@@ -374,9 +372,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                city: 'City is required'
-            }
+            errors: ['City is required']
         });
     }
 
@@ -385,9 +381,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                state: 'State is required'
-            }
+            errors: ['State is required']
         });
     }
 
@@ -396,9 +390,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                country: 'Country is required'
-            }
+            errors: ['Country is required']
         });
     }
 
@@ -407,9 +399,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                lat: 'Latitude is not valid'
-            }
+            errors: ['Latitude is not valid']
         });
     }
 
@@ -418,9 +408,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                lng: 'Longitude is not valid'
-            }
+            errors: ['Longitude is not valid']
         });
     }
 
@@ -429,9 +417,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                name: 'Name must be less than 50 characters'
-            }
+            errors: ['Name must be less than 50 characters']
         });
     }
 
@@ -440,9 +426,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                description: 'Description is required'
-            }
+            errors: ['Description is required']
         });
     }
 
@@ -451,9 +435,7 @@ router.post('/', handleValidationErrors, requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                price: 'Price per day is required'
-            }
+            errors: ['Price per day is required']
         });
     }
 
@@ -506,10 +488,7 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                userId: 'Not authorized to edit spot'
-
-            }
+            errors: ['Not authorized to edit spot']
         })
     }
 
@@ -655,17 +634,16 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                address: 'Street address is required',
-                city: 'City is required',
-                state: 'State is required',
-                country: 'Country is required',
-                lat: 'Latitude is not valid',
-                lng: 'Longitude is not valid',
-                name: 'Name must be less than 50 characters',
-                description: 'Description is required',
-                price: 'Price per day is required'
-            }
+            errors: ['Street address is required',
+            'City is required',
+            'State is required',
+            'Country is required',
+            'Latitude is not valid',
+            'Longitude is not valid',
+            'Name must be less than 50 characters',
+            'Description is required',
+            'Price per day is required']
+
         });
     }
 
@@ -675,10 +653,7 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                userId: 'Not authorized to edit spot'
-
-            }
+            errors: ['Not authorized to edit spot']
         })
     }
 
@@ -688,17 +663,17 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: {
-                address: 'Street address is required',
-                city: 'City is required',
-                state: 'State is required',
-                country: 'Country is required',
-                lat: 'Latitude is not valid',
-                lng: 'Longitude is not valid',
-                name: 'Name must be less than 50 characters',
-                description: 'Description is required',
-                price: 'Price per day is required'
-            }
+            errors: [
+                'Street address is required',
+                'City is required',
+                'State is required',
+                'Country is required',
+                'Latitude is not valid',
+                'Longitude is not valid',
+                'Name must be less than 50 characters',
+                'Description is required',
+                'Price per day is required'
+            ]
         });
 
     }
@@ -776,10 +751,8 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                ownerId: 'Not authorized to delete spot'
+            errors: ['Not authorized to delete spot']
 
-            }
         })
     }
 
@@ -819,10 +792,10 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         res.json({
             message: 'Validation error',
             statusCode: 400,
-            errors: {
-                review: 'Review text is required',
-                stars: 'Stars must be an integer from 1 to 5'
-            }
+            errors: [
+               'Review text is required',
+                'Stars must be an integer from 1 to 5'
+            ]
         })
     }
 
@@ -934,10 +907,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                userId: 'Not authorized to make a booking'
-
-            }
+            errors: ['Not authorized to make a booking']
         })
     }
 
@@ -950,9 +920,9 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
             res.json({
                 message: 'Validation error',
                 statusCode: 400,
-                errors: {
-                    endDate: 'endDate cannot be on or before startDate'
-                }
+                errors: [
+                    'endDate cannot be on or before startDate'
+                ]
             })
         }
 
@@ -992,9 +962,9 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
             res.json({
                 message: 'Sorry, this spot is already booked for the specified dates',
                 statusCode: 403,
-                errors: {
-                    startDate: 'Start date conflicts with an existing booking'
-                }
+                errors: [
+                'Start date conflicts with an existing booking'
+                ]
             })
         }
 
@@ -1004,9 +974,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
             res.json({
                 message: 'Sorry, this spot is already booked for the specified dates',
                 statusCode: 403,
-                errors: {
-                    endDate: 'End date conflicts with an existing booking'
-                }
+                errors: ['End date conflicts with an existing booking']
             })
         }
 

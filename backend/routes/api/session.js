@@ -25,7 +25,7 @@ const validateLogin = [
 ];
 
 // Log in
-router.post('/', validateLogin, requireAuth, async (req, res, next) => {
+router.post('/', validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 
   const user = await User.login({ credential, password });
@@ -35,9 +35,7 @@ router.post('/', validateLogin, requireAuth, async (req, res, next) => {
     res.json({
     message: 'Authentication required',
     statusCode: 401,
-    errors: {
-      credentials: 'The provided credentials are invalid.'
-      }
+    errors: ['The provided credentials are invalid.']
     })
   }
 
