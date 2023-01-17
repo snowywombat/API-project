@@ -1,6 +1,6 @@
 .profile-button {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /**/
     list-style: none;
     align-items: center;
     background: white;
