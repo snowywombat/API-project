@@ -4,6 +4,8 @@ import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import './ProfileButton.css'
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -41,39 +43,48 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className='profile-button' onClick={openMenu}>
+        <div className='bar-icon'>
+            <i className="fa-solid fa-bars" style={{fontSize: 10}}/>
+        </div>
+
+        <div className='profile-icon'>
+          <i className="fa-solid fa-user" />
+        </div>
+
+          <ul className={ulClassName} ref={ulRef}>
+            {user ? (
+              <>
+                <li>{user.username}</li>
+                <li>{user.firstName} {user.lastName}</li>
+                <li>{user.email}</li>
+                <li>
+                  <button onClick={logout}>Log Out</button>
+                </li>
+              </>
+            ) : (
+              <>
+              <div className='dropdown-buttons'>
+                <li className='signup'>
+                  <OpenModalButton
+                    buttonText="Sign Up"
+                    onButtonClick={closeMenu}
+                    modalComponent={<SignupFormModal />}
+                  />
+                </li>
+                <li className='login'>
+                  <OpenModalButton
+                    buttonText="Log In"
+                    onButtonClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                  />
+                </li>
+              </div>
+              </>
+            )}
+          </ul>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <OpenModalButton
-                buttonText="Log In"
-                onButtonClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-            </li>
-            <li>
-              <OpenModalButton
-                buttonText="Sign Up"
-                onButtonClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </li>
-          </>
-        )}
-      </ul>
-    </>
+      </>
   );
 }
 
