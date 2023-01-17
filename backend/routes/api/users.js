@@ -53,11 +53,8 @@ router.post('/', validateSignup, async (req, res) => {
       res.json({
         message: 'Forbidden',
         statusCode: 403,
-        errors: {
-          email: 'User with that email already exists'
-        }
+        errors: ['User with that email already exists']
       })
-
     }
 
     else if(user.username === username) {
@@ -65,9 +62,7 @@ router.post('/', validateSignup, async (req, res) => {
       res.json({
         message: 'Forbidden',
         statusCode: 403,
-        errors: {
-          email: 'User with that username already exists'
-        }
+        errors: ['User with that username already exists']
       })
     }
   }

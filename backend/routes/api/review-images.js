@@ -57,10 +57,7 @@ router.delete('/:imageId', requireAuth, async(req, res, next) => {
             res.json({
                 message: 'Forbidden',
                 statusCode: 403,
-                errors: {
-                    ownerId: 'Not authorized to delete review image'
-
-                }
+                errors: ['Not authorized to delete review image']
             })
         }
     }

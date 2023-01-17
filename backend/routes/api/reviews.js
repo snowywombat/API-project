@@ -144,10 +144,7 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                userId: 'Not authorized to add image to review'
-
-            }
+            errors: ['Not authorized to add image to review']
         })
     }
 
@@ -174,10 +171,7 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                userId: 'Not authorized add image to review'
-
-            }
+            errors: ['Not authorized add image to review']
         })
     }
 
@@ -186,10 +180,8 @@ router.put('/:reviewId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Validation error',
             statusCode: 400,
-            errors : {
-                review: "Review text is required",
-                stars: "Stars must be an integer from 1 to 5"
-              }
+            errors : [ "Review text is required",
+            "Stars must be an integer from 1 to 5"]
         })
     }
 
@@ -241,18 +233,11 @@ router.delete('/:reviewId', requireAuth, async(req, res, next) => {
         res.json({
             message: 'Forbidden',
             statusCode: 403,
-            errors: {
-                ownerId: 'Not authorized to delete review'
-
-            }
+            errors: ['Not authorized to delete review']
         })
     }
 
-
 });
-
-
-
 
 
 module.exports = router;
