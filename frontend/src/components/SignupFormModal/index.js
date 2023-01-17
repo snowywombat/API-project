@@ -31,12 +31,12 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1 className='signup-title'>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <label className='email'>
           Email
           <input
             type="text"
@@ -90,7 +90,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className='submit-button'>Sign Up</button>
       </form>
     </>
   );

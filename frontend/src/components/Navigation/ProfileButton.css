@@ -1,0 +1,55 @@
+.profile-button {
+    display: flex;
+    flex-direction: row; /*k*/
+    list-style: none;
+    align-items: center;
+    background: white;
+    width: 40px;
+    height: 25px;
+    border: 0.5px solid rgb(161, 161, 161);
+    border-radius: 12px;
+    margin-right: 25px;
+}
+.profile-button:hover {
+    box-shadow: -0.2px 0.2px 1px  rgb(161, 161, 161);
+}
+
+.bar-icon {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    padding: 0px 2px;
+}
+
+.profile-icon {
+    display: inline-block;
+    position: relative;
+    padding: 0px 2px;
+}
+
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    background: white;
+    width: 100px;
+    height: 40px;
+    border: 0.7px solid rgb(230, 230, 230);
+    border-radius: 5px;
+    position: absolute;
+    top: 21px;
+    right: 25px;
+}
+
+.dropdown-buttons {
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    top: 3px;
+    right: 85px;
+}
+
+
+.hidden {
+    display: none;
+}
