@@ -43,3 +43,10 @@
     color: rgb(249, 56, 72);
 
 }
+
+.create-button {
+    display: flex;
+    position: relative;
+    left: 150px;
+    font-size: 50px;
+}

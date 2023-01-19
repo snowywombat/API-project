@@ -1,0 +1,9 @@
+.details-image {
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 10px;
+    display: flex;
+    width: 195px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 7px;
+}

@@ -279,16 +279,16 @@ router.get('/', async (req, res, next) => {
 
 
     if(!page) page = 1;
-    if(!size) size = 20;
+    if(!size) size = 24;
 
     let pagination = []
-    if ((page > 0 || page < 10) && (size > 0 || size < 20)) {
+    if ((page > 0 || page < 10) && (size > 0 || size < 24)) {
         pagination.limit = size;
         pagination.offset = size * (page - 1)
     }
 
 
-    const spots = await Spot.findAll({
+    const findSpots = await Spot.findAll({
         include: [
             {
                 model: Review
@@ -304,12 +304,12 @@ router.get('/', async (req, res, next) => {
     })
 
 
-    let spotsList = [];
-    spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
+    let Spots = [];
+   findSpots.forEach(spot => {
+        Spots.push(spot.toJSON())
     })
 
-    for (let spot of spotsList){
+    for (let spot of Spots){
 
         const reviews = await Review.findAll({
             where: {
@@ -322,7 +322,7 @@ router.get('/', async (req, res, next) => {
             spot.avgRating = reviews[0].dataValues.avgRating
         }
         else {
-            spot.avgRating = 'No reviews exist for this spot.'
+            spot.avgRating = 'No reviews'
         }
 
         const images = await SpotImage.findAll({
@@ -347,7 +347,7 @@ router.get('/', async (req, res, next) => {
 
 
     return res.json({
-        spotsList,
+        Spots,
         page,
         size,
     });

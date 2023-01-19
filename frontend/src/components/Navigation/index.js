@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import OpenModalButton from '../OpenModalButton';
+import CreateSpotModal from '../Spots/SpotForm';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -16,6 +18,13 @@ function Navigation({ isLoaded }){
             <i className="fa-solid fa-crown" />
             <h1 className='title'>heirbnb</h1>
             </NavLink>
+          </div>
+
+          <div className = 'create-button'>
+            <OpenModalButton
+                    buttonText="Create Spot"
+                    modalComponent={<CreateSpotModal />}
+                  />
           </div>
 
           {isLoaded && (

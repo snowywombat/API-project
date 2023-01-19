@@ -1,0 +1,67 @@
+.spots-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* border: 1px black solid; */
+    border-radius: 7px;
+    width: 195px;
+    height: 200px;
+    margin: 15px;
+    bottom: 15px;
+}
+
+.spots-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(4, 25%);
+    grid-template-rows: auto;
+    column-gap: 5px;
+    row-gap: 14px; */
+    width: auto;
+    height: auto;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.main-page {
+    display: flex;
+    width: auto;
+    height: auto;
+}
+
+
+.spots-info {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    bottom: 13px;
+    flex-direction: column;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 10px;
+
+}
+
+.spots-image {
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 10px;
+    display: flex;
+    width: 195px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 7px;
+
+}
+
+/* .spots-info-rating {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 10px;
+    left: 200px;
+
+} */
