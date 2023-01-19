@@ -9,13 +9,6 @@ import { useModal } from "../../context/Modal";
 function EditSpotModal({ spots }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { spotId } = useParams();
-    // const spots = useSelector(state => state.spots[spotId]);
-    // console.log('edit', spots)
-
-    // useEffect(() => {
-    //     dispatch(getSingleSpot(spotId))
-    // }, [spotId, dispatch])
 
     const [address, setAddress] = useState(spots.address);
     const [city, setCity] = useState(spots.city);
@@ -24,23 +17,27 @@ function EditSpotModal({ spots }) {
     const [name, setName] = useState(spots.name);
     const [description, setDescription] = useState(spots.description);
     const [price, setPrice] = useState(spots.price);
-    const [SpotImages, setSpotImages] = useState(spots.SpotImages.map(image => image.url));
+    // const [SpotImages, setSpotImages] = useState(spots.SpotImages.map(image => image.url));
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 
-    // if(!spots) return null;
+    if(!spots) return null;
 
     const handleDelete = () => {
-        dispatch(spotActions.removeSpot(spotId))
+        dispatch(spotActions.removeSpot(spots.id))
+        .then(() => {
+          history.push('/')
+          closeModal()
+        })
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(spotActions.updateSpot({ address, city, state, country, name, description, price, SpotImages }, spotId))
-        .then((joined) => {
-            history.push(`/spots/${joined.id}`)
+        dispatch(spotActions.updateSpot({ address, city, state, country, name, description, price }, spots.id))
+        .then((updatedSpot) => {
+            history.push(`/spots/${updatedSpot.id}`)
             closeModal()
         })
         .catch(
@@ -123,7 +120,7 @@ function EditSpotModal({ spots }) {
 
               />
             </label>
-            <label>
+            {/* <label>
               Upload Image
               <input
                 type="text"
@@ -131,9 +128,12 @@ function EditSpotModal({ spots }) {
                 onChange={(e) => setSpotImages(e.target.value)}
 
               />
-            </label>
+            </label> */}
             <button type="submit" className='update-button'>
                 Update
+            </button>
+            <button onClick={handleDelete} type="submit" className='delete-button'>
+                Delete
             </button>
           </form>
         </>

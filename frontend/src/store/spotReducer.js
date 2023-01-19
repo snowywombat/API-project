@@ -104,8 +104,8 @@ export const createSpot = (spot) => async dispatch => {
 };
 
 export const updateSpot = (spot, spotId) => async dispatch => {
-    const { address, city, state, country, name, description, price, lng=1.0001, lat=1.0001, SpotImages} = spot;
-    const response1 = await fetch(`/api/spots/${spotId}`, {
+    const { address, city, state, country, name, description, price, lng=1.0001, lat=1.0001} = spot;
+    const response1 = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -123,35 +123,20 @@ export const updateSpot = (spot, spotId) => async dispatch => {
 
     if (response1.ok) {
         const updatedSpot = await response1.json();
-        console.log('updatedSpot', updatedSpot)
-
-        const response2 = await csrfFetch(`api/spots/${updatedSpot.id}/images`,{
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                url: SpotImages,
-                preview: true
-            })
-        } );
-
-        if (response2.ok) {
-            const spotImage = await response2.json();
-            const joined = {...updatedSpot, previewImage: spotImage[0].url }
-            dispatch(addSpot(joined));
-            return joined;
-        }
+        dispatch(editSpot(updatedSpot))
+        return updatedSpot
     }
 };
 
 export const removeSpot = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
     })
 
     if(response.ok) {
-        const deleteSpot = await response.json();
-        dispatch(deleteSpot(deleteSpot))
-        return deleteSpot;
+        const remove = await response.json();
+        dispatch(deleteSpot(spotId))
+        return remove;
     }
 }
 
@@ -173,7 +158,7 @@ const spotReducer = (state = initialState, action) => {
         }
         case EDIT_SPOT: {
             const newState = {...state}
-            newState[action.editSpot.id] = action.editSpot
+            newState[action.editSpot.id] = {...newState[action.editSpot.id], ...action.editSpot}
             return newState;
         }
         case CREATE_SPOT: {

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import SpotDetails from '../Spots/SpotDetails';
 import OpenModalButton from '../OpenModalButton';
 import CreateSpotModal from '../Spots/SpotForm';
 import './Navigation.css';
@@ -30,6 +31,7 @@ function Navigation({ isLoaded }){
           {isLoaded && (
             <div className='profile'>
               <ProfileButton user={sessionUser} />
+              <SpotDetails user={sessionUser} />
             </div>
           )}
 

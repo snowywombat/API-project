@@ -620,9 +620,8 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
     const findSpot = await Spot.findByPk(spotId);
 
     if (findSpot === null) {
-        res.status(404),
-
-        res.json({
+        res.status(404)
+        return res.json({
             message: "Spot couldn't be found",
             statusCode: 404
         })
@@ -631,7 +630,7 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
 
     if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price){
         res.status(400)
-        res.json({
+        return res.json({
             message: 'Validation Error',
             statusCode: 400,
             errors: ['Street address is required',
@@ -648,19 +647,19 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
     }
 
 
-    else if(ownerId !== findSpot.ownerId) {
-        res.status(403),
-        res.json({
+    if(ownerId !== findSpot.ownerId) {
+        res.status(403)
+        return res.json({
             message: 'Forbidden',
             statusCode: 403,
             errors: ['Not authorized to edit spot']
         })
     }
 
-    else if(!req.body) {
+    if(!req.body) {
 
-        res.status(400),
-        res.json({
+        res.status(400)
+        return res.json({
             message: 'Validation Error',
             statusCode: 400,
             errors: [
@@ -678,7 +677,7 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
 
     }
 
-    else if(ownerId === findSpot.ownerId){
+    if(ownerId === findSpot.ownerId){
 
         if(ownerId) {
             ownerId = ownerId;
@@ -713,7 +712,7 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         findSpot.save();
 
         res.status(200)
-        res.json(findSpot)
+        return res.json(findSpot)
     }
 
 
