@@ -103,9 +103,9 @@ export const createSpot = (spot) => async dispatch => {
 
 };
 
-export const updateSpot = (spot) => async dispatch => {
-    const {id, address, city, state, country, lat, lng, name, description, price} = spot;
-    const response = await fetch(`/api/spots/${id}`, {
+export const updateSpot = (spot, spotId) => async dispatch => {
+    const { address, city, state, country, name, description, price, lng=1.0001, lat=1.0001, SpotImages} = spot;
+    const response1 = await fetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -121,19 +121,37 @@ export const updateSpot = (spot) => async dispatch => {
         })
     });
 
-    if (response.ok) {
-        const editedSpot = await response.json();
-        dispatch(editSpot(editSpot));
-        return editedSpot;
+    if (response1.ok) {
+        const updatedSpot = await response1.json();
+        console.log('updatedSpot', updatedSpot)
+
+        const response2 = await csrfFetch(`api/spots/${updatedSpot.id}/images`,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                url: SpotImages,
+                preview: true
+            })
+        } );
+
+        if (response2.ok) {
+            const spotImage = await response2.json();
+            const joined = {...updatedSpot, previewImage: spotImage[0].url }
+            dispatch(addSpot(joined));
+            return joined;
+        }
     }
 };
 
 export const removeSpot = (spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
+
     if(response.ok) {
-        dispatch(deleteSpot(spotId))
+        const deleteSpot = await response.json();
+        dispatch(deleteSpot(deleteSpot))
+        return deleteSpot;
     }
 }
 
