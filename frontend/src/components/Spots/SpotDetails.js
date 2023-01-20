@@ -32,7 +32,6 @@ const SpotDetails = () => {
         reviewsArr.forEach(review => {
             if(review.userId === user.id) {
                 dispatch(reviewActions.removeReview(review.id))
-                console.log(review.id)
             }
         })
       }

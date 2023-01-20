@@ -47,7 +47,6 @@ export const createReview = (oneReview, spotId) => async dispatch => {
         })
     });
 
-    console.log('i want this response',response1)
 
     if (response1.ok) {
         const createdReview = await response1.json();
