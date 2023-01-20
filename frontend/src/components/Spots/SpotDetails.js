@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotActions from "../../store/spotReducer";
 import * as reviewActions from "../../store/reviewReducer"
-import OpenModalButton from '../OpenModalButton';
+import OpenCreateModalButton from '../CreateModal';
 import EditSpotModal from '../Spots/SpotEdit';
 import './SpotDetails.css'
 import CreateReviewModal from '../Reviews/CreateReview';
@@ -47,36 +47,73 @@ const SpotDetails = () => {
         <section className='detail-page'>
             <div className='details-main'>
                 <div className='details-header'>
+                    <div className='details-header-title'>
                     {spots.name}
-                    <i class='fa-solid fa-star'/>
-                    {spots.avgStarRating}
-                    {spots.numReviews}
-                    {spots.city} {spots.state} {spots.country}
+                    </div>
+                    <div className='details-header-info'>
+                        <div className='details-header-info-rating'>
+                            <i class='fa-solid fa-star'/>
+                            {spots.avgStarRating}
+                        </div>
+                        <div className='breaker'> . </div>
+                        <div className='details-header-info-reviews'>
+                            {spots.numReviews} reviews
+                        </div>
+                        <div className='breaker'> . </div>
+                        <div className='details-header-info-location'>
+                            {spots.city}, {spots.state}, {spots.country}
+                        </div>
+                    </div>
                 </div>
                 <div className='details-body'>
                     {spots.SpotImages &&
                         <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' />
                     }
 
-                    {spots.SpotImages &&
-                        <div className='details-info'>
-                            {spots.description}
-                            {spots.price}
-                            {spots.Owner.firstName}
-                            {spots.Owner.lastName}
-                        </div>
-                    }
 
-                    {user && +spots.ownerId === user.id &&
-                    <div className = 'edit-button'>
-                        <OpenModalButton
-                        buttonText="Edit"
-                        modalComponent={<EditSpotModal
-                            spots={spots}
-                        />}
-                    />
+                    <div className='details-text'>
+                        {user && +spots.ownerId === user.id &&
+                        <div className = 'edit-button'>
+                            <OpenCreateModalButton
+                            buttonText="Edit"
+                            modalComponent={<EditSpotModal
+                                spots={spots}
+                            />}
+                        />
+                        </div>
+                        }
+                        {spots.SpotImages &&
+                            <div className='details-info'>
+                                <div className='details-name'>
+                                    <div>
+                                        Hosted by
+                                    </div>
+                                    <div className='details-owner-first-name'>
+                                        {spots.Owner.firstName}
+                                    </div>
+                                    <div className='details-last-name'>
+                                        {spots.Owner.lastName}
+                                    </div>
+                                </div>
+                                <div className='details-description'>
+                                    <div className='details-description-header'>
+                                        the space:
+                                    </div>
+                                    <div className='details-description-body'>
+                                        {spots.description}
+                                    </div>
+                                </div>
+                                <div className='details-price'>
+                                    <div className='details-price-number'>
+                                    ${spots.price}
+                                    </div>
+                                    <div>
+                                    /night
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    }
 
                 </div>
 
@@ -84,37 +121,41 @@ const SpotDetails = () => {
         </section>
 
 
-        {reviewsArr.map((review) => (
-            <div className = 'review-main'>
-
+        <h1 className='review-header'>Reviews</h1>
+        <div className = 'review-main'>
+            {reviewsArr.map((review) => (
                 <div className = 'review-body'>
                     {review && review.spotId === +spotId && review.User &&
-                    <div className='review-info'>
-                    {review.review}
-                    {review.stars}
-                    {review.User.firstName}
+                    <div className='single-review'>
+                        <div className='review-info'>
+                            <div className='review-info-review'>
+                                {review.review}
+                            </div>
+                            <div className='review-info-name'>
+                                -{review.User.firstName}
+                            </div>
+                        {user && +review.userId === user.id &&
+                            <div className='delete-review-button-div'>
+                                <button onClick={handleDelete} type="submit" className='delete-review-button'>
+                                Delete
+                                </button>
+                            </div>
+                        }
+                        </div>
                     </div>
                     }
 
-                    {user && +review.userId === user.id &&
-                        <div>
-                            <button onClick={handleDelete} type="submit" className='delete-button'>
-                            Delete
-                            </button>
-                        </div>
-                    }
 
                 </div>
 
+            ))}
 
-            </div>
-        ))}
-
+        </div>
 
         <div className='review-button'>
             <div className = 'create-review-button'>
-                <OpenModalButton
-                buttonText="Create Review"
+                <OpenCreateModalButton
+                buttonText="Add Review"
                 modalComponent={<CreateReviewModal
                     reviews={reviews}
                     spots={spots}
@@ -122,7 +163,6 @@ const SpotDetails = () => {
                     />
             </div>
         </div>
-
     </>
 );
 }

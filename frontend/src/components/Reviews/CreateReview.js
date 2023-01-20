@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as reviewActions from "../../store/reviewReducer";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import './CreateReview.css'
 
 function CreateReviewModal({ spots }) {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function CreateReviewModal({ spots }) {
     <>
       <h1 className='create-review-title'>Create Review</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <ul className='error-message'>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
@@ -51,7 +52,7 @@ function CreateReviewModal({ spots }) {
             required
           />
         </label>
-        <button type="submit" className='submit-button'>
+        <button type="submit" className='create-review-submit-button'>
             Create
         </button>
       </form>

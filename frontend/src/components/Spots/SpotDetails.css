@@ -8,21 +8,28 @@
 
 }
 
+.detail-page{
+    display:flex;
+    margin-bottom: 50px;
+
+}
+
 .details-body {
     display: flex;
     justify-content: space-between;
-    border: 1px solid rgb(158, 37, 206);
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
 }
 
 .review-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     width: auto;
     height: auto;
     position: relative;
-    top: 5px;
+    padding-top: 15px;
+    padding-left: 5px;
     border-top: 1px solid rgb(230, 230, 230);
 }
 
@@ -30,6 +37,17 @@
     display: flex;
     justify-content: space-between;
 
+}
+
+.details-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+}
+
+.details-text:hover {
+    background:  rgb(253, 245, 245);
 }
 
 .details-image {
@@ -45,24 +63,188 @@
 
 .details-info {
     display: flex;
+    font-family: 'Montserrat light', 'sans-serif';
+    flex-direction: column;
     align-items: center;
+
 }
 
+.details-name {
+    display: flex;
+    font-size: 12px;
+    text-align: center;
+
+}
+
+.details-description {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 25px;
+
+}
+
+.details-price {
+    display: flex;
+    padding-top: 25px;
+    font-size: 9px;
+    text-align: center;
+}
+
+.details-price-number {
+    font-family: 'Montserrat semibold', 'sans-serif';
+
+}
+
+.details-description-header {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    text-align: center;
+
+}
+
+.details-description-body {
+    display: flex;
+    text-align: center;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    font-size: 18px;
+    padding-left: 4px;
+}
+
+.details-owner-first-name {
+    padding-left: 3px;
+    padding-right: 3px;
+}
 .details-header {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 10px;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
-.edit-spot-button {
-    width: 35px;
-    height: 20px;
+.details-header-info {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    font-size: 8px;
+}
+
+.details-header-info-rating {
+    display: flex;
+    padding-right: 5px;
+
+}
+
+.details-header-info-reviews {
+    display: flex;
+    padding-right: 5px;
+
+}
+
+.details-header-info-location {
+    display: flex;
+}
+
+.breaker {
+    display: flex;
+    padding-right: 5px;
+}
+
+
+.details-header-title {
+    font-size: 20px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+}
+
+.single-review {
+    display: flex;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    justify-content: space-between;
+    padding: 5px;
+    margin: 5px;
+    margin-right: 10px;
+    margin-bottom: 55px;
+}
+
+.single-review:hover {
+    background: rgb(253, 245, 245);
+}
+
+.review-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 150px;
+    flex-direction: column;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 9px;
+}
+
+.spots-info-review {
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-bottom: 4px;
+}
+
+.review-info-name {
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Montserrat semibold', 'sans-serif';
+}
+
+
+.review-header {
+    font-size: 14px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+
+}
+
+.review-button {
+    display:flex;
+    width: 40px;
+    padding-left: 8px;
+}
+
+.edit-button {
+    display: flex;
     position: absolute;
+    width: 45px;
+    height: 20px;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 8px;
-    right: 183px;
+    top: 135px;
+    right: 191px;
 
+}
+
+.delete-review-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 28px;
+    font-size: 7px;
+    width: 27px;
+    height: 15px;
+    color: white;
+    background-color: rgb(249, 56, 72);
+    border-radius: 5px;
+    border: 2px rgb(250, 53, 68);
+}
+
+.delete-review-button:hover {
+    box-shadow: -0.2px 0.2px 1px  rgb(161, 161, 161);
+    background: rgb(249, 66, 82);
+}
+
+.delete-review-button-div {
+    display: flex;
+    justify-content: flex-end;
+    height: 0px;
+    width: 145px;
 }

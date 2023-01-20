@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import SpotDetails from '../Spots/SpotDetails';
-import OpenModalButton from '../OpenModalButton';
+import OpenCreateModalButton from '../CreateModal';
 import CreateSpotModal from '../Spots/SpotForm';
 import './Navigation.css';
 
@@ -14,6 +14,7 @@ function Navigation({ isLoaded }){
     <section className='header'>
       <nav className='nav-bar'>
 
+        <div className='inner-nav-bar'>
           <div className='home'>
             <NavLink className='home-navlink' exact to="/">
             <i className="fa-solid fa-crown" />
@@ -22,11 +23,12 @@ function Navigation({ isLoaded }){
           </div>
 
           <div className = 'create-button'>
-            <OpenModalButton
+            <OpenCreateModalButton
                     buttonText="Create Spot"
                     modalComponent={<CreateSpotModal />}
                   />
           </div>
+        </div>
 
           {isLoaded && (
             <div className='profile'>

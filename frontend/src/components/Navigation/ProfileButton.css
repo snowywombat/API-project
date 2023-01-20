@@ -38,8 +38,8 @@
     border: 0.7px solid rgb(230, 230, 230);
     border-radius: 5px;
     position: absolute;
-    top: 21px;
-    right: 25px;
+    top: 30px;
+    right: 33px;
 }
 
 .profile-dropdown li {
@@ -54,13 +54,11 @@
 .dropdown-buttons {
     display:flex;
     flex-direction: column;
-    position: absolute;
-    top: 3px;
-    right: 85px;
+    padding-left: 10.2px;
 }
 
 .logged-in-dropdown-elements {
-    font-family: 'Montserrat', 'sans-serif';
+    font-family: 'Montserrat semibold', 'sans-serif';
 }
 
 .dropdown-logout {

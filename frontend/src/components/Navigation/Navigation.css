@@ -16,6 +16,15 @@
     height: auto;
 }
 
+.inner-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto
+
+}
+
 .home {
     display: flex;
     align-items: flex-start;
@@ -41,12 +50,10 @@
     font-size: 12px;
     letter-spacing: -0.8px;
     color: rgb(249, 56, 72);
-
 }
+
 
 .create-button {
     display: flex;
-    position: relative;
-    left: 150px;
-    font-size: 50px;
+    padding-right: 10px;
 }
