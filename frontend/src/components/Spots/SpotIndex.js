@@ -12,8 +12,7 @@ const SpotIndex = () => {
 
 
   useEffect(() => {
-    console.log('spot index use effect running')
-    dispatch(getSpots())
+      dispatch(getSpots())
   }, [dispatch])
 
 
@@ -21,7 +20,7 @@ const SpotIndex = () => {
     <section className='main-page'>
       <div className='spots-body'>
       {spotsArr.map((spot) => (
-        <Link to={`/spot/${spot.id}`} style={{ textDecoration: 'none' }}>
+        <Link key={spot.id} to={`/spot/${spot.id}`} style={{ textDecoration: 'none' }}>
           <div className='spots-card'>
 
             <div>
@@ -42,7 +41,7 @@ const SpotIndex = () => {
               </div>
 
               <div className='spots-info-rating'>
-                <i class='fa-solid fa-star'/>
+                <i className='fa-solid fa-star'/>
                 {Number(spot.avgRating).toFixed(1)}
               </div>
             </div>

@@ -20,12 +20,10 @@ const SpotDetails = () => {
 
 
     useEffect(() => {
-        console.log('spot detail use effect for get reviews running')
         dispatch(reviewActions.getReviews(spotId))
     }, [spotId, dispatch])
 
     useEffect(() => {
-        console.log('spot detail use effect for get single spot running')
         dispatch(spotActions.getSingleSpot(spotId))
     }, [spotId, dispatch])
 
@@ -53,7 +51,7 @@ const SpotDetails = () => {
                     </div>
                     <div className='details-header-info'>
                         <div className='details-header-info-rating'>
-                            <i class='fa-solid fa-star'/>
+                            <i className='fa-solid fa-star'/>
                             {Number(spots.avgStarRating).toFixed(1)}
                         </div>
                         <div className='breaker'> . </div>
@@ -68,7 +66,7 @@ const SpotDetails = () => {
                 </div>
                 <div className='details-body'>
                     {spots.SpotImages &&
-                        <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' />
+                        <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' key={spots.id}  />
                     }
 
 
@@ -125,7 +123,7 @@ const SpotDetails = () => {
         <h1 className='review-header'>Reviews</h1>
         <div className = 'review-main'>
             {reviewsArr.map((review) => (
-                <div className = 'review-body'>
+                <div key={review.id} className = 'review-body'>
                     { review && review.spotId === +spotId && review.User &&
                     <div className='single-review'>
                         <div className='review-info'>
@@ -145,8 +143,6 @@ const SpotDetails = () => {
                         </div>
                     </div>
                     }
-
-
                 </div>
 
             ))}

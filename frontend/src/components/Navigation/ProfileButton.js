@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button className='profile-button' onClick={openMenu}>
+      <div className='profile-button' onClick={openMenu}>
         <div className='bar-icon'>
             <i className="fa-solid fa-bars" style={{fontSize: 10}}/>
         </div>
@@ -93,7 +93,7 @@ function ProfileButton({ user }) {
               </>
             )}
           </ul>
-      </button>
+      </div>
       </>
   );
 }

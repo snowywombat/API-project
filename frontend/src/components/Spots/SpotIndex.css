@@ -11,6 +11,10 @@
     resize: both;
 }
 
+.key {
+    list-style: none;
+}
+
 
 .spots-body {
     display: flex;
