@@ -562,6 +562,9 @@ router.get('/current', requireAuth, async(req, res, next) => {
 //get details of a Spot from an id
 router.get('/:spotId', async(req, res, next) => {
     const { spotId } = req.params
+    //findAll reviews where spotId == spot id
+    //calculate the num reviews, average review score
+    //after find spot convert to json object, add keys and values to spots
 
     let spots = await Spot.findByPk(spotId, {
         include: [
@@ -581,19 +584,17 @@ router.get('/:spotId', async(req, res, next) => {
             attributes: ['id', 'firstName', 'lastName'],
         }],
 
-
-        attributes: {
-            include:
-            [
-                [
-                    sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'
-                ],
-                [
-                    sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'
-                ],
-            ]
-        },
-
+        // attributes: {
+        //     include:
+        //     [
+        //         [
+        //             sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'
+        //         ],
+        //         [
+        //             sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'
+        //         ],
+        //     ]
+        // },
 
         group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'Owner.id'],
         required: true,
