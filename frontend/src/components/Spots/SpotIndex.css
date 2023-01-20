@@ -8,7 +8,9 @@
     height: 200px;
     margin: 15px;
     bottom: 15px;
+    resize: both;
 }
+
 
 .spots-body {
     display: flex;
@@ -37,11 +39,36 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    bottom: 13px;
+    width: 150px;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
-    font-size: 10px;
+    font-size: 9px;
+    color: black;
 
+}
+
+.spots-bottom-div {
+    display: flex;
+   justify-content: space-between;
+    padding: 5px;
+}
+
+.spots-info-rating {
+    display: flex;
+    font-size: 9px;
+    font-family: 'Montserrat', 'sans-serif';
+    color: black;
+    height: 60px;
+}
+
+.spots-info-location {
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-bottom: 4px;
+
+}
+
+.spots-info-price {
+    display: flex;
 }
 
 .spots-image {
@@ -53,6 +80,15 @@
     object-fit: cover;
     border-radius: 7px;
 
+}
+
+.spots-price {
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-right: 2px;
+}
+
+.fa-star {
+    display: flex;
 }
 
 /* .spots-info-rating {

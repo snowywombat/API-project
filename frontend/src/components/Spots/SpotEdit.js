@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import * as spotActions from "../../store/spotReducer";
 // import { getSingleSpot } from '../../store/spotReducer';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import './SpotEdit.css'
 
 
 function EditSpotModal({ spots }) {
@@ -53,7 +54,7 @@ function EditSpotModal({ spots }) {
         <>
           <h1 className='create-spot-title'>Update Spot</h1>
           <form onSubmit={handleSubmit}>
-            <ul>
+            <ul className='error-message'>
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
               ))}
@@ -129,12 +130,14 @@ function EditSpotModal({ spots }) {
 
               />
             </label> */}
-            <button type="submit" className='update-button'>
-                Update
-            </button>
-            <button onClick={handleDelete} type="submit" className='delete-button'>
-                Delete
-            </button>
+            <div className='edit-buttons'>
+              <button type="submit" className='update-button'>
+                  Update
+              </button>
+              <button onClick={handleDelete} type="submit" className='delete-button'>
+                  Delete
+              </button>
+            </div>
           </form>
         </>
       );

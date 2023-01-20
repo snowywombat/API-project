@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import * as spotActions from "../../store/spotReducer";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import './SpotForm.css'
 
 
 function CreateSpotModal() {
@@ -41,7 +42,7 @@ function CreateSpotModal() {
     <>
       <h1 className='create-spot-title'>Create Spot</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <ul className='error-message'>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
@@ -118,7 +119,7 @@ function CreateSpotModal() {
             required
           />
         </label>
-        <button type="submit" className='submit-button'>
+        <button type="submit" className='create-spot-submit-button'>
             Create
         </button>
       </form>

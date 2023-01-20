@@ -1,0 +1,19 @@
+.button-create-spot-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(249, 56, 72);
+    border: none;
+    color: white;
+    border-radius: 3px;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 9px;
+    width: 70px;
+    height: 21px;
+
+}
+
+.button-create-spot-modal:hover {
+    box-shadow: -0.2px 0.2px 1px  rgb(161, 161, 161);
+    background: rgb(249, 66, 82);
+}

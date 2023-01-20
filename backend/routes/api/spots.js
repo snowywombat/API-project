@@ -322,7 +322,7 @@ router.get('/', async (req, res, next) => {
             spot.avgRating = reviews[0].dataValues.avgRating
         }
         else {
-            spot.avgRating = '5.0';
+            spot.avgRating = '';
         }
 
         const images = await SpotImage.findAll({
