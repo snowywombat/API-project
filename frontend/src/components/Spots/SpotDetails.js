@@ -54,7 +54,7 @@ const SpotDetails = () => {
                     <div className='details-header-info'>
                         <div className='details-header-info-rating'>
                             <i class='fa-solid fa-star'/>
-                            {Number(spots.avgStarRating).toFixed(2)}
+                            {Number(spots.avgStarRating).toFixed(1)}
                         </div>
                         <div className='breaker'> . </div>
                         <div className='details-header-info-reviews'>
