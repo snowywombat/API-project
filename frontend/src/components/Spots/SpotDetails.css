@@ -248,3 +248,7 @@
     height: 0px;
     width: 145px;
 }
+
+.key {
+    list-style: none;
+}
