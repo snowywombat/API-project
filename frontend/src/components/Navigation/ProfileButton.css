@@ -30,15 +30,25 @@
 .profile-dropdown {
     display: flex;
     flex-direction: column;
+    align-items: center;
     list-style: none;
     background: white;
     width: 100px;
-    height: 40px;
+    height: 70px;
     border: 0.7px solid rgb(230, 230, 230);
     border-radius: 5px;
     position: absolute;
     top: 21px;
     right: 25px;
+}
+
+.profile-dropdown li {
+    display: flex;
+    font-size: 8px;
+    position: relative;
+    top: 5px;
+    right: 25px;
+
 }
 
 .dropdown-buttons {
@@ -47,6 +57,27 @@
     position: absolute;
     top: 3px;
     right: 85px;
+}
+
+.logged-in-dropdown-elements {
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.dropdown-logout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 8px;
+    background: rgb(249, 56, 72);
+    color: white;
+    width: 60px;
+    height: 20px;
+    border: 0.5px solid rgb(161, 161, 161);
+    border-radius: 12px;
+    top: 7px;
+
 }
 
 

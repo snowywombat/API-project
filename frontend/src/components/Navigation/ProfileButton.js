@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import DemoFormModal from "../DemoModal";
 import './ProfileButton.css'
 
 
@@ -55,11 +56,13 @@ function ProfileButton({ user }) {
           <ul className={ulClassName} ref={ulRef}>
             {user ? (
               <>
+                <div className='logged-in-dropdown-elements'>
                 <li>{user.username}</li>
                 <li>{user.firstName} {user.lastName}</li>
                 <li>{user.email}</li>
+                </div>
                 <li>
-                  <button onClick={logout}>Log Out</button>
+                  <button className='dropdown-logout' onClick={logout}>Log Out</button>
                 </li>
               </>
             ) : (
@@ -77,6 +80,13 @@ function ProfileButton({ user }) {
                     buttonText="Log In"
                     onButtonClick={closeMenu}
                     modalComponent={<LoginFormModal />}
+                  />
+                </li>
+                <li className='demo'>
+                  <OpenModalButton
+                    buttonText="Demo"
+                    onButtonClick={closeMenu}
+                    modalComponent={<DemoFormModal />}
                   />
                 </li>
               </div>
