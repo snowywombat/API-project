@@ -112,7 +112,7 @@ function CreateSpotModal() {
         <label>
           Upload Image
           <input
-            type="text"
+            type="url"
             value={SpotImages}
             onChange={(e) => setSpotImages(e.target.value)}
             required

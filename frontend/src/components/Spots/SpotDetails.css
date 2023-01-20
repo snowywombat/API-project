@@ -11,9 +11,25 @@
 .details-body {
     display: flex;
     justify-content: space-between;
-    border: 1px solid rgb(230, 230, 230);
+    border: 1px solid rgb(158, 37, 206);
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
+}
+
+.review-main {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    position: relative;
+    top: 5px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+.review-body {
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .details-image {

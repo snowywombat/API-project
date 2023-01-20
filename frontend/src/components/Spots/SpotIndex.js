@@ -1,22 +1,14 @@
-import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpots } from '../../store/spotReducer';
-import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import './SpotIndex.css'
 
 const SpotIndex = () => {
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const spots = useSelector(state => state.spots);
   const spotsArr = Object.values(spots);
-
-
-const navigate = () => {
-    history.push(`/spot/${spotsArr[0].id}`)
-}
 
 
   useEffect(() => {

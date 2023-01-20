@@ -228,7 +228,7 @@ router.delete('/:reviewId', requireAuth, async(req, res, next) => {
         }
     }
 
-    else if(userId !== deletedReview.userId) {
+   else if(userId !== deletedReview.userId) {
         res.status(403),
         res.json({
             message: 'Forbidden',
