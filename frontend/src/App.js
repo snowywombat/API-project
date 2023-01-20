@@ -9,8 +9,12 @@ import SpotDetails from "./components/Spots/SpotDetails";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  console.log('app component running')
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser()).then(() => {
+      console.log('before is loaded')
+      setIsLoaded(true)
+    });
   }, [dispatch]);
 
   return (
@@ -18,8 +22,10 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path='/' component={SpotIndex} />
+          {console.log('before spot details route in return')}
           <Route exact path='/spot/:spotId' component={SpotDetails} />
+          {console.log('before spot details route in return')}
+          <Route exact path='/' component={SpotIndex} />
         </Switch>
       )}
     </>

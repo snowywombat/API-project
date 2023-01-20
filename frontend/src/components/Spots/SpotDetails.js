@@ -14,18 +14,19 @@ const SpotDetails = () => {
     const spots = useSelector(state => state.spots[spotId]);
     const user = useSelector(state => state.session.user)
 
-
     //get reviews
     const reviews = useSelector(state => state.reviews);
     const reviewsArr = Object.values(reviews)
 
 
     useEffect(() => {
-        dispatch(spotActions.getSingleSpot(spotId))
+        console.log('spot detail use effect for get reviews running')
+        dispatch(reviewActions.getReviews(spotId))
     }, [spotId, dispatch])
 
     useEffect(() => {
-        dispatch(reviewActions.getReviews(spotId))
+        console.log('spot detail use effect for get single spot running')
+        dispatch(spotActions.getSingleSpot(spotId))
     }, [spotId, dispatch])
 
     const handleDelete = () => {
@@ -53,11 +54,11 @@ const SpotDetails = () => {
                     <div className='details-header-info'>
                         <div className='details-header-info-rating'>
                             <i class='fa-solid fa-star'/>
-                            {spots.avgStarRating}
+                            {Number(spots.avgStarRating).toFixed(2)}
                         </div>
                         <div className='breaker'> . </div>
                         <div className='details-header-info-reviews'>
-                            {spots.numReviews} reviews
+                            {Number(spots.numReviews)} reviews
                         </div>
                         <div className='breaker'> . </div>
                         <div className='details-header-info-location'>
@@ -125,7 +126,7 @@ const SpotDetails = () => {
         <div className = 'review-main'>
             {reviewsArr.map((review) => (
                 <div className = 'review-body'>
-                    {review && review.spotId === +spotId && review.User &&
+                    { review && review.spotId === +spotId && review.User &&
                     <div className='single-review'>
                         <div className='review-info'>
                             <div className='review-info-review'>
