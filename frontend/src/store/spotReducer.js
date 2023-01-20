@@ -84,7 +84,7 @@ export const createSpot = (spot) => async dispatch => {
     if (response1.ok) {
         const createdSpot = await response1.json();
 
-        const response2 = await csrfFetch(`api/spots/${createdSpot.id}/images`,{
+        const response2 = await csrfFetch(`/api/spots/${createdSpot.id}/images`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({

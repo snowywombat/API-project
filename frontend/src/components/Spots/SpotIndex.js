@@ -15,7 +15,7 @@ const SpotIndex = () => {
 
 
 const navigate = () => {
-    history.push(`/spots/${spotsArr[0].id}`)
+    history.push(`/spot/${spotsArr[0].id}`)
 }
 
 
@@ -28,7 +28,7 @@ const navigate = () => {
     <section className='main-page'>
       <div className='spots-body'>
       {spotsArr.map((spot) => (
-        <NavLink to={`/spots/${spot.id}`}>
+        <NavLink to={`/spot/${spot.id}`}>
           <div className='spots-card'>
             <div>
               <img className='spots-image' src = {`${spot.previewImage}`} alt='property' />

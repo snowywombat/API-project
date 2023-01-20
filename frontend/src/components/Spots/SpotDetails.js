@@ -10,7 +10,7 @@ const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spots = useSelector(state => state.spots[spotId]);
-    const user = useSelector(state => state.session)
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(spotActions.getSingleSpot(spotId))
@@ -22,7 +22,7 @@ const SpotDetails = () => {
         spots.avgStarRating = '5.0'
     }
 
-    console.log('spots id', spots.ownerId)
+    // console.log('spots id', spots.ownerId)
     // console.log('user', user)
     // console.log('userid', user.user.id)
 
@@ -50,7 +50,7 @@ const SpotDetails = () => {
                     </div>
                 }
 
-                {user && spots.ownerId === user.user.id &&
+                {user && +spots.ownerId === user.id &&
                 <div className = 'edit-button'>
                     <OpenModalButton
                     buttonText="Edit"

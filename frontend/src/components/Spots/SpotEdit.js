@@ -37,7 +37,7 @@ function EditSpotModal({ spots }) {
         setErrors([]);
         dispatch(spotActions.updateSpot({ address, city, state, country, name, description, price }, spots.id))
         .then((updatedSpot) => {
-            history.push(`/spots/${updatedSpot.id}`)
+            history.push(`/spot/${updatedSpot.id}`)
             closeModal()
         })
         .catch(

@@ -25,14 +25,10 @@ function CreateSpotModal() {
         setErrors([]);
         dispatch(spotActions.createSpot({ address, city, state, country, name, description, price, SpotImages }))
             .then((joined) => {
-                if('other url' !== 'spot details url') {
-                  history.push(`/spots/${joined.id}`)
+                  history.push(`/spot/${joined.id}`)
                   closeModal()
                 }
-                else {
-                  closeModal()
-                }
-            })
+            )
             .catch(
                 async (res) => {
                     const data = await res.json();
