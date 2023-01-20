@@ -16,6 +16,7 @@ function CreateReviewModal({ spots }) {
         e.preventDefault();
         setErrors([]);
         dispatch(reviewActions.createReview({ review, stars }, spots.id))
+            .then(() => dispatch(reviewActions.getReviews(spots.id)))
             .then(closeModal)
             .catch(
                 async (res) => {

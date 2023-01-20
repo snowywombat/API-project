@@ -12,6 +12,7 @@ const SpotIndex = () => {
 
 
   useEffect(() => {
+    console.log('spot index use effect running')
     dispatch(getSpots())
   }, [dispatch])
 
@@ -42,7 +43,7 @@ const SpotIndex = () => {
 
               <div className='spots-info-rating'>
                 <i class='fa-solid fa-star'/>
-                {spot.avgRating}
+                {Number(spot.avgRating).toFixed(1)}
               </div>
             </div>
 
