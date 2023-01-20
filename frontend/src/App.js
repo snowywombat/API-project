@@ -27,7 +27,7 @@ function App() {
             <SpotIndex />
           </Route>
           {console.log('before spot details route in return')}
-          <Route path={`/spot/:spotId`}>
+          <Route exact path={`/spot/:spotId`}>
               <SpotDetails />
           </Route>
           {/*
