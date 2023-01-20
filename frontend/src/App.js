@@ -23,9 +23,17 @@ function App() {
       {isLoaded && (
         <Switch>
           {console.log('before spot details route in return')}
-          <Route exact path='/spot/:spotId' component={SpotDetails} />
+          <Route exact path="/">
+            <SpotIndex />
+          </Route>
           {console.log('before spot details route in return')}
-          <Route exact path='/' component={SpotIndex} />
+          <Route path={`/spot/:spotId`}>
+              <SpotDetails />
+          </Route>
+          {/*
+          <Route exact path='/spot/:spotId' component={SpotDetails} />
+
+          <Route exact path='/' component={SpotIndex} /> */}
         </Switch>
       )}
     </>
