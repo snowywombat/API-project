@@ -12,6 +12,7 @@ const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spots = useSelector(state => state.spots[spotId]);
+    // const spotsArr = Object.values(spots)
     const user = useSelector(state => state.session.user)
 
     //get reviews
@@ -20,25 +21,27 @@ const SpotDetails = () => {
 
 
     useEffect(() => {
-        dispatch(reviewActions.getReviews(spotId))
+        dispatch(spotActions.getSingleSpot(spotId))
     }, [spotId, dispatch])
 
     useEffect(() => {
-        dispatch(spotActions.getSingleSpot(spotId))
+        dispatch(reviewActions.getReviews(spotId))
     }, [spotId, dispatch])
+
 
     const handleDelete = () => {
         reviewsArr.forEach(review => {
             if(review.userId === user.id) {
                 dispatch(reviewActions.removeReview(review.id))
+                .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
             }
         })
       }
 
     if(!spots) return null;
 
-    if(spots.avgStarRating === null) {
-        spots.avgStarRating = '5.0'
+    if(spots.avgStarRating === 'NaN') {
+        spots.avgStarRating = ''
     }
 
     return (
@@ -51,12 +54,12 @@ const SpotDetails = () => {
                     </div>
                     <div className='details-header-info'>
                         <div className='details-header-info-rating'>
+                            {spots.avgStarRating}
                             <i className='fa-solid fa-star'/>
-                            {Number(spots.avgStarRating).toFixed(1)}
                         </div>
                         <div className='breaker'> . </div>
                         <div className='details-header-info-reviews'>
-                            {Number(spots.numReviews)} reviews
+                            {spots.numReviews} reviews
                         </div>
                         <div className='breaker'> . </div>
                         <div className='details-header-info-location'>
@@ -129,6 +132,8 @@ const SpotDetails = () => {
                         <div className='review-info'>
                             <div className='review-info-review'>
                                 {review.review}
+                                {review.stars}
+                                <i className='fa-solid fa-star'/>
                             </div>
                             <div className='review-info-name'>
                                 -{review.User.firstName}
@@ -161,7 +166,8 @@ const SpotDetails = () => {
             </div>
         </div>
     </>
-);
+    );
+
 }
 
 export default SpotDetails;

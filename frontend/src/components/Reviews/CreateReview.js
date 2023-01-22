@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as reviewActions from "../../store/reviewReducer";
+import * as spotActions from "../../store/spotReducer";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './CreateReview.css'
@@ -16,6 +17,7 @@ function CreateReviewModal({ spots }) {
         e.preventDefault();
         setErrors([]);
         dispatch(reviewActions.createReview({ review, stars }, spots.id))
+            .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
             .then(() => dispatch(reviewActions.getReviews(spots.id)))
             .then(closeModal)
             .catch(

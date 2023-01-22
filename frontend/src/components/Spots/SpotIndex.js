@@ -42,7 +42,7 @@ const SpotIndex = () => {
 
               <div className='spots-info-rating'>
                 <i className='fa-solid fa-star'/>
-                {Number(spot.avgRating).toFixed(1)}
+                {Number(spot.avgRating).toFixed(2)}
               </div>
             </div>
 
