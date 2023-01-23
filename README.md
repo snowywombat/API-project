@@ -1,5 +1,5 @@
 # Heirbnb
-Heirbnb is a website clone of Airbnb. Heibnb is a platform to rent out spaces hosted by the property's owner.
+Heirbnb is a website clone of Airbnb. Heirbnb is a platform to rent out spaces hosted by the property's owner.
 Live site: 
 
 # Wiki Link
@@ -9,5 +9,17 @@ Live site:
 * [Redux Store Shape](https://github.com/snowywombat/API-project/wiki/Redux-Store-Shape)
 
 # Tech Stack
+* Frameworks, Platforms, and Libraries: 
+** Javascript
+** HTML5
+** CSS3
+** Node.js
+** Express.js
+** React
+** Redux
+* Database
+** Postgres
+* Hosting
+** Render
 
 # Landing Page
