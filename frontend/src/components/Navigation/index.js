@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import OpenCreateModalButton from '../CreateModal';
+import OpenCreateSpotModalButton from '../CreateSpotModal';
 import CreateSpotModal from '../Spots/SpotForm';
 import './Navigation.css';
 
@@ -22,8 +22,8 @@ function Navigation({ isLoaded }){
           </div>
 
           <div className = 'create-button'>
-            <OpenCreateModalButton
-                    buttonText="Create Spot"
+            <OpenCreateSpotModalButton
+                    buttonText="Heirbnb your home"
                     modalComponent={<CreateSpotModal />}
                   />
           </div>

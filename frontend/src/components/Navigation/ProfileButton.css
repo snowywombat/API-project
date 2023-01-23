@@ -1,14 +1,16 @@
 .profile-button {
     display: flex;
-    flex-direction: row; /*k*/
+    flex-direction: row;
+    justify-content: space-evenly;
     list-style: none;
     align-items: center;
     background: white;
-    width: 40px;
-    height: 25px;
+    width: 45px;
+    height: 23px;
     border: 0.5px solid rgb(161, 161, 161);
     border-radius: 12px;
     margin-right: 25px;
+
 }
 .profile-button:hover {
     box-shadow: -0.2px 0.2px 1px  rgb(161, 161, 161);
@@ -16,15 +18,16 @@
 
 .bar-icon {
     list-style: none;
-    display: inline-block;
+    display: flex;
     position: relative;
-    padding: 0px 2px;
+    padding-left: 3px;
+
 }
 
 .profile-icon {
-    display: inline-block;
+    display: flex;
     position: relative;
-    padding: 0px 2px;
+    padding-right: 3px;
 }
 
 .profile-dropdown {
@@ -38,8 +41,8 @@
     border: 0.7px solid rgb(230, 230, 230);
     border-radius: 5px;
     position: absolute;
-    top: 30px;
-    right: 33px;
+    top: 23px;
+    right: 25px;
 }
 
 .profile-dropdown li {

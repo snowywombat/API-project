@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotActions from "../../store/spotReducer";
 import * as reviewActions from "../../store/reviewReducer"
-import OpenCreateModalButton from '../CreateModal';
+import OpenCreateReviewModalButton from '../CreateReviewModal';
 import EditSpotModal from '../Spots/SpotEdit';
 import './SpotDetails.css'
 import CreateReviewModal from '../Reviews/CreateReview';
@@ -53,20 +53,40 @@ const SpotDetails = () => {
                     {spots.name}
                     </div>
                     <div className='details-header-info'>
+                    {spots.avgStarRating > 0.01 &&
                         <div className='details-header-info-rating'>
                             {spots.avgStarRating}
                             <i className='fa-solid fa-star'/>
                         </div>
-                        <div className='breaker'> . </div>
+                    }
+                        <div className='breaker'>
+                            <i className='fa-solid fa-circle' style={{fontSize: 3}} />
+                        </div>
                         <div className='details-header-info-reviews'>
                             {spots.numReviews} reviews
                         </div>
-                        <div className='breaker'> . </div>
+                        <div className='breaker'>
+                            <i className='fa-solid fa-circle' style={{fontSize: 3}} />
+                        </div>
                         <div className='details-header-info-location'>
                             {spots.city}, {spots.state}, {spots.country}
                         </div>
                     </div>
                 </div>
+
+                <div className='edit-button-div'>
+                {user && +spots.ownerId === user.id &&
+                        <div className = 'edit-button'>
+                            <OpenCreateReviewModalButton
+                            buttonText="Edit"
+                            modalComponent={<EditSpotModal
+                                spots={spots}
+                            />}
+                        />
+                        </div>
+                    }
+                </div>
+
                 <div className='details-body'>
                     {spots.SpotImages &&
                         <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' key={spots.id}  />
@@ -74,18 +94,9 @@ const SpotDetails = () => {
 
 
                     <div className='details-text'>
-                        {user && +spots.ownerId === user.id &&
-                        <div className = 'edit-button'>
-                            <OpenCreateModalButton
-                            buttonText="Edit"
-                            modalComponent={<EditSpotModal
-                                spots={spots}
-                            />}
-                        />
-                        </div>
-                        }
                         {spots.SpotImages &&
                             <div className='details-info'>
+
                                 <div className='details-name'>
                                     <div>
                                         Hosted by
@@ -128,23 +139,33 @@ const SpotDetails = () => {
             {reviewsArr.map((review) => (
                 <div key={review.id} className = 'review-body'>
                     { review && review.spotId === +spotId && review.User &&
+
                     <div className='single-review'>
+
+
                         <div className='review-info'>
+                            {user && +review.userId === user.id &&
+                                <div className='delete-review-button-div'>
+                                    <button onClick={handleDelete} type="submit" className='delete-review-button'>
+                                        <i className='fa-solid fa-circle-xmark'  style={{fontSize: 11}} />
+                                    </button>
+                                </div>
+                            }
+
+                            <div className='review-review'>
+                            {review.review}
+                            </div>
+
                             <div className='review-info-review'>
-                                {review.review}
-                                {review.stars}
-                                <i className='fa-solid fa-star'/>
-                            </div>
                             <div className='review-info-name'>
-                                -{review.User.firstName}
+                                    -{review.User.firstName}
+                                </div>
+                                <div className='review-info-stars'>
+                                    {review.stars}
+                                    <i className='fa-solid fa-star'/>
+                                    </div>
+
                             </div>
-                        {user && +review.userId === user.id &&
-                            <div className='delete-review-button-div'>
-                                <button onClick={handleDelete} type="submit" className='delete-review-button'>
-                                Delete
-                                </button>
-                            </div>
-                        }
                         </div>
                     </div>
                     }
@@ -156,7 +177,7 @@ const SpotDetails = () => {
 
         <div className='review-button'>
             <div className = 'create-review-button'>
-                <OpenCreateModalButton
+                <OpenCreateReviewModalButton
                 buttonText="Add Review"
                 modalComponent={<CreateReviewModal
                     reviews={reviews}
