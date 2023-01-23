@@ -1,4 +1,4 @@
-# Heirbnb
+#  👑 Heirbnb
 Heirbnb is a website clone of Airbnb. Heirbnb is a platform to rent out spaces hosted by the property's owner.
 Live site: 
 
