@@ -25,4 +25,6 @@ Live site: https://heirbnb.onrender.com/ (currently not working)
 
 # Landing Page
 Welcome to the Landing Page! Here, you can log in as a demo user, or create your own account. Feel free to host your own spot, or leave reviews on other spots.
+<br>
+<br>
 <img width="1715" alt="Screen Shot 2023-01-23 at 1 34 15 AM" src="https://user-images.githubusercontent.com/96889369/214007210-aa6cb914-cbc6-4360-b582-96df482cf4b9.png">
