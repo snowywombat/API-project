@@ -75,8 +75,13 @@ module.exports = {
       ],
       {}
     );
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete(options, {}, {});
   }
-    }
+
+}
 
 // options.tableName = 'Spots';
 
@@ -150,9 +155,4 @@ module.exports = {
 //   async up (queryInterface, Sequelize) {
 //     await Spot.bulkCreate(options, { validate: true });
 //   },
-
-//   async down (queryInterface, Sequelize) {
-//     await queryInterface.bulkDelete(options, {}, {});
-
-//   }
 // };
