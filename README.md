@@ -10,16 +10,16 @@ Live site:
 
 # Tech Stack
 * Frameworks, Platforms, and Libraries: 
-** Javascript
-** HTML5
-** CSS3
-** Node.js
-** Express.js
-** React
-** Redux
+  * Javascript
+  * HTML5
+  * CSS3
+  * Node.js
+  * Express.js
+  * React
+  * Redux
 * Database
-** Postgres
+  * Postgres
 * Hosting
-** Render
+  * Render
 
 # Landing Page
