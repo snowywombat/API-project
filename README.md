@@ -1,5 +1,5 @@
 #  👑 Heirbnb
-Heirbnb is a website clone of Airbnb. Heirbnb is a platform to rent out spaces hosted by the property's owner.
+Heirbnb is a website clone of Airbnb. It is a platform to search for spaces to stay hosted by the property's owner. Live like an heir!
 <br>
 Live site: https://heirbnb.onrender.com/ (currently not working)
 
