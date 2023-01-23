@@ -1,4 +1,4 @@
-.button-create-spot-modal {
+.button-create-review-modal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
 
 }
 
-.button-create-spot-modal:hover {
+.button-create-review-modal:hover {
     box-shadow: -0.2px 0.2px 1px  rgb(161, 161, 161);
     background: rgb(249, 66, 82);
 }

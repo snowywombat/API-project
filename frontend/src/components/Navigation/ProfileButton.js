@@ -46,11 +46,11 @@ function ProfileButton({ user }) {
     <>
       <div className='profile-button' onClick={openMenu}>
         <div className='bar-icon'>
-            <i className="fa-solid fa-bars" style={{fontSize: 10}}/>
+            <i className="fa-solid fa-bars" style={{fontSize: 8}}/>
         </div>
 
         <div className='profile-icon'>
-          <i className="fa-solid fa-user" />
+          <i className="fa-solid fa-user" style={{fontSize: 13}} />
         </div>
 
           <ul className={ulClassName} ref={ulRef}>

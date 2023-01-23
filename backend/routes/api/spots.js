@@ -367,12 +367,30 @@ router.post('/', requireAuth, async(req, res, next) => {
         });
     }
 
+    else if(address.length > 256) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Address must be less than 256 characters.']
+        });
+    }
+
     else if(!city) {
         res.status(400)
         res.json({
             message: 'Validation Error',
             statusCode: 400,
             errors: ['City is required']
+        });
+    }
+
+    else if(city.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['City must be less than 50 characters.']
         });
     }
 
@@ -385,12 +403,30 @@ router.post('/', requireAuth, async(req, res, next) => {
         });
     }
 
+    else if(state.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['State must be less than 50 characters.']
+        });
+    }
+
     else if(!country) {
         res.status(400)
         res.json({
             message: 'Validation Error',
             statusCode: 400,
             errors: ['Country is required']
+        });
+    }
+
+    else if(country.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Country must be less than 50 characters.']
         });
     }
 
@@ -412,6 +448,15 @@ router.post('/', requireAuth, async(req, res, next) => {
         });
     }
 
+    else if(!name) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Name is required']
+        });
+    }
+
     else if(name.length > 50) {
         res.status(400)
         res.json({
@@ -427,6 +472,15 @@ router.post('/', requireAuth, async(req, res, next) => {
             message: 'Validation Error',
             statusCode: 400,
             errors: ['Description is required']
+        });
+    }
+
+    else if(description.length > 256) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Description must be less than 256 characters.']
         });
     }
 
@@ -565,13 +619,33 @@ router.get('/:spotId', async(req, res, next) => {
     //findAll reviews where spotId == spot id
     //calculate the num reviews, average review score
     //after find spot convert to json object, add keys and values to spots
+    let reviews = await Review.findAll({
+        where: {
+            spotId: spotId
+        }
+    })
+
+    function avgStars(reviews)  {
+        let sum = 0;
+
+        reviews.forEach(review => {
+            sum += review.stars
+        });
+
+        return (sum * 1.0 / reviews.length).toFixed(2)
+    }
+
+
+    const review = reviews.length
+
+
 
     let spots = await Spot.findByPk(spotId, {
         include: [
         {
             model: Review,
             as: 'Reviews',
-            attributes: [],
+            attributes: ['review', 'stars'],
         },
         {
             model: SpotImage,
@@ -596,18 +670,23 @@ router.get('/:spotId', async(req, res, next) => {
         //     ]
         // },
 
+
         group: ['Spot.id', 'Reviews.id', 'SpotImages.id', 'Owner.id'],
         required: true,
-        duplicating: false
+        duplicating: false,
 
     });
+
+    spotJSON = spots.toJSON()
+    spotJSON.numReviews = review
+    spotJSON.avgStarRating = avgStars(reviews)
 
     if (!spots) {
         res.status(404);
         res.send({ message: 'Spot Not Found', statusCode: 404 });
     }
 
-    res.json(spots)
+    res.json(spotJSON)
 
 });
 
@@ -629,21 +708,138 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
 
     }
 
-    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price){
+    if(!address) {
         res.status(400)
-        return res.json({
+        res.json({
             message: 'Validation Error',
             statusCode: 400,
-            errors: ['Street address is required',
-            'City is required',
-            'State is required',
-            'Country is required',
-            'Latitude is not valid',
-            'Longitude is not valid',
-            'Name must be less than 50 characters',
-            'Description is required',
-            'Price per day is required']
+            errors: ['Street address is required']
+        });
+    }
 
+    else if(address.length > 256) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Address must be less than 256 characters.']
+        });
+    }
+
+    else if(!city) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['City is required']
+        });
+    }
+
+    else if(city.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['City must be less than 50 characters.']
+        });
+    }
+
+    else if(!state) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['State is required']
+        });
+    }
+
+    else if(state.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['State must be less than 50 characters.']
+        });
+    }
+
+    else if(!country) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Country is required']
+        });
+    }
+
+    else if(country.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Country must be less than 50 characters.']
+        });
+    }
+
+    else if(!lat) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Latitude is not valid']
+        });
+    }
+
+    else if(!lng) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Longitude is not valid']
+        });
+    }
+
+    else if(!name) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Name is required']
+        });
+    }
+
+    else if(name.length > 50) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Name must be less than 50 characters']
+        });
+    }
+
+    else if(!description) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Description is required']
+        });
+    }
+
+    else if(description.length > 256) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Description must be less than 256 characters.']
+        });
+    }
+
+    else if(!price) {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: ['Price per day is required']
         });
     }
 
@@ -657,26 +853,26 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
         })
     }
 
-    if(!req.body) {
+    // if(!req.body) {
 
-        res.status(400)
-        return res.json({
-            message: 'Validation Error',
-            statusCode: 400,
-            errors: [
-                'Street address is required',
-                'City is required',
-                'State is required',
-                'Country is required',
-                'Latitude is not valid',
-                'Longitude is not valid',
-                'Name must be less than 50 characters',
-                'Description is required',
-                'Price per day is required'
-            ]
-        });
+    //     res.status(400)
+    //     return res.json({
+    //         message: 'Validation Error',
+    //         statusCode: 400,
+    //         errors: [
+    //             'Street address is required',
+    //             'City is required',
+    //             'State is required',
+    //             'Country is required',
+    //             'Latitude is not valid',
+    //             'Longitude is not valid',
+    //             'Name must be less than 50 characters',
+    //             'Description is required',
+    //             'Price per day is required'
+    //         ]
+    //     });
 
-    }
+    // }
 
     if(ownerId === findSpot.ownerId){
 
@@ -787,25 +983,41 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         })
     }
 
-    else if (review.length === 0 || (stars < 1 || stars > 5)) {
+    else if (review.length === 0) {
         res.status(400),
         res.json({
             message: 'Validation error',
             statusCode: 400,
             errors: [
-               'Review text is required',
+               'Review cannot be empty',
+            ]
+        })
+    }
+
+    else if ((stars < 1 || stars > 5)) {
+        res.status(400),
+        res.json({
+            message: 'Validation error',
+            statusCode: 400,
+            errors: [
                 'Stars must be an integer from 1 to 5'
             ]
         })
     }
 
     else if(findReviews.length > 0) {
-        res.status(403),
-        res.json({
-            message: 'User already has a review for this spot',
-            statusCode: 403
-        })
 
+        const err = new Error('Forbidden');
+        err.title = 'Forbidden';
+        err.errors = ["You've already created a review for this spot."];
+        err.status = 403;
+        return next(err);
+
+        // res.status(403),
+        // res.json({
+        //     message: 'User already has a review for this spot',
+        //     statusCode: 403
+        // })
     }
 
 
@@ -821,7 +1033,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         res.status(201)
         res.json(newReview)
     }
-
 
 });
 

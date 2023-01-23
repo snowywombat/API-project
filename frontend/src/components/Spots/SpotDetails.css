@@ -11,11 +11,13 @@
 .detail-page{
     display:flex;
     margin-bottom: 50px;
+    justify-content: center;
 
 }
 
 .details-body {
     display: flex;
+    /* position: relative; */
     justify-content: space-between;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -36,6 +38,8 @@
 .review-body {
     display: flex;
     justify-content: space-between;
+    height:auto;
+    width: auto;
 
 }
 
@@ -127,6 +131,7 @@
 
 .details-header-info {
     display: flex;
+    align-items: center;
     flex-direction: row;
     padding-top: 5px;
     font-size: 8px;
@@ -161,12 +166,14 @@
 
 .single-review {
     display: flex;
-    border-bottom: 1px solid rgb(230, 230, 230);
-    justify-content: space-between;
+    position: relative;
+    border-bottom: 1px solid rgb(255, 222, 225);
+    border-top: 1px solid rgb(255, 222, 225);
+    align-items: center;
     padding: 5px;
     margin: 5px;
     margin-right: 10px;
-    margin-bottom: 55px;
+    margin-bottom: 10px;
 }
 
 .single-review:hover {
@@ -181,6 +188,22 @@
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 9px;
+}
+
+.review-info-review {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.review-info-stars {
+    display: flex;
+    flex-direction: row;
+}
+
+.review-review {
+    display: flex;
+    padding-bottom: 4px;
 }
 
 .spots-info-review {
@@ -205,19 +228,25 @@
 
 .review-button {
     display:flex;
-    width: 40px;
+    width: auto;
+    justify-content: center;
     padding-left: 8px;
+}
+
+.edit-button-div {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 3px;
+
 }
 
 .edit-button {
     display: flex;
-    position: absolute;
     width: 45px;
     height: 20px;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 8px;
-    top: 135px;
-    right: 191px;
+    padding-left: 94%;
 
 }
 
@@ -225,11 +254,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    margin-top: 15px;
-    margin-bottom: 28px;
+    position: absolute;
+    left: 95%;
+    bottom: 90%;
     font-size: 7px;
-    width: 27px;
+    width: 18px;
     height: 15px;
     color: white;
     background-color: rgb(249, 56, 72);

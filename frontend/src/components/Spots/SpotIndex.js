@@ -16,6 +16,7 @@ const SpotIndex = () => {
   }, [dispatch])
 
 
+
   return (
     <section className='main-page'>
       <div className='spots-body'>
@@ -40,10 +41,12 @@ const SpotIndex = () => {
                 </div>
               </div>
 
+              {spot.avgRating > 0.01 &&
               <div className='spots-info-rating'>
                 <i className='fa-solid fa-star'/>
-                {Number(spot.avgRating).toFixed(1)}
+                {Number(spot.avgRating).toFixed(2)}
               </div>
+              }
             </div>
 
         </div>

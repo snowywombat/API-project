@@ -2,7 +2,7 @@ import React from 'react';
 import { useModal } from '../../context/Modal';
 import './CreateModal.css'
 
-function OpenCreateModalButton({
+function OpenCreateReviewModalButton({
   modalComponent, // component to render inside the modal
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
@@ -17,8 +17,8 @@ function OpenCreateModalButton({
   };
 
   return (
-    <button className='button-create-spot-modal' onClick={onClick} >{buttonText}</button>
+    <button className='button-create-review-modal' onClick={onClick} >{buttonText}</button>
   );
 }
 
-export default OpenCreateModalButton;
+export default OpenCreateReviewModalButton;

@@ -17,7 +17,9 @@ form {
 
 .error-message {
     display: flex;
+    flex-direction: column;
     position: relative;
+    align-items: center;
     right: 20px;
     font-size: 10px;
     color:rgb(249, 56, 72);

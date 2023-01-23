@@ -1,0 +1,18 @@
+.button-create-spot-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: black;
+    background: none;
+    border-radius: 12px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    font-size: 7.2px;
+    width: 85px;
+    height: 25px;
+
+}
+
+.button-create-spot-modal:hover {
+    background:rgb(243, 243, 243);
+}
