@@ -50,6 +50,10 @@ module.exports = {
     );
   },
 
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete(options, {}, {});
+  }
+
 }
 
 // options.tableName = 'Reviews';
