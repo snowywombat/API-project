@@ -11,7 +11,7 @@ import CreateReviewModal from '../Reviews/CreateReview';
 const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    const spots = useSelector(state => state.spots[spotId]);
+    const spots = useSelector(state => state.spots);
     // const spotsArr = Object.values(spots)
     const user = useSelector(state => state.session.user)
 
@@ -36,7 +36,7 @@ const SpotDetails = () => {
                 .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
             }
         })
-      }
+    }
 
     if(!spots) return null;
 
