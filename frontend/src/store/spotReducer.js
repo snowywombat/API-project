@@ -57,7 +57,6 @@ const response = await fetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
         const details = await response.json();
-        console.log(details, 'details')
         dispatch(spotDetails(details));
         return details;
     }

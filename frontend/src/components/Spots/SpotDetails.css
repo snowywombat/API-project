@@ -3,8 +3,8 @@
     flex-direction: column;
     width: auto;
     height: auto;
-    margin-left: 175px;
-    margin-right: 175px;
+    margin-left: 150px;
+    margin-right: 150px;
 
 }
 
@@ -17,7 +17,6 @@
 
 .details-body {
     display: flex;
-    /* position: relative; */
     justify-content: space-between;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -47,8 +46,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 500px;
+    width: auto;
+    height: 500px;
     padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .details-text:hover {
@@ -60,7 +62,7 @@
     font-family: 'Montserrat', 'sans-serif';
     font-size: 10px;
     width: 50%;
-    height: 300px;
+    height: 500px;
     object-fit: cover;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -76,7 +78,7 @@
 
 .details-name {
     display: flex;
-    font-size: 12px;
+    font-size: 22px;
     text-align: center;
 
 }
@@ -85,14 +87,14 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 25px;
+    padding-top: 35px;
 
 }
 
 .details-price {
     display: flex;
-    padding-top: 25px;
-    font-size: 9px;
+    padding-top: 35px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -103,9 +105,10 @@
 
 .details-description-header {
     display: flex;
-    font-size: 12px;
+    font-size: 20px;
     align-items: center;
     text-align: center;
+    margin-bottom: 5px;
 
 }
 
@@ -113,7 +116,7 @@
     display: flex;
     text-align: center;
     font-family: 'Montserrat semibold', 'sans-serif';
-    font-size: 18px;
+    font-size: 25px;
     padding-left: 4px;
 }
 
@@ -121,13 +124,13 @@
     padding-left: 3px;
     padding-right: 3px;
 }
+
 .details-header {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
-    font-size: 10px;
     padding-top: 20px;
-    padding-bottom: 15px;
+    padding-bottom: 30px;
 }
 
 .details-header-info {
@@ -135,7 +138,7 @@
     align-items: center;
     flex-direction: row;
     padding-top: 5px;
-    font-size: 8px;
+    font-size: 15px;
 }
 
 .details-header-info-rating {
@@ -161,7 +164,8 @@
 
 
 .details-header-title {
-    font-size: 20px;
+    font-size: 35px;
+    margin-bottom: 7px;
     font-family: 'Montserrat semibold', 'sans-serif';
 }
 
@@ -236,6 +240,8 @@
 
 .edit-button-div {
     display: flex;
+    width: auto;
+    height: auto;
     justify-content: flex-end;
     padding-bottom: 3px;
 
