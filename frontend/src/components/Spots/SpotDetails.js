@@ -11,7 +11,7 @@ import CreateReviewModal from '../Reviews/CreateReview';
 const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
-    const spots = useSelector(state => state.spots);
+    const allSpots = useSelector(state => state.spots);
     // const spotsArr = Object.values(spots)
     const user = useSelector(state => state.session.user)
 
@@ -38,100 +38,105 @@ const SpotDetails = () => {
         })
     }
 
+    const spots = Object.values(allSpots).find(el => el.id === Number(spotId))
+
     if(!spots) return null;
 
     if(spots.avgStarRating === 'NaN') {
         spots.avgStarRating = ''
     }
 
+
     return (
     <>
-        <section className='detail-page'>
-            <div className='details-main'>
-                <div className='details-header'>
-                    <div className='details-header-title'>
-                    {spots.name}
-                    </div>
-                    <div className='details-header-info'>
-                    {spots.avgStarRating > 0.01 &&
-                        <div className='details-header-info-rating'>
-                            {spots.avgStarRating}
-                            <i className='fa-solid fa-star'/>
-                        </div>
-                    }
-                        <div className='breaker'>
-                            <i className='fa-solid fa-circle' style={{fontSize: 3}} />
-                        </div>
-                        <div className='details-header-info-reviews'>
-                            {spots.numReviews} reviews
-                        </div>
-                        <div className='breaker'>
-                            <i className='fa-solid fa-circle' style={{fontSize: 3}} />
-                        </div>
-                        <div className='details-header-info-location'>
-                            {spots.city}, {spots.state}, {spots.country}
-                        </div>
-                    </div>
-                </div>
-
-                <div className='edit-button-div'>
-                {user && +spots.ownerId === user.id &&
-                        <div className = 'edit-button'>
-                            <OpenCreateReviewModalButton
-                            buttonText="Edit"
-                            modalComponent={<EditSpotModal
-                                spots={spots}
-                            />}
-                        />
-                        </div>
-                    }
-                </div>
-
-                <div className='details-body'>
-                    {spots.SpotImages &&
-                        <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' key={spots.id}  />
-                    }
-
-
-                    <div className='details-text'>
-                        {spots.SpotImages &&
-                            <div className='details-info'>
-
-                                <div className='details-name'>
-                                    <div>
-                                        Hosted by
-                                    </div>
-                                    <div className='details-owner-first-name'>
-                                        {spots.Owner.firstName}
-                                    </div>
-                                    <div className='details-last-name'>
-                                        {spots.Owner.lastName}
-                                    </div>
+        {spots &&
+            <section className='detail-page'>
+                    <div className='details-main'>
+                        <div className='details-header'>
+                            <div className='details-header-title'>
+                            {spots.name}
+                            </div>
+                            <div className='details-header-info'>
+                            {spots.avgStarRating > 0.01 &&
+                                <div className='details-header-info-rating'>
+                                    {spots.avgStarRating}
+                                    <i className='fa-solid fa-star'/>
                                 </div>
-                                <div className='details-description'>
-                                    <div className='details-description-header'>
-                                        the space:
-                                    </div>
-                                    <div className='details-description-body'>
-                                        {spots.description}
-                                    </div>
+                            }
+                                <div className='breaker'>
+                                    <i className='fa-solid fa-circle' style={{fontSize: 3}} />
                                 </div>
-                                <div className='details-price'>
-                                    <div className='details-price-number'>
-                                    ${spots.price}
-                                    </div>
-                                    <div>
-                                    /night
-                                    </div>
+                                <div className='details-header-info-reviews'>
+                                    {spots.numReviews} reviews
+                                </div>
+                                <div className='breaker'>
+                                    <i className='fa-solid fa-circle' style={{fontSize: 3}} />
+                                </div>
+                                <div className='details-header-info-location'>
+                                    {spots.city}, {spots.state}, {spots.country}
                                 </div>
                             </div>
-                        }
+                        </div>
+
+                        <div className='edit-button-div'>
+                        {user && +spots.ownerId === user.id &&
+                                <div className = 'edit-button'>
+                                    <OpenCreateReviewModalButton
+                                    buttonText="Edit"
+                                    modalComponent={<EditSpotModal
+                                        spots={spots}
+                                    />}
+                                />
+                                </div>
+                            }
+                        </div>
+
+                        <div className='details-body'>
+                            {spots.SpotImages &&
+                                <img className='details-image' src = {`${spots.SpotImages.map(image => image.url)}`} alt='property' key={spots.id}  />
+                            }
+
+
+                            <div className='details-text'>
+                                {spots.SpotImages &&
+                                    <div className='details-info'>
+
+                                        <div className='details-name'>
+                                            <div>
+                                                Hosted by
+                                            </div>
+                                            <div className='details-owner-first-name'>
+                                                {spots.Owner.firstName}
+                                            </div>
+                                            <div className='details-last-name'>
+                                                {spots.Owner.lastName}
+                                            </div>
+                                        </div>
+                                        <div className='details-description'>
+                                            <div className='details-description-header'>
+                                                the space:
+                                            </div>
+                                            <div className='details-description-body'>
+                                                {spots.description}
+                                            </div>
+                                        </div>
+                                        <div className='details-price'>
+                                            <div className='details-price-number'>
+                                            ${spots.price}
+                                            </div>
+                                            <div>
+                                            /night
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+
                     </div>
-
-                </div>
-
-            </div>
-        </section>
+            </section>
+        }
 
 
         <h1 className='review-header'>Reviews</h1>
