@@ -38,7 +38,7 @@
     display: flex;
     justify-content: space-between;
     height:auto;
-    width: auto;
+    width: 20%;
 
 }
 
@@ -115,6 +115,7 @@
 .details-description-body {
     display: flex;
     text-align: center;
+    line-height: 1.4;
     font-family: 'Montserrat semibold', 'sans-serif';
     font-size: 25px;
     padding-left: 4px;
@@ -172,13 +173,14 @@
 .single-review {
     display: flex;
     position: relative;
+    justify-content: center;
+    width: 100%;
     border-bottom: 1px solid rgb(255, 222, 225);
     border-top: 1px solid rgb(255, 222, 225);
     align-items: center;
-    padding: 5px;
-    margin: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    padding: 20px;
+    margin: 20px;
+    margin-bottom: 25px;
 }
 
 .single-review:hover {
@@ -189,7 +191,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 150px;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 9px;
@@ -204,11 +205,13 @@
 .review-info-stars {
     display: flex;
     flex-direction: row;
+    font-size: 12px;
 }
 
 .review-review {
     display: flex;
     padding-bottom: 4px;
+    font-size: 15px;
 }
 
 .spots-info-review {
@@ -220,11 +223,12 @@
     display: flex;
     justify-content: flex-end;
     font-family: 'Montserrat semibold', 'sans-serif';
+    font-size: 12px;
 }
 
 
 .review-header {
-    font-size: 14px;
+    font-size: 25px;
     font-family: 'Montserrat semibold', 'sans-serif';
     padding-top: 1px;
     padding-left: 14px;
