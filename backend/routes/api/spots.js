@@ -9,6 +9,7 @@ const { Review } = require('../../db/models');
 const { Booking } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
+const { Tag } = require('../../db/models')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { captureRejectionSymbol } = require('pg/lib/query');
@@ -1265,6 +1266,84 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
     }
 
 })
+
+//get all tags by spotId
+router.get('/:spotId/tags', async (req, res, next) => {
+    const { spotId } = rq.params;
+
+    const findSpot = await Spot.findByPk(spotId)
+
+    if(findSpot) {
+        const Tags = await Tag.findAll({
+            where: {
+                spotId: spotId
+            },
+            include: [{
+                model: User,
+                as: 'User',
+                attributes: ['id', 'firstName', 'lastName'],
+            }],
+            attributes: ['id', 'userId', 'spotId', 'tagName', 'createdAt', 'updatedAt']
+        })
+
+        res.status(200)
+        res.json({Tags})
+    }
+
+    else {
+        res.status(404),
+        res.json({
+            message: "Spot couldn't be found",
+            status: 404
+        })
+    }
+})
+
+//create tags for a spot
+router.post('/:spotId/tags', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params;
+    const { tagName } = req.body;
+    let userId = req.user.id;
+
+    const findSpot = await Spot.findbyPk(spotId, {
+        where: {
+            userId: userId
+        }
+    })
+
+
+    if(findSpot === null) {
+        res.status(404),
+
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    else if (tagName.length === 0) {
+        res.status(400),
+        res.json({
+            message: 'Validation error',
+            statusCode: 400,
+            errors: [
+               'Tag cannot be empty',
+            ]
+        })
+    }
+
+    else {
+        const newTag = await Tag.create({
+            spotId: findSpot.id,
+            userId: userId,
+            tagName,
+
+        })
+
+        res.status(201)
+        res.json(newTag)
+    }
+});
 
 
 module.exports = router;
