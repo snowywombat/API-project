@@ -1213,22 +1213,8 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
     const { spotId } = req.params;
     const userId = req.user.id;
 
-    let findSpots = await Spot.findByPk(spotId)
-    //     where: {
-    //         id: spotId,
-    //         ownerId: userId
-    //     },
-    //     attributes: ['ownerId']
-    // })
+    const findSpots = await Spot.findByPk(spotId)
 
-    if (!findSpots) {
-        res.status(404),
-        res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-
-        })
-    }
 
     if(findSpots) {
         if(userId !== findSpots.ownerId) {
@@ -1236,18 +1222,20 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
                 where: {
                     spotId: spotId
                 },
-
-                attributes: ['spotId', 'startDate', 'endDate'],
-
-                // group: ['booking.id']
+                include: [{
+                    model: User,
+                    as: 'User',
+                    attributes: ['id', 'firstName', 'lastName']
+                }],
+                attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate'],
 
             })
 
             res.status(200)
-            res.json({ Bookings })
+            res.json({Bookings})
         }
 
-        else  {
+        else if (userId === findSpots.ownerId) {
             const Bookings = await Booking.findAll({
                 where: {
                     spotId: spotId
@@ -1259,13 +1247,20 @@ router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
                 }],
                 attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
 
-                // group: ['booking.id']
-
             })
 
             res.status(200)
-            res.json({ Bookings })
+            res.json({Bookings})
 
+        }
+
+        else {
+            res.status(404),
+            res.json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+
+            })
         }
     }
 

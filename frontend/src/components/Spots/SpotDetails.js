@@ -2,11 +2,14 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotActions from "../../store/spotReducer";
-import * as reviewActions from "../../store/reviewReducer"
+import * as reviewActions from "../../store/reviewReducer";
+import * as bookingActions from "../../store/bookingReducer";
 import OpenCreateReviewModalButton from '../CreateReviewModal';
+import OpenCreateBookingModalButton from '../CreateBookingModal';
 import EditSpotModal from '../Spots/SpotEdit';
 import './SpotDetails.css'
 import CreateReviewModal from '../Reviews/CreateReview';
+import CreateBookingModal from '../Bookings/CreateBooking';
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -19,6 +22,10 @@ const SpotDetails = () => {
     const reviews = useSelector(state => state.reviews);
     const reviewsArr = Object.values(reviews)
 
+    //get bookings
+    const bookings = useSelector(state => state.bookings);
+    const bookingsArr = Object.values(bookings)
+
 
     useEffect(() => {
         dispatch(spotActions.getSingleSpot(spotId))
@@ -26,6 +33,10 @@ const SpotDetails = () => {
 
     useEffect(() => {
         dispatch(reviewActions.getReviews(spotId))
+    }, [spotId, dispatch])
+
+    useEffect(() => {
+        dispatch(bookingActions.getBookings(spotId))
     }, [spotId, dispatch])
 
 
@@ -38,13 +49,37 @@ const SpotDetails = () => {
         })
     }
 
+    const handleDeleteBooking = () => {
+        bookingsArr.forEach(booking => {
+            if(booking.userId === user.id) {
+                dispatch(bookingActions.removeBooking(booking.id))
+                .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
+            }
+        })
+    }
+
+    const deleteClickBooking = () => {
+        const confirmed = window.confirm("Are you sure you want to delete your review?");
+        if (confirmed) {
+          handleDeleteBooking();
+        }
+
+    }
+
     const spots = Object.values(allSpots).find(el => el.id === Number(spotId))
 
     if(!spots) return null;
+    if(!bookings) return null;
 
     if(spots.avgStarRating === 'NaN') {
         spots.avgStarRating = ''
     }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+      }
 
 
     return (
@@ -187,6 +222,49 @@ const SpotDetails = () => {
                 modalComponent={<CreateReviewModal
                     reviews={reviews}
                     spots={spots}
+                    />}
+                    />
+            </div>
+        </div>
+
+        <h1 className='booking-header'>Bookings</h1>
+        <div className='booking-main'>
+            {bookingsArr.map((booking) => (
+                <div key={booking.id} className='booking-body'>
+
+                    {booking && booking.spotId === +spotId && booking.userId === +user.id &&
+                    <>
+                        <div>
+                            {user && +booking.userId === user.id &&
+                                <div className='delete-booking-button-div'>
+                                    <button onClick={deleteClickBooking} type="submit" className='delete-booking-button'>
+                                        <i className='fa-solid fa-circle-xmark'  style={{fontSize: 11}} />
+                                    </button>
+                                </div>
+                            }
+                        </div>
+
+                        <div>
+                            {user.firstName}
+                            {user.lastName}
+                            {formatDate(booking.startDate)}
+                            {formatDate(booking.endDate)}
+                        </div>
+
+                    </>
+                    }
+
+                </div>
+            ))}
+        </div>
+
+
+        <div className ='booking-button'>
+            <div className = 'create-booking-button'>
+                <OpenCreateBookingModalButton
+                buttonText="Add Booking"
+                modalComponent={<CreateBookingModal
+                    spots = {spots}
                     />}
                     />
             </div>

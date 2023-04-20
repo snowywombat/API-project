@@ -37,8 +37,8 @@
 .review-body {
     display: flex;
     justify-content: space-between;
-    height:auto;
-    width: 20%;
+    height: auto;
+    width: auto;
 
 }
 
@@ -174,7 +174,7 @@
     display: flex;
     position: relative;
     justify-content: center;
-    width: 100%;
+    width: 300px;
     border-bottom: 1px solid rgb(255, 222, 225);
     border-top: 1px solid rgb(255, 222, 225);
     align-items: center;
