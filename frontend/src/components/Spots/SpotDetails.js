@@ -10,6 +10,7 @@ import EditSpotModal from '../Spots/SpotEdit';
 import './SpotDetails.css'
 import CreateReviewModal from '../Reviews/CreateReview';
 import CreateBookingModal from '../Bookings/CreateBooking';
+import EditBookingModal from '../Bookings/EditBooking';
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -250,6 +251,16 @@ const SpotDetails = () => {
                             {formatDate(booking.startDate)}
                             {formatDate(booking.endDate)}
                         </div>
+
+
+                        <div className = 'edit-button'>
+                                    <OpenCreateReviewModalButton
+                                    buttonText="Edit"
+                                    modalComponent={<EditBookingModal
+                                        bookings = {booking}
+                                    />}
+                                />
+                                </div>
 
                     </>
                     }

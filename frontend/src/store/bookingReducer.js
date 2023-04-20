@@ -70,6 +70,35 @@ export const addBooking = (booking, spotId) => async dispatch => {
     }
 }
 
+export const updateBooking = (booking, bookingId) => async (dispatch) => {
+    const { startDate, endDate } = booking
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            startDate,
+            endDate
+        })
+    });
+
+    if (response.ok) {
+        const booking = await response.json();
+        console.log(booking, 'booking')
+        dispatch(editBooking(booking));
+        return booking;
+
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            throw data;
+        }
+      } else {
+            return ["An error occurred. Please try again."];
+    }
+}
+
 export const removeBooking = (bookingId) => async dispatch => {
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'DELETE',
@@ -97,6 +126,12 @@ const bookingReducer = (state = initialState, action) => {
                     newState[booking.id] = booking;
                 })
             return newState;
+        }
+        case EDIT_BOOKING: {
+            const newState = {...state}
+            newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
+            return newState;
+
         }
         case DELETE_BOOKING: {
             const newState = {...state}
