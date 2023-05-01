@@ -1138,6 +1138,17 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
             })
         }
 
+        if(start.getTime() < Date.now()) {
+            res.status(400),
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: [
+                    'A booking past the current date cannot be created'
+                ]
+            })
+        }
+
         let startError = false;
         let endError = false;
 
@@ -1210,66 +1221,44 @@ router.post('/:spotId/bookings', requireAuth, async(req, res, next) => {
 })
 
 //get all bookings by spotId
-router.get('/:spotId/bookings', requireAuth, async(req, res, next) => {
+router.get('/:spotId/bookings', async(req, res, next) => {
     const { spotId } = req.params;
-    const userId = req.user.id;
-
     const findSpots = await Spot.findByPk(spotId)
 
 
     if(findSpots) {
-        if(userId !== findSpots.ownerId) {
-            const Bookings = await Booking.findAll({
-                where: {
-                    spotId: spotId
-                },
-                include: [{
-                    model: User,
-                    as: 'User',
-                    attributes: ['id', 'firstName', 'lastName']
-                }],
-                attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate'],
 
-            })
+        const Bookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            include: [{
+                model: User,
+                as: 'User',
+                attributes: ['id', 'firstName', 'lastName']
+            }],
+            attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
 
-            res.status(200)
-            res.json({Bookings})
-        }
+        })
 
-        else if (userId === findSpots.ownerId) {
-            const Bookings = await Booking.findAll({
-                where: {
-                    spotId: spotId
-                },
-                include: [{
-                    model: User,
-                    as: 'User',
-                    attributes: ['id', 'firstName', 'lastName']
-                }],
-                attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
+        res.status(200)
+        res.json({Bookings})
 
-            })
-
-            res.status(200)
-            res.json({Bookings})
-
-        }
-
-        else {
-            res.status(404),
-            res.json({
-                message: "Spot couldn't be found",
-                statusCode: 404
-
-            })
-        }
     }
 
+    else {
+        res.status(404),
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+
+        })
+    }
 })
 
 //get all tags by spotId
 router.get('/:spotId/tags', async (req, res, next) => {
-    const { spotId } = rq.params;
+    const { spotId } = req.params;
 
     const findSpot = await Spot.findByPk(spotId)
 
@@ -1305,7 +1294,7 @@ router.post('/:spotId/tags', requireAuth, async (req, res, next) => {
     const { tagName } = req.body;
     let userId = req.user.id;
 
-    const findSpot = await Spot.findbyPk(spotId, {
+    const findSpot = await Spot.findByPk(spotId, {
         where: {
             userId: userId
         }
