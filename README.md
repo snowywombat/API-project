@@ -25,3 +25,31 @@ Welcome to the Landing Page! Here, you can log in as a demo user or create your 
 <br>
 <br>
 <img width="1715" alt="Screen Shot 2023-01-23 at 1 34 15 AM" src="https://user-images.githubusercontent.com/96889369/214007210-aa6cb914-cbc6-4360-b582-96df482cf4b9.png">
+
+## Getting started
+1. Clone this repository:
+   `
+   https://github.com/snowywombat/API-project.git
+   `
+2. Install dependencies in the front end and back end:
+   * `npm install`
+
+3. Create a **.env** file:
+ - Example
+   
+   ```js
+    PORT=8000
+    DB_FILE=db/dev.db
+    JWT_SECRET=super-secret-key
+    JWT_EXPIRES_IN=expiration-number
+    SCHEMA=schema_name
+
+4. Set up your database within .env and then run the following steps: 
+   * `npx dotenv sequelize db:create`
+   * `npx dotenv sequelize db:migrate` 
+   * `npx dotenv sequelize db:seed:all`
+
+5. Start the app for both the backend and frontend:
+   * `npm start`
+
+6. Create an account or try out the demo on the website!
