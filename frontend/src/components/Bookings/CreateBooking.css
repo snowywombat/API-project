@@ -1,0 +1,51 @@
+.booking-main {
+    width: auto;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18vw;
+    padding: 10px;
+    background-color:rgb(253, 245, 245);
+    border: 1px solid rgb(255, 222, 225);
+}
+
+.create-booking-title {
+    font-size: 20px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+}
+
+.start-date {
+    font-size: 15px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+}
+
+.end-date {
+    font-size: 15px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+}
+
+.start-date-input {
+    font-size: 15px;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.end-date-input {
+    font-size: 15px;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.create-booking-submit-button {
+    border: none;
+    color: white;
+    background-color: rgb(249, 56, 72);
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 10px 15px 10px 15px;
+    font-size: 15px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

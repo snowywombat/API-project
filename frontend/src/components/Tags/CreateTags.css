@@ -1,0 +1,38 @@
+.create-tag-submit-button {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    font-size: 15px;
+    font-family: 'Montserrat', 'sans-serif';
+    color:white;
+    padding: 4px 17px 4px 17px;
+    background-color: rgb(249, 56, 72);
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.create-tag-submit-button:hover {
+    background-color: rgb(255, 95, 109);
+}
+
+.create-tag-title {
+    font-size: 20px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+}
+
+.tag-input {
+    font-size: 15px;
+    margin-left: 10px;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.tag-box {
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+}

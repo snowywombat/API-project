@@ -1,0 +1,16 @@
+.button-create-edit-modal {
+    border: none;
+    font-size: 15px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    background-color:  rgb(249, 56, 72);
+    color: white;
+    border-radius: 3px;
+    padding: 5px 20px 5px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.button-create-edit-modal:hover {
+    background-color: rgb(250, 89, 103);
+
+}

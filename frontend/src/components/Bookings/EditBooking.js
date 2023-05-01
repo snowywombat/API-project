@@ -20,14 +20,14 @@ function EditBookingModal({ spots, bookings }) {
           e.preventDefault();
           setErrors([]);
           dispatch(bookingActions.updateBooking({ startDate, endDate }, bookings.id))
-            //   .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
-            //   .then(() => dispatch(bookingActions.getBookings(spots.id)))
+              // .then(() => dispatch(spotActions.getSingleSpot(spots.id)))
+              // .then(() => dispatch(bookingActions.getBookings(spots.id)))
               .then(closeModal)
               .catch(
                   async (res) => {
                       const data = await res.json();
                       console.log(data, 'data')
-                      if (data && data.errors) setErrors(data.errors);
+                      if (data && data.message) setErrors(data.message);
                   }
               );
       };
@@ -37,9 +37,7 @@ function EditBookingModal({ spots, bookings }) {
         <h1 className='edit-booking-title'>Edit Booking</h1>
         <form onSubmit={handleSubmit}>
           <ul className='error-message'>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
+          {errors && <p>{errors}</p>}
           </ul>
           <label>
             Start Date

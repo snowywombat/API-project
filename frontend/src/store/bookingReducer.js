@@ -100,6 +100,7 @@ export const updateBooking = (booking, bookingId) => async (dispatch) => {
 }
 
 export const removeBooking = (bookingId) => async dispatch => {
+    console.log('ibi')
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'DELETE',
     })
@@ -108,6 +109,14 @@ export const removeBooking = (bookingId) => async dispatch => {
         const delBooking = await response.json();
         dispatch(deleteBooking(bookingId));
         return delBooking;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        console.log(data.errors, 'data errors')
+        if (data.errors) {
+            throw data;
+        }
+      } else {
+            return ["An error occurred. Please try again."];
     }
 }
 

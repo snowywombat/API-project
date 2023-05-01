@@ -253,12 +253,8 @@
 
 .edit-button {
     display: flex;
-    width: 45px;
-    height: 20px;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 8px;
-    padding-left: 94%;
-
 }
 
 .delete-review-button {
@@ -291,4 +287,127 @@
 
 .key {
     list-style: none;
+}
+
+.booking-body {
+    font-size: 15px;
+    font-family: 'Montserrat', 'sans-serif';
+    margin-bottom: 5px;
+    justify-items: center;
+    align-content: center;
+
+}
+
+.booking-header {
+    font-size: 25px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+}
+
+.booking-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    position: relative;
+    padding-top: 30px;
+    padding-left: 5px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+.booking-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.booking-div {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-right: 70px;
+    padding: 0 20px 0 20px;
+    background-color: rgb(253, 245, 245);
+}
+
+.booking-button {
+    margin-left: 70px;
+}
+
+.delete-booking-button {
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10px;
+    color: rgb(249, 56, 72);
+}
+
+.booking-owner-name {
+    font-size: 18px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    margin-bottom: 10px;
+}
+
+.current-booking {
+    font-size: 18px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    margin-bottom: 10px;
+
+}
+
+
+.tags-header {
+    font-size: 25px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+    margin-top: 65px;
+}
+
+.tags-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    padding-left: 5px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+.tag-display {
+    display: flex;
+    width: auto;
+    margin-top: 30px;
+}
+
+.delete-tag-button {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10px;
+    color: rgb(249, 56, 72);
+}
+
+
+.tag-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    font-size: 14px;
+    font-family: 'Montserrat', 'sans-serif';
+    color:white;
+    padding: 10px 17px 10px 20px;
+    background-color: rgb(249, 56, 72);
+    border-radius: 4px;
+    margin-left: 5px;
+
+}
+
+.tag-name:hover {
+    background-color: rgb(255, 95, 109);
 }

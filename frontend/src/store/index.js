@@ -4,12 +4,14 @@ import sessionReducer from "./session";
 import spotReducer from "./spotReducer";
 import reviewReducer from "./reviewReducer";
 import bookingReducer from "./bookingReducer";
+import tagReducer from "./tagReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   reviews: reviewReducer,
   spots: spotReducer,
   bookings: bookingReducer,
+  tags: tagReducer,
 });
 
 let enhancer;
