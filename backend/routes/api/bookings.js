@@ -75,6 +75,7 @@ router.put('/:bookingId', requireAuth, async(req, res, next) => {
     const findBooking = await Booking.findByPk(bookingId);
     const allBookings = await Booking.findAll();
 
+
     if(findBooking === null) {
         res.status(404),
         res.json({
@@ -162,8 +163,11 @@ router.put('/:bookingId', requireAuth, async(req, res, next) => {
 
             }
 
+            console.log(endDate, 'endDate if')
 
-            if(bookEndDate.getTime() <= Date.now()) {
+
+            if(end <= Date.now()) {
+                console.log(endDate, '************* helooooooooooooooooooooo')
                 res.status(403),
                 res.json({
                     message: "Past bookings can't be modified",

@@ -3,8 +3,8 @@
     flex-direction: column;
     width: auto;
     height: auto;
-    margin-left: 175px;
-    margin-right: 175px;
+    margin-left: 150px;
+    margin-right: 150px;
 
 }
 
@@ -17,7 +17,6 @@
 
 .details-body {
     display: flex;
-    /* position: relative; */
     justify-content: space-between;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -38,7 +37,7 @@
 .review-body {
     display: flex;
     justify-content: space-between;
-    height:auto;
+    height: auto;
     width: auto;
 
 }
@@ -47,8 +46,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 500px;
+    width: auto;
+    height: 500px;
     padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .details-text:hover {
@@ -60,7 +62,7 @@
     font-family: 'Montserrat', 'sans-serif';
     font-size: 10px;
     width: 50%;
-    height: 300px;
+    height: 500px;
     object-fit: cover;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -76,7 +78,7 @@
 
 .details-name {
     display: flex;
-    font-size: 12px;
+    font-size: 22px;
     text-align: center;
 
 }
@@ -85,14 +87,14 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 25px;
+    padding-top: 35px;
 
 }
 
 .details-price {
     display: flex;
-    padding-top: 25px;
-    font-size: 9px;
+    padding-top: 35px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -103,17 +105,19 @@
 
 .details-description-header {
     display: flex;
-    font-size: 12px;
+    font-size: 20px;
     align-items: center;
     text-align: center;
+    margin-bottom: 5px;
 
 }
 
 .details-description-body {
     display: flex;
     text-align: center;
+    line-height: 1.4;
     font-family: 'Montserrat semibold', 'sans-serif';
-    font-size: 18px;
+    font-size: 25px;
     padding-left: 4px;
 }
 
@@ -121,13 +125,13 @@
     padding-left: 3px;
     padding-right: 3px;
 }
+
 .details-header {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
-    font-size: 10px;
     padding-top: 20px;
-    padding-bottom: 15px;
+    padding-bottom: 30px;
 }
 
 .details-header-info {
@@ -135,7 +139,7 @@
     align-items: center;
     flex-direction: row;
     padding-top: 5px;
-    font-size: 8px;
+    font-size: 15px;
 }
 
 .details-header-info-rating {
@@ -161,20 +165,22 @@
 
 
 .details-header-title {
-    font-size: 20px;
+    font-size: 35px;
+    margin-bottom: 7px;
     font-family: 'Montserrat semibold', 'sans-serif';
 }
 
 .single-review {
     display: flex;
     position: relative;
+    justify-content: center;
+    width: 300px;
     border-bottom: 1px solid rgb(255, 222, 225);
     border-top: 1px solid rgb(255, 222, 225);
     align-items: center;
-    padding: 5px;
-    margin: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    padding: 20px;
+    margin: 20px;
+    margin-bottom: 25px;
 }
 
 .single-review:hover {
@@ -185,7 +191,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 150px;
     flex-direction: column;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 9px;
@@ -200,11 +205,13 @@
 .review-info-stars {
     display: flex;
     flex-direction: row;
+    font-size: 12px;
 }
 
 .review-review {
     display: flex;
     padding-bottom: 4px;
+    font-size: 15px;
 }
 
 .spots-info-review {
@@ -216,11 +223,12 @@
     display: flex;
     justify-content: flex-end;
     font-family: 'Montserrat semibold', 'sans-serif';
+    font-size: 12px;
 }
 
 
 .review-header {
-    font-size: 14px;
+    font-size: 25px;
     font-family: 'Montserrat semibold', 'sans-serif';
     padding-top: 1px;
     padding-left: 14px;
@@ -236,6 +244,8 @@
 
 .edit-button-div {
     display: flex;
+    width: auto;
+    height: auto;
     justify-content: flex-end;
     padding-bottom: 3px;
 
@@ -243,12 +253,8 @@
 
 .edit-button {
     display: flex;
-    width: 45px;
-    height: 20px;
     font-family: 'Montserrat', 'sans-serif';
     font-size: 8px;
-    padding-left: 94%;
-
 }
 
 .delete-review-button {
@@ -281,4 +287,127 @@
 
 .key {
     list-style: none;
+}
+
+.booking-body {
+    font-size: 15px;
+    font-family: 'Montserrat', 'sans-serif';
+    margin-bottom: 5px;
+    justify-items: center;
+    align-content: center;
+
+}
+
+.booking-header {
+    font-size: 25px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+}
+
+.booking-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    position: relative;
+    padding-top: 30px;
+    padding-left: 5px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+.booking-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.booking-div {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-right: 70px;
+    padding: 0 20px 0 20px;
+    background-color: rgb(253, 245, 245);
+}
+
+.booking-button {
+    margin-left: 70px;
+}
+
+.delete-booking-button {
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10px;
+    color: rgb(249, 56, 72);
+}
+
+.booking-owner-name {
+    font-size: 18px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    margin-bottom: 10px;
+}
+
+.current-booking {
+    font-size: 18px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    margin-bottom: 10px;
+
+}
+
+
+.tags-header {
+    font-size: 25px;
+    font-family: 'Montserrat semibold', 'sans-serif';
+    padding-top: 1px;
+    padding-left: 14px;
+    margin-top: 65px;
+}
+
+.tags-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    padding-left: 5px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+
+.tag-display {
+    display: flex;
+    width: auto;
+    margin-top: 30px;
+}
+
+.delete-tag-button {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10px;
+    color: rgb(249, 56, 72);
+}
+
+
+.tag-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    font-size: 14px;
+    font-family: 'Montserrat', 'sans-serif';
+    color:white;
+    padding: 10px 17px 10px 20px;
+    background-color: rgb(249, 56, 72);
+    border-radius: 4px;
+    margin-left: 5px;
+
+}
+
+.tag-name:hover {
+    background-color: rgb(255, 95, 109);
 }

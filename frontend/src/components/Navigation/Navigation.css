@@ -9,6 +9,7 @@
     height: auto;
     padding-bottom: 5px;
     border-bottom: 1px solid rgb(230, 230, 230);
+    z-index: 1;
 }
 
 .nav-bar {
@@ -47,11 +48,12 @@
     padding-right: 3px;
     padding-left: 25px;
     color: rgb(249, 56, 72);
+    font-size: 18px;
 }
 
 .title {
     font-family: 'Montserrat semibold', 'sans-serif';
-    font-size: 12px;
+    font-size: 18px;
     letter-spacing: -0.8px;
     color: rgb(249, 56, 72);
 }
