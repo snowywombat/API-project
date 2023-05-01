@@ -53,3 +53,37 @@ Welcome to the Landing Page! Here, you can log in as a demo user or create your 
    * `npm start`
 
 6. Create an account or try out the demo on the website!
+
+# Features 
+
+## Spots
+* Users can view spots
+* Logged-in users can create a spot
+* Logged-in owners can update their spot
+* Logged-in owners can delete their spot
+
+## Reviews
+* Users can view reviews for a spot
+* Logged-in users can create a review on a spot
+* Logged-in owners can update their review
+* Logged-in owners can delete their review
+
+## Bookings
+* Users can view bookings for a spot
+* Logged-in users can create a booking for a spot
+* Logged-in owners can update their booking 
+* Logged-in owners can delete their booking
+
+## Tags
+* Users can view tags for a spot
+* Logged-in owners can create tags
+* Logged-in owners can delete their tags
+
+
+## Future Features
+### Users Page
+* Logged-in users can change their user settings
+### AWS
+* Logged-in owners can upload images of their spot to AWS S3
+### Google Maps Api
+* Logged-in users can locate their booking with Google Maps API
