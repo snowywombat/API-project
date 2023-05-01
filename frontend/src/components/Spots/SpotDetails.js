@@ -159,7 +159,7 @@ const SpotDetails = () => {
                         </div>
 
                         <div className='edit-button-div'>
-                        {user && +spots.ownerId === user.id &&
+                            {user.user && +spots.ownerId === user.user.id &&
                                 <div className = 'edit-button'>
                                     <OpenCreateReviewModalButton
                                     buttonText="Edit"
