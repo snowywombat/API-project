@@ -25,7 +25,6 @@ const SpotDetails = () => {
     const allSpots = useSelector(state => state.spots);
     // const spotsArr = Object.values(spots)
     const user = useSelector(state => state.session)
-    console.log(user, 'user *********')
 
     //get reviews
     const reviews = useSelector(state => state.reviews);
@@ -62,7 +61,6 @@ const SpotDetails = () => {
     }
 
     const handleDeleteBooking = (bookingId, e) => {
-        console.log(e, 'eeee')
         e.preventDefault();
         setErrors([]);
 
@@ -75,7 +73,6 @@ const SpotDetails = () => {
                 .catch(
                     async (res) => {
                         const data = await res.json();
-                        console.log(data, 'heelo?')
                         if (data && data.message) setErrors(data.message);
                     }
                 );
@@ -99,8 +96,6 @@ const SpotDetails = () => {
             return null;
             }
     })
-
-    console.log(bookingsArr, 'booking arr ********')
 
     if(!bookings) return null;
     if(!tags) return null;

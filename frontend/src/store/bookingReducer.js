@@ -85,7 +85,6 @@ export const updateBooking = (booking, bookingId) => async (dispatch) => {
 
     if (response.ok) {
         const booking = await response.json();
-        console.log(booking, 'booking')
         dispatch(editBooking(booking));
         return booking;
 
@@ -100,7 +99,6 @@ export const updateBooking = (booking, bookingId) => async (dispatch) => {
 }
 
 export const removeBooking = (bookingId) => async dispatch => {
-    console.log('ibi')
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'DELETE',
     })
@@ -111,7 +109,6 @@ export const removeBooking = (bookingId) => async dispatch => {
         return delBooking;
     } else if (response.status < 500) {
         const data = await response.json();
-        console.log(data.errors, 'data errors')
         if (data.errors) {
             throw data;
         }

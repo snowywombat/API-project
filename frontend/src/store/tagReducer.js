@@ -36,11 +36,8 @@ export const getTags = (spotId) => async dispatch => {
     }
 };
 
-console.log('hello')
 export const createTag = (tag, spotId) => async dispatch => {
     const { tagName } = tag;
-    console.log('hello')
-    console.log(tag, 'tag')
 
     const response = await csrfFetch(`/api/spots/${spotId}/tags`, {
         method: 'POST',
@@ -52,7 +49,6 @@ export const createTag = (tag, spotId) => async dispatch => {
 
     if (response.ok) {
         const createTag = await response.json();
-        console.log(createTag, 'createTag')
         dispatch(addTag(createTag));
         return createTag;
     }
@@ -60,19 +56,16 @@ export const createTag = (tag, spotId) => async dispatch => {
 
 
 export const removeTag = (tagId) => async dispatch => {
-    console.log('hielo')
     const response = await csrfFetch(`/api/tags/${tagId}`, {
         method: 'DELETE',
     })
 
     if(response.ok) {
         const removeTag = await response.json();
-        console.log(removeTag, 'removeTag')
         dispatch(deleteTag(tagId))
         return removeTag;
     } else if (response.status < 500) {
         const data = await response.json();
-        console.log(data.errors, 'data errors')
         if (data.errors) {
             throw data;
         }
