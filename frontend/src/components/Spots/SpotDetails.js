@@ -177,15 +177,7 @@ const SpotDetails = () => {
                                     <div className='details-info'>
 
                                         <div className='details-name'>
-                                            <div>
-                                                Hosted by
-                                            </div>
-                                            <div className='details-owner-first-name'>
-                                                {spots.Owner.firstName}
-                                            </div>
-                                            <div className='details-last-name'>
-                                                {spots.Owner.lastName}
-                                            </div>
+                                            Hosted by: {spots.Owner.firstName} {spots.Owner.lastName}
                                         </div>
                                         <div className='details-description'>
                                             <div className='details-description-header'>
@@ -297,7 +289,7 @@ const SpotDetails = () => {
                                     Current Booking:
                                 </div>
                             }
-                            {booking && (new Date(Date.parse(booking.endDate))).getTime() > Date.now() && user.user && (+booking.userId === user.user.id || spots.ownerId === user.user.id) &&
+                            {booking && booking.User && (new Date(Date.parse(booking.endDate))).getTime() > Date.now() && user.user && (+booking.userId === user.user.id || spots.ownerId === user.user.id) &&
                                 <div className='booking-owner'>
                                     <div className='booking-owner-name'>
                                         {booking.User.firstName} {booking.User.lastName}'s Booking:
