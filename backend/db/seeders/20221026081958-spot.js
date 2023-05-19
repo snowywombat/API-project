@@ -21,7 +21,7 @@ module.exports = {
           lng: -147.7200,
           name: 'River Rest',
           description:'Stunning mansion with 6 bedrooms and picturesque views of the Chena River.',
-          price: 119.00,
+          price: 760.00,
           ownerId: 1,
         },
         {
@@ -32,8 +32,8 @@ module.exports = {
           lat: 47.5962,
           lng: -120.6615,
           name: 'Mountain Dream Escape',
-          description:'Na-Mu Lodge offers a luxurious mansion with 20 bedrooms, each with private baths, nestled in the scenic mountains.',
-          price: 1303.00,
+          description:'Na-Mu Lodge offers a luxurious mansion with 7 bedrooms, each with private baths, nestled in the scenic mountains.',
+          price: 540.00,
           ownerId: 2,
         },
         {
@@ -45,7 +45,7 @@ module.exports = {
           lng: -73.0693,
           name: 'The Legendary Pyramid House',
           description:'Iconic architectural masterpiece with 10 bedrooms and breathtaking views, offering unparalleled peace and privacy.',
-          price: 1460.00,
+          price: 680.00,
           ownerId: 3,
         },
         {
@@ -57,7 +57,7 @@ module.exports = {
           lng: -91.1871,
           name: 'Charming Acadian Style Mansion',
           description:'This beautifully appointed 15 bedroom/10 bath Acadian Style Cottage is located on a private street.',
-          price: 43.00,
+          price: 950.00,
           ownerId: 4,
         },
         {
@@ -69,7 +69,7 @@ module.exports = {
           lng: -106.6504,
           name: 'Oasis in the City',
           description:'Lovely 7 bd / 5 ba "casita" (guesthouse) nestled on an acre in the beautiful North Valley.',
-          price: 110.00,
+          price: 325.00,
           ownerId: 5,
         },
         {
@@ -81,7 +81,7 @@ module.exports = {
           lng: -118.2437,
           name: 'Urban Retreat',
           description: 'Charming 6 bd / 5 ba mansion located in the heart of downtown.',
-          price: 150.00,
+          price: 1110.00,
           ownerId: 6,
         },
         {
@@ -93,7 +93,7 @@ module.exports = {
           lng: -80.1918,
           name: 'Tropical Paradise',
           description: 'Cozy 8 bd / 5 ba beachfront mansion with stunning ocean views.',
-          price: 180.00,
+          price: 830.00,
           ownerId: 3,
         },
         {
@@ -105,7 +105,7 @@ module.exports = {
           lng: -122.3321,
           name: 'Urban Oasis',
           description: 'Spacious 9 bd / 6 ba mansion in the vibrant downtown area.',
-          price: 250.00,
+          price: 1250.00,
           ownerId: 1,
         },
         {
@@ -117,7 +117,7 @@ module.exports = {
           lng: -87.6298,
           name: 'City Chic Retreat',
           description: 'Modern 10 bd / 8 ba mansion in a trendy neighborhood with skyline views.',
-          price: 200.00,
+          price: 1300.00,
           ownerId: 4,
         },
         {
@@ -129,7 +129,7 @@ module.exports = {
           lng: -122.4194,
           name: 'Cozy Urban Retreat',
           description: 'Quaint 5 bd / 3 ba mansion located in a charming neighborhood near downtown.',
-          price: 120.00,
+          price: 1560.00,
           ownerId: 2,
         },
         {
@@ -141,7 +141,7 @@ module.exports = {
           lng: -74.0060,
           name: 'Central Park Retreat',
           description: 'Spacious 12 bd / 9 ba house overlooking Central Park in the heart of New York City.',
-          price: 300.00,
+          price: 1420.00,
           ownerId: 4,
         },
         {
@@ -153,7 +153,7 @@ module.exports = {
           lng: -122.4194,
           name: 'Modern Mansion in SoMa',
           description: 'Contemporary 6 bd / 6 ba mansion located in the vibrant South of Market (SoMa) neighborhood.',
-          price: 200.00,
+          price: 890.00,
           ownerId: 2,
         },
         {
@@ -165,7 +165,7 @@ module.exports = {
           lng: -80.1918,
           name: 'Oceanfront Paradise',
           description: 'Luxurious 8 bd / 6 ba beachfront mansion with stunning ocean views in Miami.',
-          price: 450.00,
+          price: 965.00,
           ownerId: 3,
         },
         {
@@ -177,7 +177,7 @@ module.exports = {
           lng: -97.7431,
           name: 'Hip Downtown Mansion',
           description: 'Trendy 6 bd / 5.5 ba mansion located in the vibrant downtown area of Austin.',
-          price: 280.00,
+          price: 450.00,
           ownerId: 6,
         },
         {
@@ -189,7 +189,7 @@ module.exports = {
           lng: -122.3321,
           name: 'Seattle Skyline Retreat',
           description: 'Spacious 14 bd / 10 ba (1,800 sq ft) mansion with panoramic views of the Seattle skyline.',
-          price: 380.00,
+          price: 2100.00,
           ownerId: 1,
         },
         {
@@ -201,7 +201,7 @@ module.exports = {
           lng: -87.6298,
           name: 'Urban Chic',
           description: 'Charming 5 bd / 3 ba (700 sq ft) house in a vibrant neighborhood of downtown Chicago.',
-          price: 180.00,
+          price: 650.00,
           ownerId: 5,
         },
         {
@@ -213,7 +213,7 @@ module.exports = {
           lng: -71.0589,
           name: 'Historic Brownstone Mansion',
           description: 'Elegant 9 bd / 7 ba (1,200 sq ft) mansion in a historic brownstone building in downtown Boston.',
-          price: 320.00,
+          price: 895.00,
           ownerId: 5,
         },
         {
@@ -225,7 +225,7 @@ module.exports = {
           lng: -117.1611,
           name: 'Beachfront Bungalow',
           description: 'Fun 8 bd / 5 ba bungalow just steps away from the beautiful beaches of San Diego.',
-          price: 250.00,
+          price: 780.00,
           ownerId: 6,
         },
         {
@@ -237,7 +237,7 @@ module.exports = {
           lng: -104.9903,
           name: 'Mountain View Mansion',
           description: 'Cozy 8 bd / 8 ba mansion with breathtaking mountain views in the outskirts of Denver.',
-          price: 200.00,
+          price: 630.00,
           ownerId: 2,
         },
         {
@@ -249,7 +249,7 @@ module.exports = {
           lng: -90.0715,
           name: 'French Quarter Oasis',
           description: 'Charming 15 bd / 12 ba mansion located in the historic French Quarter of New Orleans.',
-          price: 180.00,
+          price: 740.00,
           ownerId: 4,
         },
         {
@@ -261,7 +261,7 @@ module.exports = {
           lng: -86.7816,
           name: 'Music City Retreat',
           description: 'Spacious 5 bd / 4 ba home located in the vibrant city of Nashville, the heart of country music.',
-          price: 350.00,
+          price: 890.00,
           ownerId: 6,
         },
         {
@@ -273,7 +273,7 @@ module.exports = {
           lng: -157.8583,
           name: 'Tropical Paradise Villa',
           description: 'Exquisite 8 bd / 7 ba villa with lush gardens and stunning ocean views in Honolulu.',
-          price: 650.00,
+          price: 1340.00,
           ownerId: 1,
         },
         {
@@ -285,7 +285,7 @@ module.exports = {
           lng: -122.6587,
           name: 'Modern Mansion in the Pearl District',
           description: 'Stylish 9 bd / 8 ba mansion located in the trendy Pearl District of Portland.',
-          price: 220.00,
+          price: 675.00,
           ownerId: 3,
         },
       ],

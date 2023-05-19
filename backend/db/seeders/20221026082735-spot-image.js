@@ -15,7 +15,7 @@ module.exports = {
 
         {
           spotId: 1,
-          url: 'https://images.pexels.com/photos/1757516/pexels-photo-1757516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          url: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Burkhart_dibrell_house.jpg',
           preview: true,
         },
         {
@@ -30,7 +30,7 @@ module.exports = {
         },
         {
           spotId: 4,
-          url: 'https://images.pexels.com/photos/14155606/pexels-photo-14155606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          url: 'https://www.onlyinyourstate.com/wp-content/uploads/2016/03/24431871261_9fe6150deb_k.jpg',
           preview: true,
         },
         {
@@ -50,7 +50,7 @@ module.exports = {
         },
         {
           spotId: 8,
-          url: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sothebysrealty.com%2Feng%2Fsales%2Fseattle-wa-usa&psig=AOvVaw2WARH7YIv2YF8mwUriWt3K&ust=1684611781906000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCo2IiSgv8CFQAAAAAdAAAAABAG',
+          url: 'https://static.mansionglobal.com/production/media/article-images/433cb07ee9f3acaf5fe99e663947d77c/large_Seattle_14.jpg',
           preview: true,
         },
         {
@@ -60,7 +60,7 @@ module.exports = {
         },
         {
           spotId: 10,
-          url: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fsearch%3Fq%3Dmansions&psig=AOvVaw2WARH7YIv2YF8mwUriWt3K&ust=1684611781906000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCo2IiSgv8CFQAAAAAdAAAAABAN',
+          url: 'https://robbreport.com/wp-content/uploads/2021/04/Paris3.jpg?w=1000',
           preview: true,
         },
         {
