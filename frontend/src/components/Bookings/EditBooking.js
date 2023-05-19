@@ -9,7 +9,6 @@ import './EditBooking.css'
 function EditBookingModal({ spots, bookings }) {
     const dispatch = useDispatch();
 
-    console.log(typeof(bookings.id), 'id')
 
     const [startDate, setStartDate] = useState(bookings.startDate);
     const [endDate, setEndDate] = useState(bookings.endDate);
@@ -26,7 +25,6 @@ function EditBookingModal({ spots, bookings }) {
               .catch(
                   async (res) => {
                       const data = await res.json();
-                      console.log(data, 'data')
                       if (data && data.message) setErrors(data.message);
                   }
               );

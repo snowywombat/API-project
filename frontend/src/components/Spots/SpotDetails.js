@@ -25,7 +25,6 @@ const SpotDetails = () => {
     const allSpots = useSelector(state => state.spots);
     // const spotsArr = Object.values(spots)
     const user = useSelector(state => state.session)
-    console.log(user, 'user *********')
 
     //get reviews
     const reviews = useSelector(state => state.reviews);
@@ -62,7 +61,6 @@ const SpotDetails = () => {
     }
 
     const handleDeleteBooking = (bookingId, e) => {
-        console.log(e, 'eeee')
         e.preventDefault();
         setErrors([]);
 
@@ -75,7 +73,6 @@ const SpotDetails = () => {
                 .catch(
                     async (res) => {
                         const data = await res.json();
-                        console.log(data, 'heelo?')
                         if (data && data.message) setErrors(data.message);
                     }
                 );
@@ -99,8 +96,6 @@ const SpotDetails = () => {
             return null;
             }
     })
-
-    console.log(bookingsArr, 'booking arr ********')
 
     if(!bookings) return null;
     if(!tags) return null;
@@ -182,15 +177,7 @@ const SpotDetails = () => {
                                     <div className='details-info'>
 
                                         <div className='details-name'>
-                                            <div>
-                                                Hosted by
-                                            </div>
-                                            <div className='details-owner-first-name'>
-                                                {spots.Owner.firstName}
-                                            </div>
-                                            <div className='details-last-name'>
-                                                {spots.Owner.lastName}
-                                            </div>
+                                            Hosted by: {spots.Owner.firstName} {spots.Owner.lastName}
                                         </div>
                                         <div className='details-description'>
                                             <div className='details-description-header'>
@@ -302,7 +289,7 @@ const SpotDetails = () => {
                                     Current Booking:
                                 </div>
                             }
-                            {booking && (new Date(Date.parse(booking.endDate))).getTime() > Date.now() && user.user && (+booking.userId === user.user.id || spots.ownerId === user.user.id) &&
+                            {booking && booking.User && (new Date(Date.parse(booking.endDate))).getTime() > Date.now() && user.user && (+booking.userId === user.user.id || spots.ownerId === user.user.id) &&
                                 <div className='booking-owner'>
                                     <div className='booking-owner-name'>
                                         {booking.User.firstName} {booking.User.lastName}'s Booking:

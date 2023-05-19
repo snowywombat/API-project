@@ -290,9 +290,15 @@
 }
 
 .booking-body {
+    gap: 30px;
+    align-items: center;
+    margin-right: 30px;
+    margin-bottom: 15px;
+    width: 20%;
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(253, 245, 245);
     font-size: 15px;
     font-family: 'Montserrat', 'sans-serif';
-    margin-bottom: 5px;
     justify-items: center;
     align-content: center;
 
@@ -307,14 +313,8 @@
 
 .booking-main {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: auto;
-    height: auto;
-    position: relative;
+    flex-direction: column;
     padding-top: 30px;
-    padding-left: 5px;
     border-top: 1px solid rgb(230, 230, 230);
 }
 
@@ -326,14 +326,14 @@
 
 .booking-div {
     display: flex;
-    gap: 30px;
-    align-items: center;
-    margin-right: 70px;
-    padding: 0 20px 0 20px;
-    background-color: rgb(253, 245, 245);
+    flex-wrap: wrap;
+    margin-top: 110px;
+    margin-left: 10px;
 }
 
 .booking-button {
+    display: flex;
+    justify-content: center;
     margin-left: 70px;
 }
 
