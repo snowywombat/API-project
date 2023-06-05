@@ -150,17 +150,17 @@ module.exports = {
         {
           spotId: 10,
           userId: 10,
-          tagName: '',
+          tagName: 'cute',
         },
         {
           spotId: 10,
           userId: 10,
-          tagName: '',
+          tagName: 'italian',
         },
         {
           spotId: 10,
           userId: 10,
-          tagName: '',
+          tagName: 'picturesque',
         },
         {
           spotId: 11,
