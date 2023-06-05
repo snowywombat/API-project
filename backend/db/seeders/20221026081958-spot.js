@@ -94,7 +94,7 @@ module.exports = {
           name: 'Tropical Paradise',
           description: 'Cozy 8 bd / 5 ba beachfront mansion with stunning ocean views.',
           price: 830.00,
-          ownerId: 3,
+          ownerId: 7,
         },
         {
           address: '456 N. Road Seattle, Washington 98101',
@@ -106,7 +106,7 @@ module.exports = {
           name: 'Urban Oasis',
           description: 'Spacious 9 bd / 6 ba mansion in the vibrant downtown area.',
           price: 1250.00,
-          ownerId: 1,
+          ownerId: 8,
         },
         {
           address: '789 E. Avenue Chicago, Illinois 60601',
@@ -118,7 +118,7 @@ module.exports = {
           name: 'City Chic Retreat',
           description: 'Modern 10 bd / 8 ba mansion in a trendy neighborhood with skyline views.',
           price: 1300.00,
-          ownerId: 4,
+          ownerId: 9,
         },
         {
           address: '123 Main Street San Francisco, California 94101',
@@ -130,7 +130,7 @@ module.exports = {
           name: 'Cozy Urban Retreat',
           description: 'Quaint 5 bd / 3 ba mansion located in a charming neighborhood near downtown.',
           price: 1560.00,
-          ownerId: 2,
+          ownerId: 10,
         },
         {
           address: '123 Oak Street New York, New York 10001',
@@ -142,7 +142,7 @@ module.exports = {
           name: 'Central Park Retreat',
           description: 'Spacious 12 bd / 9 ba house overlooking Central Park in the heart of New York City.',
           price: 1420.00,
-          ownerId: 4,
+          ownerId: 11,
         },
         {
           address: '456 Pine Street San Francisco, California 94101',
@@ -154,7 +154,7 @@ module.exports = {
           name: 'Modern Mansion in SoMa',
           description: 'Contemporary 6 bd / 6 ba mansion located in the vibrant South of Market (SoMa) neighborhood.',
           price: 890.00,
-          ownerId: 2,
+          ownerId: 12,
         },
         {
           address: '789 Elm Street Miami, Florida 33130',
@@ -166,7 +166,7 @@ module.exports = {
           name: 'Oceanfront Paradise',
           description: 'Luxurious 8 bd / 6 ba beachfront mansion with stunning ocean views in Miami.',
           price: 965.00,
-          ownerId: 3,
+          ownerId: 13,
         },
         {
           address: '456 Oak Lane Austin, Texas 78701',
@@ -178,7 +178,7 @@ module.exports = {
           name: 'Hip Downtown Mansion',
           description: 'Trendy 6 bd / 5.5 ba mansion located in the vibrant downtown area of Austin.',
           price: 450.00,
-          ownerId: 6,
+          ownerId: 14,
         },
         {
           address: '789 Maple Avenue Seattle, Washington 98101',
@@ -190,7 +190,7 @@ module.exports = {
           name: 'Seattle Skyline Retreat',
           description: 'Spacious 14 bd / 10 ba (1,800 sq ft) mansion with panoramic views of the Seattle skyline.',
           price: 2100.00,
-          ownerId: 1,
+          ownerId: 8,
         },
         {
           address: '123 Pine Street Chicago, Illinois 60601',
@@ -202,7 +202,7 @@ module.exports = {
           name: 'Urban Chic',
           description: 'Charming 5 bd / 3 ba (700 sq ft) house in a vibrant neighborhood of downtown Chicago.',
           price: 650.00,
-          ownerId: 5,
+          ownerId: 9,
         },
         {
           address: '456 Elm Street Boston, Massachusetts 02101',
@@ -214,7 +214,7 @@ module.exports = {
           name: 'Historic Brownstone Mansion',
           description: 'Elegant 9 bd / 7 ba (1,200 sq ft) mansion in a historic brownstone building in downtown Boston.',
           price: 895.00,
-          ownerId: 5,
+          ownerId: 15,
         },
         {
           address: '789 Oak Street San Diego, California 92101',
@@ -226,7 +226,7 @@ module.exports = {
           name: 'Beachfront Bungalow',
           description: 'Fun 8 bd / 5 ba bungalow just steps away from the beautiful beaches of San Diego.',
           price: 780.00,
-          ownerId: 6,
+          ownerId: 16,
         },
         {
           address: '123 Main Street Denver, Colorado 80202',
@@ -238,7 +238,7 @@ module.exports = {
           name: 'Mountain View Mansion',
           description: 'Cozy 8 bd / 8 ba mansion with breathtaking mountain views in the outskirts of Denver.',
           price: 630.00,
-          ownerId: 2,
+          ownerId: 17,
         },
         {
           address: '456 Elm Street New Orleans, Louisiana 70112',
@@ -250,7 +250,7 @@ module.exports = {
           name: 'French Quarter Oasis',
           description: 'Charming 15 bd / 12 ba mansion located in the historic French Quarter of New Orleans.',
           price: 740.00,
-          ownerId: 4,
+          ownerId: 18,
         },
         {
           address: '789 Maple Avenue Nashville, Tennessee 37201',
@@ -262,7 +262,7 @@ module.exports = {
           name: 'Music City Retreat',
           description: 'Spacious 5 bd / 4 ba home located in the vibrant city of Nashville, the heart of country music.',
           price: 890.00,
-          ownerId: 6,
+          ownerId: 19,
         },
         {
           address: '123 Oak Street Honolulu, Hawaii 96813',
@@ -274,7 +274,7 @@ module.exports = {
           name: 'Tropical Paradise Villa',
           description: 'Exquisite 8 bd / 7 ba villa with lush gardens and stunning ocean views in Honolulu.',
           price: 1340.00,
-          ownerId: 1,
+          ownerId: 20,
         },
         {
           address: '456 Pine Street Portland, Oregon 97204',
@@ -286,7 +286,7 @@ module.exports = {
           name: 'Modern Mansion in the Pearl District',
           description: 'Stylish 9 bd / 8 ba mansion located in the trendy Pearl District of Portland.',
           price: 675.00,
-          ownerId: 3,
+          ownerId: 2,
         },
       ],
       {}
