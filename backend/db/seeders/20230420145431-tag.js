@@ -100,37 +100,37 @@ module.exports = {
         {
           spotId: 6,
           userId: 6,
-          tagName: '',
+          tagName: 'california',
         },
         {
           spotId: 7,
           userId: 7,
-          tagName: '',
+          tagName: 'beach',
         },
         {
           spotId: 7,
           userId: 7,
-          tagName: '',
+          tagName: 'spacious',
         },
         {
           spotId: 7,
           userId: 7,
-          tagName: '',
+          tagName: 'nautical',
         },
         {
           spotId: 8,
           userId: 8,
-          tagName: '',
+          tagName: 'mansion',
         },
         {
           spotId: 8,
           userId: 8,
-          tagName: '',
+          tagName: 'modern',
         },
         {
           spotId: 8,
           userId: 8,
-          tagName: '',
+          tagName: 'residential',
         },
         {
           spotId: 9,
