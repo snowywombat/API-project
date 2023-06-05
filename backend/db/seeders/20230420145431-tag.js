@@ -135,17 +135,17 @@ module.exports = {
         {
           spotId: 9,
           userId: 9,
-          tagName: '',
+          tagName: 'aged',
         },
         {
           spotId: 9,
           userId: 9,
-          tagName: '',
+          tagName: 'mature',
         },
         {
           spotId: 9,
           userId: 9,
-          tagName: '',
+          tagName: 'manicured',
         },
         {
           spotId: 10,
