@@ -165,47 +165,47 @@ module.exports = {
         {
           spotId: 11,
           userId: 11,
-          tagName: '',
+          tagName: 'grand',
         },
         {
           spotId: 11,
           userId: 11,
-          tagName: '',
+          tagName: 'lofty',
         },
         {
           spotId: 11,
           userId: 11,
-          tagName: '',
+          tagName: 'garden',
         },
         {
           spotId: 12,
           userId: 12,
-          tagName: '',
+          tagName: 'picturesque',
         },
         {
           spotId: 12,
           userId: 12,
-          tagName: '',
+          tagName: 'matured',
         },
         {
           spotId: 12,
           userId: 12,
-          tagName: '',
+          tagName: 'homey',
         },
         {
           spotId: 13,
           userId: 13,
-          tagName: '',
+          tagName: 'resort',
         },
         {
           spotId: 13,
           userId: 13,
-          tagName: '',
+          tagName: 'lively',
         },
         {
           spotId: 13,
           userId: 13,
-          tagName: '',
+          tagName: 'beach',
         },
         {
           spotId: 14,
