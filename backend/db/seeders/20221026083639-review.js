@@ -21,13 +21,13 @@ module.exports = {
         {
           spotId: 1,
           userId: 16,
-          review: '',
+          review: 'The spot was a hidden gem, with a welcoming host and impeccable cleanliness.',
           stars: 5
         },
         {
           spotId: 1,
           userId: 9,
-          review: '',
+          review: 'The mansion exceeded my expectations, with stunning views and thoughtful recommendations from the host.',
           stars: 5
         },
         {
@@ -39,13 +39,13 @@ module.exports = {
         {
           spotId: 2,
           userId: 6,
-          review: '',
-          stars: 4
+          review: 'The spot was exceptional, with an attentive host, stylish decor, and a perfect location.',
+          stars: 5
         },
         {
           spotId: 2,
           userId: 17,
-          review: '',
+          review: 'The house had all the amenities I needed, ensuring a comfortable and enjoyable stay.',
           stars: 4
         },
         {
@@ -57,13 +57,13 @@ module.exports = {
         {
           spotId: 3,
           userId: 10,
-          review: '',
+          review: 'I had a delightful time at the spot; the unique decor and personalized touches added a special charm.',
           stars: 5
         },
         {
           spotId: 3,
           userId: 15,
-          review: '',
+          review: 'The spot was a tranquil retreat, offering breathtaking views and a serene ambiance.',
           stars: 5
         },
         {
@@ -75,13 +75,13 @@ module.exports = {
         {
           spotId: 4,
           userId: 2,
-          review: '',
+          review: 'The mansion exuded elegance and luxury, creating a memorable experience for my stay.',
           stars: 5
         },
         {
           spotId: 4,
           userId: 7,
-          review: '',
+          review: "The mansion's grandeur and historic charm made me feel like royalty during my stay.",
           stars: 5
         },
         {
@@ -93,14 +93,14 @@ module.exports = {
         {
           spotId: 5,
           userId: 11,
-          review: "",
-          stars: 1
+          review: "Unfortunately, the spot fell short with unresponsive communication and subpar cleanliness",
+          stars: 3
         },
         {
           spotId: 5,
           userId: 20,
-          review: "",
-          stars: 1
+          review: "I had a mixed experience at the house, with a friendly host but some maintenance issues.",
+          stars: 4
         },
         {
           spotId: 6,
