@@ -1,0 +1,102 @@
+.pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    object-fit:contain;
+    background-repeat: no-repeat;
+    -webkit-animation: fade 81s infinite;
+    animation: fade 81s infinite;
+}
+
+#pic1 {
+    background-image: url("https://s3.us-east-2.amazonaws.com/havenlifestyles/202029644-1.jpg");
+    animation-delay: 0s;
+}
+
+#pic2 {
+    background-image: url("https://live.staticflickr.com/8164/7615606914_057d6bfb72_b.jpg");
+    animation-delay: 9s;
+}
+
+#pic3 {
+    background-image: url("https://static.mansionglobal.com/production/media/article-images/433cb07ee9f3acaf5fe99e663947d77c/large_Seattle_14.jpg");
+    animation-delay: 18s;
+}
+
+#pic4 {
+    background-image: url("https://photos.zillowstatic.com/fp/d56b7db0d4695379e80514ac909ae097-p_e.jpg");
+    animation-delay: 27s;
+}
+
+#pic5 {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/d1/Crawford_Hill_Mansion.JPG");
+    animation-delay: 36s;
+}
+
+#pic6 {
+    background-image: url("https://images.pexels.com/photos/7031595/pexels-photo-7031595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    animation-delay: 45s;
+}
+
+#pic7 {
+    background-image: url("https://nimvo.com/wp-content/uploads/2017/08/Firemanhouse10_biz.jpg");
+    animation-delay: 54s;
+}
+
+#pic8 {
+    background-image: url("https://cdn4.picryl.com/photo/2019/09/26/thistle-hill-one-of-several-cattle-barons-mansions-in-fort-worth-texas-58fb9c-1024.jpg");
+    animation-delay: 63s;
+}
+
+#pic9 {
+    background-image: url("https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    animation-delay: 72s;
+}
+
+#pic10 {
+    background-image: url("https://robbreport.com/wp-content/uploads/2021/04/Paris3.jpg?w=1000");
+    animation-delay: 81s;
+}
+
+@-webkit-keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    15% {
+        opacity:  1;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    15% {
+        opacity:  1;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}

@@ -21,10 +21,10 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path = "/">
+          <Route exact path = "/splashpage">
             <SplashPage />
           </Route>
-          <Route exact path="/spots">
+          <Route exact path="/">
             <SpotIndex />
           </Route>
           <Route exact path={`/spot/:spotId`}>
