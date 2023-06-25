@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotIndex from "./components/Spots/SpotIndex";
 import SpotDetails from "./components/Spots/SpotDetails";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path = "/splashpage">
+            <SplashPage />
+          </Route>
           <Route exact path="/">
             <SpotIndex />
           </Route>
