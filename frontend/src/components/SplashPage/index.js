@@ -9,8 +9,11 @@ const SplashPage = () => {
 
     return (
       <>
-      <div className="SplashPage-Container">
-        <div className="SplashPage-Images">
+        <div className="SplashPage-Container">
+          <div>
+            <h1 className='welcome-header'>welcome to heirbnb</h1>
+          </div>
+          <div className="SplashPage-Images">
             <div className="pic" id="pic1" />
             <div className="pic" id="pic2" />
             <div className="pic" id="pic3" />
@@ -21,11 +24,11 @@ const SplashPage = () => {
             <div className="pic" id="pic8" />
             <div className="pic" id="pic9" />
             <div className="pic" id="pic10" />
+          </div>
+          <div>
+            <h2 className='description'>Discover the epitome of luxury and indulgence at heirbnb: where mansions redefine opulence.</h2>
+          </div>
         </div>
-        <div>
-        <h1>Welcome to heirbnb</h1>
-        </div>
-    </div>
       </>
     );
   };
