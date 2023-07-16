@@ -111,13 +111,13 @@ module.exports = {
         {
           spotId: 6,
           userId: 14,
-          review: '',
-          stars: 4
+          review: 'Very relaxing stay! Recommend!',
+          stars: 5
         },
         {
           spotId: 6,
           userId: 4,
-          review: '',
+          review: 'The rooms were a bit unclean but overall nice stay.',
           stars: 4
         },
         {
@@ -129,13 +129,13 @@ module.exports = {
         {
           spotId: 7,
           userId: 13,
-          review: '',
+          review: 'I loved this spot! Would love to come back! Host was amazing',
           stars: 5
         },
         {
           spotId: 7,
           userId: 18,
-          review: '',
+          review: 'Lovely stay, would highly recommend.',
           stars: 5
         },
         {
@@ -147,14 +147,14 @@ module.exports = {
         {
           spotId: 8,
           userId: 5,
-          review: '',
-          stars: 5
+          review: "The rooms were a bit old, a refurbishment wouldn't hurt",
+          stars: 3
         },
         {
           spotId: 8,
           userId: 19,
-          review: '',
-          stars: 5
+          review: "Overall nice - very spacious but the building wasn't up to date",
+          stars: 4
         },
         {
           spotId: 9,
@@ -165,14 +165,14 @@ module.exports = {
         {
           spotId: 9,
           userId: 1,
-          review: "",
-          stars: 2
+          review: "Wonderful stay - would come back again!",
+          stars: 5
         },
         {
           spotId: 9,
           userId: 12,
-          review: "",
-          stars: 2
+          review: "Nice stay! The views were spectacular.",
+          stars: 5
         },
         {
           spotId: 10,
@@ -183,14 +183,14 @@ module.exports = {
         {
           spotId: 10,
           userId: 3,
-          review: "",
-          stars: 3
+          review: "What a charming stay. The rooms were clean and everybody was satisfied",
+          stars: 5
         },
         {
           spotId: 10,
           userId: 13,
-          review: "",
-          stars: 3
+          review: "Owner was a bit uncommunicative but the place was very nice",
+          stars: 4
         },
         {
           spotId: 11,
@@ -399,13 +399,13 @@ module.exports = {
         {
           spotId: 22,
           userId: 19,
-          review: '',
-          stars: 5
+          review: 'Very spacious! My family loved the pool. The AC was broken so it was hot.',
+          stars: 4
         },
         {
           spotId: 22,
           userId: 16,
-          review: '',
+          review: 'We had a nice and relaxing stay. The view was beautiful',
           stars: 5
         },
         {
@@ -417,13 +417,13 @@ module.exports = {
         {
           spotId: 23,
           userId: 7,
-          review: '',
+          review: 'I loved the house - the interior design was beautiful. Recommend!',
           stars: 5
         },
         {
           spotId: 23,
           userId: 13,
-          review: '',
+          review: 'Great spot and owner was awesome',
           stars: 5
         },
 
