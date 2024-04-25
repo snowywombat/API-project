@@ -1,13 +1,15 @@
+
 #  👑 Heirbnb
 Heirbnb is a website clone of Airbnb. It is a platform to search for spaces to stay hosted by the property's owner. Live like an heir!
 <br>
 Live site: https://heirbnb.onrender.com/ 
 
 # Wiki Link
-* [API Documentation](https://github.com/snowywombat/API-project/wiki/API-Documentation)
-* [Database Schema](https://github.com/snowywombat/API-project/wiki/Database-Schema)
-* [Feature List](https://github.com/snowywombat/API-project/wiki/Feature-List)
-* [Redux Store Shape](https://github.com/snowywombat/API-project/wiki/Redux-Store-Shape)
+
+- [API Documentation](https://github.com/snowywombat/API-project/wiki/API-Documentation)
+- [Database Schema](https://github.com/snowywombat/API-project/wiki/Database-Schema)
+- [Feature List](https://github.com/snowywombat/API-project/wiki/Feature-List)
+- [Redux Store Shape](https://github.com/snowywombat/API-project/wiki/Redux-Store-Shape)
 
 # Tech Stack
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -21,6 +23,8 @@ Live site: https://heirbnb.onrender.com/
 ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 # Landing Page
+Run frontend and backend with npm start command
+=======
 Welcome to the Landing Page! Here, you can log in as a demo user or create your own account. Host your own spot or leave reviews on other spots!
 <br>
 <br>
@@ -87,3 +91,4 @@ Welcome to the Landing Page! Here, you can log in as a demo user or create your 
 * Logged-in owners can upload images of their spot to AWS S3
 ### Google Maps Api
 * Logged-in users can locate their booking with Google Maps API
+

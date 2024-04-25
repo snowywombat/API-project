@@ -189,10 +189,9 @@ const SpotDetails = () => {
                                         </div>
                                         <div className='details-price'>
                                             <div className='details-price-number'>
-                                            ${spots.price}
+                                            {`$${spots.price}/night`}
                                             </div>
                                             <div>
-                                            /night
                                             </div>
                                         </div>
                                     </div>
