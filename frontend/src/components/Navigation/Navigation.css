@@ -40,15 +40,15 @@
 .home-navlink {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
     text-decoration: none;
 }
 
 .fa-crown {
-    padding-right: 3px;
+    padding-right: 5px;
     padding-left: 25px;
     color: rgb(249, 56, 72);
     font-size: 24px;
+    padding-top: 23px;
 }
 
 .title {
