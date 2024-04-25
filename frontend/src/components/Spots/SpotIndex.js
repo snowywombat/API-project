@@ -35,9 +35,8 @@ const SpotIndex = () => {
                 </div>
                 <div className='spots-info-price'>
                 <div className='spots-price'>
-                  ${spot.price}
+                  {`$${spot.price} night`}
                 </div>
-                night
                 </div>
               </div>
 

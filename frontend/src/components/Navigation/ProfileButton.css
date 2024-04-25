@@ -57,14 +57,14 @@
 .dropdown-buttons {
     display:flex;
     flex-direction: column;
-    padding-left: 10.2px;
+    padding-left: 15px;
 }
 
 .logged-in-dropdown-elements {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat semibold', 'sans-serif';
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .dropdown-logout {
