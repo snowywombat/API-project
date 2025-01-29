@@ -30,7 +30,7 @@ module.exports = {
         },
         {
           spotId: 4,
-          url: 'https://www.onlyinyourstate.com/wp-content/uploads/2016/03/24431871261_9fe6150deb_k.jpg',
+          url: 'https://images.pexels.com/photos/87378/pexels-photo-87378.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           preview: true,
         },
         {
